@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Run的博客">
 <meta property="og:description" content="MySql优化分析原理 MYSQL逻辑分层 ：连接层 服务层 引擎层 存储层 InnoDB(默认) ：事务优先 （适合高并发操作；行锁） MyISAM ：性能优先  （表锁）SQL优化 编写过程： 1select dinstinct  ..from  ..join ..on ..where ..group by ...having ..order by ..limit ..  解析过程： 1fro">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-11T13:06:07.905Z">
+<meta property="og:updated_time" content="2018-11-27T12:35:31.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySql优化分析">
 <meta name="twitter:description" content="MySql优化分析原理 MYSQL逻辑分层 ：连接层 服务层 引擎层 存储层 InnoDB(默认) ：事务优先 （适合高并发操作；行锁） MyISAM ：性能优先  （表锁）SQL优化 编写过程： 1select dinstinct  ..from  ..join ..on ..where ..group by ...having ..order by ..limit ..  解析过程： 1fro">
@@ -171,9 +171,59 @@
 <li>复合索引  ：多个列构成的索引 （相当于 二级目录 ：  z: zhao）  (name,age)   (a,b,c,d,…,n)<h2 id="分析SQL"><a href="#分析SQL" class="headerlink" title="分析SQL"></a>分析SQL</h2></li>
 <li>分析SQL的执行计划  : explain   ，可以模拟SQL优化器执行SQL语句，从而让开发人员 知道自己编写的SQL状况</li>
 <li>MySQL查询优化其会干扰我们的优化</li>
-<li><p>explain字段</p>
-<p>  | id | select_type | table | type | possible_keys | key | key_len | ref | rows | Extra |<br>  | —— | —— | —— | —— | —— | —— | —— | —— | —— | —— |<br>  | 编号 | 查询类型 | 表 | 类型 | 预测用到的索引 | 实际使用的索引 | 实际使用索引的长度 | 表之间的引用 | 通过索引查询到的数据量 | 额外的信息 |</p>
-</li>
+<li>explain字段</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td style="text-align:center">编号</td>
+</tr>
+<tr>
+<td>select_type</td>
+<td style="text-align:center">查询类型</td>
+</tr>
+<tr>
+<td>table</td>
+<td style="text-align:center">表</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:center">类型</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td style="text-align:center">预测用到的索引</td>
+</tr>
+<tr>
+<td>key</td>
+<td style="text-align:center">实际使用的索引</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td style="text-align:center">实际使用索引的长度</td>
+</tr>
+<tr>
+<td>ref</td>
+<td style="text-align:center">表之间的引用</td>
+</tr>
+<tr>
+<td>rows</td>
+<td style="text-align:center">通过索引查询到的数据量</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td style="text-align:center">额外的信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>例子数据</p>
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> course</span><br><span class="line">(</span><br><span class="line">cid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">cname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacher</span><br><span class="line">(</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacherCard</span><br><span class="line">(</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tcdesc <span class="built_in">varchar</span>(<span class="number">200</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'java'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'html'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'sql'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">'web'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tz'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'tw'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tl'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tzdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'twdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tldesc'</span>) ;</span><br></pre></td></tr></table></figure>
 </li>
@@ -509,11 +559,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,7 +583,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
             
             <div class="clearfix"></div>

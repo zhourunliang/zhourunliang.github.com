@@ -130,6 +130,762 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2017-04-30-python-spider-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/30/2017-04-30-python-spider-1/">python爬虫下载Bilibili番剧弹幕</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/30/2017-04-30-python-spider-1/" class="archive-article-date">
+  	<time datetime="2017-04-30T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文绍如何利用python爬虫下载bilibili番剧弹幕。  </p>
+<hr>
+<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ol>
+<li>python3环境</li>
+<li>需要安装BeautifulSoup,selenium包</li>
+<li>phantomjs</li>
+</ol>
+<hr>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h2><ol>
+<li>通过aid下载bilibili番剧弹幕</li>
+<li>通过aid获取cid，如: <a href="http://www.bilibili.com/widget/getPageList?aid=9654289" target="_blank" rel="noopener">http://www.bilibili.com/widget/getPageList?aid=9654289</a></li>
+<li>下载弹幕地址：<a href="http://comment.bilibili.tv/cid.xml" target="_blank" rel="noopener">http://comment.bilibili.tv/cid.xml</a></li>
+</ol>
+<hr>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">headers = &#123; <span class="string">'Accept'</span>:<span class="string">'*/*'</span>,</span><br><span class="line">    <span class="string">'Accept-Encoding'</span>:<span class="string">'gzip, deflate, sdch, br'</span>,</span><br><span class="line">    <span class="string">'Accept-Language'</span>:<span class="string">'zh-CN,zh;q=0.8'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Request-Headers'</span>:<span class="string">'content-encoding, content-type, x-za-batch-size, x-za-log-version, x-za-platform, x-za-product'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Request-Method'</span>:<span class="string">'POST'</span>,</span><br><span class="line">    <span class="string">'Cache-Control'</span>:<span class="string">'no-cache'</span>,</span><br><span class="line">    <span class="string">'Connection'</span>:<span class="string">'keep-alive'</span>,</span><br><span class="line">    <span class="string">'Host'</span>:<span class="string">'bilibili-web-analytics.bilibili.com'</span>,</span><br><span class="line">    <span class="string">'Origin'</span>:<span class="string">'https://www.bilibili.com'</span>,</span><br><span class="line">    <span class="string">'Pragma'</span>:<span class="string">'no-cache'</span>,</span><br><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> enumerate(headers):</span><br><span class="line">    webdriver.DesiredCapabilities.PHANTOMJS[<span class="string">'phantomjs.page.customHeaders.&#123;&#125;'</span>.format(key)] = value</span><br><span class="line">driver = webdriver.PhantomJS(executable_path=<span class="string">'./phantomjs-2.1.1-windows/bin/phantomjs.exe'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">geAidByKeyword</span><span class="params">(Keyword)</span>:</span></span><br><span class="line">    print(<span class="string">'正在搜索，请等待......'</span>)</span><br><span class="line">    search_url=<span class="string">"http://search.bilibili.com/bangumi?keyword="</span>+Keyword</span><br><span class="line">    search_url=quote(search_url,safe=<span class="string">'/:?='</span>)</span><br><span class="line">    search_html = urllib.request.urlopen(search_url)</span><br><span class="line">    search_bsObj = BeautifulSoup(search_html,<span class="string">'html.parser'</span>)</span><br><span class="line">    search_linkList = search_bsObj.findAll(<span class="string">"a"</span>,&#123;<span class="string">"class"</span>:<span class="string">"title"</span>&#125;)</span><br><span class="line">    count=len(search_linkList)</span><br><span class="line">    print(<span class="string">'已找到%s个'</span> %count)</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> search_linkList:</span><br><span class="line">        print(<span class="string">'%s:%s'</span> % (i,search_linkList[i][<span class="string">'title'</span>]))</span><br><span class="line">        i=i+<span class="number">1</span></span><br><span class="line">    <span class="comment"># 选择</span></span><br><span class="line">    select=input(<span class="string">'请选择你要下载的编号：'</span>)</span><br><span class="line">    select=int(select)</span><br><span class="line">    <span class="comment"># print(select)</span></span><br><span class="line">    search_link=search_linkList[select][<span class="string">'href'</span>]</span><br><span class="line">    <span class="keyword">if</span> search_link==<span class="string">''</span>:</span><br><span class="line">        print(<span class="string">'输入无效字符'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="comment"># 进入</span></span><br><span class="line">    <span class="comment"># print(search_link)</span></span><br><span class="line">    search_link=<span class="string">"http:"</span>+search_link</span><br><span class="line">    select_link_html = urllib.request.urlopen(search_link)</span><br><span class="line">    select_link_bsObj = BeautifulSoup(select_link_html,<span class="string">'html.parser'</span>)</span><br><span class="line">    select_link_list=select_link_bsObj.findAll(<span class="string">"li"</span>,&#123;<span class="string">"data-newest-ep-id"</span>:re.compile(<span class="string">"[0-9]+"</span>)&#125;)</span><br><span class="line">    data_season_id=select_link_list[<span class="number">0</span>][<span class="string">'data-season-id'</span>]</span><br><span class="line">    data_newest_ep_id=select_link_list[<span class="number">0</span>][<span class="string">'data-newest-ep-id'</span>]</span><br><span class="line">    new_aid_url=<span class="string">"http://bangumi.bilibili.com/anime/%s/play#%s"</span> % (data_season_id,data_newest_ep_id)</span><br><span class="line">    getNewAid(new_aid_url)</span><br><span class="line">    <span class="comment"># print(data_season_id)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNewAid</span><span class="params">(url)</span>:</span></span><br><span class="line">    driver.get(url)</span><br><span class="line">    html = driver.page_source</span><br><span class="line">    bsObj = BeautifulSoup(html,<span class="string">'html.parser'</span>)</span><br><span class="line">    aid_list=bsObj.findAll(<span class="string">"a"</span>,&#123;<span class="string">"class"</span>:<span class="string">"v-av-link"</span>&#125;)</span><br><span class="line">    aid=aid_list[<span class="number">0</span>].get_text()</span><br><span class="line">    aid=aid[<span class="number">2</span>:]</span><br><span class="line">    checkAndDown(aid)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkAndDown</span><span class="params">(aid)</span>:</span></span><br><span class="line">    title=getAnimeName(aid)</span><br><span class="line">    check=input(<span class="string">'你要下载的是%s,是否要下载(1：是；0：否)：'</span> %title)</span><br><span class="line">    print(check)</span><br><span class="line">    <span class="keyword">if</span> int(check)==<span class="number">1</span>:</span><br><span class="line">        getPageList(aid)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getAnimeName</span><span class="params">(aid)</span>:</span></span><br><span class="line">    <span class="comment"># print(aid)</span></span><br><span class="line">    html = urllib.request.urlopen(<span class="string">"http://www.bilibili.com/video/av%s"</span> %aid)</span><br><span class="line">    bsObj = BeautifulSoup(html,<span class="string">'html.parser'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">       title=bsObj.find(<span class="string">"title"</span>).get_text()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'获取失败,aid=%s'</span> %aid)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> title</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPageList</span><span class="params">(aid)</span>:</span></span><br><span class="line">    url=<span class="string">"http://www.bilibili.com/widget/getPageList"</span></span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">'aid'</span>:aid</span><br><span class="line">    &#125;</span><br><span class="line">    re = requests.get(url,params)</span><br><span class="line">    cidDic=json.loads(re.text)</span><br><span class="line">    animeName=getAnimeName(aid)</span><br><span class="line">    <span class="keyword">for</span> cidItem <span class="keyword">in</span> cidDic:</span><br><span class="line">        cidItem[<span class="string">'animeName'</span>]=animeName</span><br><span class="line">        downloadDanmu(cidItem)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">downloadDanmu</span><span class="params">(cidItem)</span>:</span></span><br><span class="line">    cid=cidItem[<span class="string">'cid'</span>]</span><br><span class="line">    animeName=cidItem[<span class="string">'animeName'</span>]</span><br><span class="line">    pagename=cidItem[<span class="string">'pagename'</span>]</span><br><span class="line">    comment_url=<span class="string">"http://comment.bilibili.tv/%s.xml"</span> %cid</span><br><span class="line">    comment_page_zip=urllib.request.urlopen(comment_url).read()</span><br><span class="line">    comment=zlib.decompressobj(-zlib.MAX_WBITS).decompress(comment_page_zip)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(<span class="string">'%s'</span> % animeName)==<span class="keyword">False</span>:</span><br><span class="line">        os.makedirs(<span class="string">'%s'</span> % animeName)</span><br><span class="line">    fout=open(<span class="string">'%s/%s.xml'</span> % (animeName,pagename),<span class="string">'wb'</span>)</span><br><span class="line">    fout.write(comment)</span><br><span class="line">    fout.close()</span><br><span class="line">    print(<span class="string">'%s %s下载完成'</span> % (animeName,pagename))</span><br><span class="line"></span><br><span class="line"><span class="comment"># aid=input('请输入aid：')</span></span><br><span class="line"><span class="comment"># getPageList(aid)</span></span><br><span class="line">keyword=input(<span class="string">'请输入番剧的关键字：'</span>)</span><br><span class="line">geAidByKeyword(keyword)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/30/2017-04-30-python-spider-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2016-06-29-js-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/29/2016-06-29-js-1/">AJAX加载更多</a>
+    </h1>
+  
+
+        
+        <a href="/2016/06/29/2016-06-29-js-1/" class="archive-article-date">
+  	<time datetime="2016-06-29T14:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="利用ajax实现下拉加载更多。"><a href="#利用ajax实现下拉加载更多。" class="headerlink" title="利用ajax实现下拉加载更多。"></a>利用ajax实现下拉加载更多。</h1><hr>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>加载更多<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 内容 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"footer"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"loading"</span> <span class="attr">style</span>=<span class="string">"display: none;text-align: center;font-size: small;"</span>&gt;</span>加载中，请稍后...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"loaded"</span> <span class="attr">style</span>=<span class="string">"display: block;text-align: center;font-size: small;"</span>&gt;</span>加载完成<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">$(document).ready(function() &#123;</span></span><br><span class="line"><span class="undefined">    $('.loaded').hide();</span></span><br><span class="line"><span class="undefined">    var loading = $(".loading").data("on", false);</span></span><br><span class="line"><span class="undefined">    var next_page=2;</span></span><br><span class="line"><span class="undefined">    $(window).scroll(function()&#123;</span></span><br><span class="line"><span class="undefined">        if(loading.data("on")) return;</span></span><br><span class="line"><span class="undefined">        if($(document).scrollTop() &gt; $(document).height()-$(window).height()-$('#footer').height())&#123;</span></span><br><span class="line"><span class="undefined">            $(".loading").css(&#123;'display':'block'&#125;);</span></span><br><span class="line"><span class="undefined">            loading.data("on", true).fadeIn();</span></span><br><span class="line"><span class="undefined">            $.ajax(&#123;</span></span><br><span class="line"><span class="undefined">                type     : "post",</span></span><br><span class="line"><span class="undefined">                dataType : "json",      </span></span><br><span class="line"><span class="undefined">                url      : GET_DATA_URL,</span></span><br><span class="line"><span class="undefined">                data     : &#123;</span></span><br><span class="line"><span class="undefined">                    "page"      : next_page,</span></span><br><span class="line"><span class="undefined">                    "limit"        : 12,</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="undefined">                success: function(data) &#123;</span></span><br><span class="line"><span class="undefined">                    if (data.status==1) &#123;</span></span><br><span class="line"><span class="undefined">                         // alert("success");</span></span><br><span class="line"><span class="undefined">                         // 在main显示</span></span><br><span class="line"><span class="undefined">                         // $(data.data).appendTo("#main");</span></span><br><span class="line"><span class="undefined">                         // 加入vue 数组</span></span><br><span class="line"><span class="undefined">                         var new_data=data.data;</span></span><br><span class="line"><span class="undefined">                         for (var i = 0; i &lt; new_data.length; i++) &#123;</span></span><br><span class="line"><span class="undefined">                             initData.data.push(new_data[i]);</span></span><br><span class="line"><span class="undefined">                         &#125;</span></span><br><span class="line"><span class="undefined">                         next_page=next_page+1;</span></span><br><span class="line"><span class="undefined">                         loading.data("on", false);     </span></span><br><span class="line"><span class="undefined">                    &#125; else &#123;</span></span><br><span class="line"><span class="undefined">                          loading.fadeOut();</span></span><br><span class="line"><span class="undefined">                         $('.loaded').fadeIn();</span></span><br><span class="line"><span class="undefined">                          window.setTimeout(" $('.loaded').fadeOut();",2000);</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="undefined">                error: function() &#123;</span></span><br><span class="line"><span class="undefined">                    alert('加载失败,请检测网络!');</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;);  </span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">     &#125;);</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/06/29/2016-06-29-js-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2015-11-24-PHP-demo-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/24/2015-11-24-PHP-demo-2/">用PHP和MySql实现简单的留言本-注册和登录功能</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/24/2015-11-24-PHP-demo-2/" class="archive-article-date">
+  	<time datetime="2015-11-24T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。  </p>
+<hr>
+<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。<br>content.sql:  </p>
+<pre><code>CREATE TABLE IF NOT EXISTS `content` (
+`id` int(11) NOT NULL auto_increment,
+`title` varchar(50) NOT NULL,
+`name` varchar(20) NOT NULL,
+`content` varchar(200) NOT NULL,
+PRIMARY KEY (`id`))
+ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;  
+</code></pre><p>userinfo.sql:  </p>
+<pre><code>CREATE TABLE IF NOT EXISTS `userinfo` (
+`id` int(11) NOT NULL auto_increment,
+`name` varchar(20) NOT NULL,
+`password` varchar(20) NOT NULL,
+`sex` varchar(20) NOT NULL,
+`email` varchar(20) NOT NULL,
+PRIMARY KEY (`id`))
+ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
+</code></pre><p>分别用来存放留言数据和用户数据。</p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>config.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+$servername = &quot;localhost&quot;;
+$username = &quot;user&quot;;
+$password = &quot;123456&quot;;
+$dbname = &quot;bbs&quot;;
+// 创建连接
+$conn = new mysqli($servername, $username, $password, $dbname);
+// 检测连接
+if ($conn-&gt;connect_error) {
+    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+} 
+
+mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
+?&gt;
+--&gt;    
+</code></pre><h3 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h3><p>register.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;html&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;head&gt;
+&lt;title&gt;注册&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎新用户注册&lt;/font&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;login.php&quot;&gt;登录&lt;/a&gt;&lt;/p&gt;
+&lt;table align=&quot;center&quot;&gt;
+
+    &lt;form name=&quot;register&quot; method=&quot;post&quot; action=&quot;register_get.php&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;用户名：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;再次输入密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;re_password&quot; /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;性别：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
+            &lt;td&gt;男&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;男&quot; /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;女&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;女&quot; /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;邮箱：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;2&quot;&gt;其中加&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;为必填&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot; /&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot; /&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/form&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+--&gt;    
+</code></pre><h3 id="上传注册信息"><a href="#上传注册信息" class="headerlink" title="上传注册信息"></a>上传注册信息</h3><p>register_get.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+header(&quot;content-Type: text/html; charset=utf-8&quot;);
+include(&quot;config.php&quot;);
+$username= trim($_POST[&apos;username&apos;]);
+$email = $_POST[&apos;email&apos;];
+$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
+WHERE name=&apos;&quot;.$username.&quot;&apos;&quot;);
+if (empty($username)) {
+    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (mysqli_num_rows($result)!=0) {
+    echo &quot;&lt;script&gt;alert(&apos;此用户名已注册!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (empty($_POST[&apos;password&apos;])) {
+    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif($_POST[&apos;password&apos;]!=$_POST[&apos;re_password&apos;]){
+    echo &quot;&lt;script&gt;alert(&apos;两次密码输入不一致!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (empty($_POST[&apos;sex&apos;])) {
+    echo &quot;&lt;script&gt;alert(&apos;性别不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (!preg_match(&quot;/([\w\-]+\@[\w\-]+\.[\w\-]+)/&quot;,$email)) {
+    echo &quot;&lt;script&gt;alert(&apos;非法邮件地址!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
+}
+else
+{ 
+$sql = &quot;INSERT INTO userinfo (name, password, sex, email)
+VALUES (&apos;$username&apos;,&apos;&quot;.$_POST[&apos;password&apos;].&quot;&apos;,&apos;&quot;.$_POST[&apos;sex&apos;].&quot;&apos;,&apos;$email&apos;);&quot;;
+if ($conn-&gt;multi_query($sql) === TRUE) {
+    echo &quot;&lt;script&gt;alert(&apos;注册成功!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+} else {
+    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
+}
+$conn-&gt;close();
+}
+?&gt;
+--&gt;    
+</code></pre><h3 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h3><p>login.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;html&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;head&gt;
+&lt;title&gt;登录&lt;/title&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎登录&lt;/font&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;register.php&quot;&gt;注册&lt;/a&gt;&lt;/p&gt;
+&lt;table align=&quot;center&quot;&gt;
+    &lt;form name=&quot;login&quot; method=&quot;post&quot; action=&quot;login_get.php&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;用户名：&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;密码：&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;确定&quot;&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/form&gt;
+&lt;/table&gt;
+&lt;/head&gt;
+&lt;/html&gt;
+--&gt;
+</code></pre><h3 id="上传登录信息"><a href="#上传登录信息" class="headerlink" title="上传登录信息"></a>上传登录信息</h3><p>login_get.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+header(&quot;content-Type: text/html; charset=utf-8&quot;);
+include(&quot;config.php&quot;);
+$name= $_POST[&apos;name&apos;];
+$password = $_POST[&apos;password&apos;];
+if (empty($name)) {
+    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (empty($password)) {
+    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+}
+else
+{ 
+$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
+WHERE name=&apos;&quot;.$name.&quot;&apos;&quot;);
+if (mysqli_num_rows($result)==0) {
+    echo &quot;&lt;script&gt;alert(&apos;账号不存在!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+} 
+
+    while($row = mysqli_fetch_array($result))
+    {
+        if ($row[&apos;password&apos;]==$password) {
+            session_start();
+            $_SESSION[&quot;pass&quot;]=&quot;ok&quot;;
+            $_SESSION[&quot;name&quot;]=$_POST[&apos;name&apos;];
+            echo &quot;&lt;script&gt;alert(&apos;登录成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+        }
+        else
+            echo &quot;&lt;script&gt;alert(&apos;密码不正确!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+    }
+}
+
+$conn-&gt;close();
+?&gt;
+--&gt;  
+</code></pre><h3 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h3><p>index.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;html&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;head&gt;
+&lt;?php session_start(); 
+if(empty($_SESSION[&quot;pass&quot;])){  //如果输入的的密码为空
+    echo &quot;&lt;script&gt;alert(&apos;请先登录!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+}
+if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
+{
+    $name=$_SESSION[&apos;name&apos;];
+}
+?&gt;
+&lt;title&gt;留言本&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;当前账号：&lt;?php echo $name; ?&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;session_destroy.php&quot;&gt;注销&lt;/a&gt;&lt;/td&gt;  
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+&lt;?php
+include(&quot;config.php&quot;);
+$sql = &quot;SELECT title, name, content FROM content&quot;;
+$result = $conn-&gt;query($sql);
+if ($result-&gt;num_rows &gt; 0) {
+    // 输出每行数据
+    while($row = $result-&gt;fetch_assoc()) 
+    {
+?&gt;
+    &lt;/p&gt;
+    &lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
+    &lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
+    &lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
+    &lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
+    &lt;/tr bgColor=&quot;#ffffff&quot;&gt;
+    &lt;tr&gt;
+    &lt;td colspan=&quot;4&quot;&gt;&lt;?php echo wordwrap($row[&quot;content&quot;],50); ?&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;/table&gt;
+&lt;?php
+    }
+} else 
+{
+    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
+}
+$conn-&gt;close();
+?&gt;
+&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
+&lt;p&gt;
+标题：
+&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
+&lt;/p&gt;
+&lt;p&gt;
+留言：
+&lt;/p&gt;
+&lt;p&gt;
+&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
+&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
+&lt;/p&gt;
+&lt;/form&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+--&gt;  
+</code></pre><h3 id="上传留言信息"><a href="#上传留言信息" class="headerlink" title="上传留言信息"></a>上传留言信息</h3><p>post.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+header(&quot;content-Type: text/html; charset=utf-8&quot;);
+session_start(); 
+if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
+{
+    $name=$_SESSION[&apos;name&apos;];
+}
+include(&quot;config.php&quot;);
+$title= $_POST[&apos;title&apos;];
+$patch = $_POST[&apos;content&apos;];
+$content = str_replace(&quot;
+&quot;,&quot;&lt;br /&gt;&quot;,$patch);
+if (empty($title)) {
+    echo &quot;&lt;script&gt;alert(&apos;标题不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (empty($name)) {
+    echo &quot;&lt;script&gt;alert(&apos;名字不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+}
+elseif (empty($content)) {
+    echo &quot;&lt;script&gt;alert(&apos;内容不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+}
+else
+{ 
+$sql = &quot;INSERT INTO content (title, name, content)
+VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
+if ($conn-&gt;multi_query($sql) === TRUE) {
+    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+} else {
+    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
+}
+$conn-&gt;close();
+}
+?&gt;
+--&gt;      
+</code></pre><h3 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h3><p>session_destroy.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+header(&quot;content-Type: text/html; charset=utf-8&quot;);
+session_start();
+session_destroy();
+echo &quot;&lt;script&gt;alert(&apos;已注销!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
+?&gt;
+--&gt;    
+</code></pre><hr>
+<h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/001.JPG" alt="注册">  </p>
+<p><img src="http://7xok5a.com1.z0.glb.clouddn.com/002.JPG" alt="登录">  </p>
+<p><img src="http://7xok5a.com1.z0.glb.clouddn.com/003.JPG" alt="主页"></p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">demo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/24/2015-11-24-PHP-demo-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2015-11-20-PHP-demo" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/20/2015-11-20-PHP-demo/">用PHP和MySql实现简单的留言本</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/20/2015-11-20-PHP-demo/" class="archive-article-date">
+  	<time datetime="2015-11-20T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近学习了PHP和MySql，实现了一个简单的留言本。<br>当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。<br>PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。  </p>
+<hr>
+<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。  </p>
+<pre><code>
+CREATE TABLE IF NOT EXISTS `content` (
+`id` int(11) NOT NULL auto_increment,
+`title` varchar(50) NOT NULL,
+`name` varchar(20) NOT NULL,
+`content` varchar(200) NOT NULL,
+PRIMARY KEY (`id`))
+ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
+</code></pre>
+
+<hr>
+<p>我写了3个PHP文件，分别是config.php,用于连接数据库；post.php,用于提交数据；index.php,主页，用于提供用户操作界面。  </p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><p>config.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+$servername = &quot;localhost&quot;;
+$username = &quot;user&quot;;
+$password = &quot;123456&quot;;
+$dbname = &quot;bbs&quot;;
+// 创建连接
+$conn = new mysqli($servername, $username, $password, $dbname);
+// 检测连接
+if ($conn-&gt;connect_error) {
+    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+}
+
+mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
+?&gt;
+--&gt;
+</code></pre><p>post.php:  </p>
+<pre><code>&lt;!--lang:php
+&lt;?php
+header(&quot;content-Type: text/html; charset=utf-8&quot;);
+include(&quot;config.php&quot;);
+$title= $_POST[&apos;title&apos;];
+$name= $_POST[&apos;name&apos;];
+$patch = $_POST[&apos;content&apos;];
+$content = str_replace(&quot;
+&quot;,&quot;&lt;br /&gt;&quot;,$patch);
+$sql = &quot;INSERT INTO content (title, name, content)
+VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
+if ($conn-&gt;multi_query($sql) === TRUE) {
+    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
+} else {
+    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
+}
+
+$conn-&gt;close();
+?&gt;  
+--&gt;
+</code></pre><p>index.php:</p>
+<pre><code>&lt;!--lang:php
+&lt;html&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;body&gt;
+&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+&lt;?php
+include(&quot;config.php&quot;);
+$sql = &quot;SELECT title, name, content FROM content&quot;;
+$result = $conn-&gt;query($sql);
+if ($result-&gt;num_rows &gt; 0) {
+    // 输出每行数据
+    while($row = $result-&gt;fetch_assoc())
+    {
+?&gt;
+&lt;/p&gt;
+&lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
+&lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
+&lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
+&lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
+&lt;/tr bgColor=&quot;#ffffff&quot;&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;&lt;?php echo $row[&quot;content&quot;] ?&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+&lt;?php
+    }
+} else
+{
+    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
+}
+$conn-&gt;close();
+?&gt;
+&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
+&lt;p&gt;
+标题：
+&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
+&lt;/p&gt;
+&lt;p&gt;用户：&lt;input type=&quot;test&quot; name=&quot;name&quot; id=&quot;name&quot;&gt;&lt;/p&gt;
+&lt;p&gt;
+留言：
+&lt;/p&gt;
+&lt;p&gt;
+&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
+&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
+&lt;/p&gt;
+&lt;/form&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+--&gt;
+</code></pre><hr>
+<h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/000.JPG" alt="picture"></p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">demo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/20/2015-11-20-PHP-demo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2015-11-17-learn-MySql-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -827,126 +1583,9 @@ mysql> SELECT * FROM pet WHERE name LIKE '_____';
 
 
   
-    <article id="post-2015-10-25-learn-PHP-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/25/2015-10-25-learn-PHP-1/">PHP学习笔记（1）</a>
-    </h1>
-  
-
-        
-        <a href="/2015/10/25/2015-10-25-learn-PHP-1/" class="archive-article-date">
-  	<time datetime="2015-10-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量:"></a>PHP变量:</h2><p>变量以 $ 符号开始，后面跟着变量的名称。<br>PHP语句和 PHP 变量都是区分大小写的。<br>PHP是一门弱类型语言，不必向 PHP 声明该变量的数据类型。PHP 会根据变量的值，自动把变量转换为正确的数据类型。  </p>
-<h3 id="PHP变量作用域："><a href="#PHP变量作用域：" class="headerlink" title="PHP变量作用域："></a>PHP变量作用域：</h3><p>PHP 有四种不同的变量作用域：local，global，static，parameter。  </p>
-<h3 id="局部和全局作用域："><a href="#局部和全局作用域：" class="headerlink" title="局部和全局作用域："></a>局部和全局作用域：</h3><p>在所有函数外部定义的变量，拥有全局作用域。除了函数外，全局变量可以被脚本中的任何部分访问，要在一个函数中访问一个全局变量，需要使用 global 关键字。<br>global 关键字用于函数内访问全局变量。<br>当一个函数完成时，它的所有变量通常都会被删除。然而，有时候您希望某个局部变量不要被删除。要做到这一点，请在您第一次声明变量时使用 static 关键字。  </p>
-<hr>
-<h2 id="echo和print语句"><a href="#echo和print语句" class="headerlink" title="echo和print语句:"></a>echo和print语句:</h2><p>echo 和 print 区别:<br>echo - 可以输出一个或多个字符串<br>print - 只允许输出一个字符串，返回值总为 1<br>echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。  </p>
-<hr>
-<h2 id="PHP常量："><a href="#PHP常量：" class="headerlink" title="PHP常量："></a>PHP常量：</h2><p>设置常量，使用 define() 函数，函数语法如下：<br>define(string constant_name, mixed value, case_sensitive = true)<br>该函数有三个参数:<br>constant_name：必选参数，常量名称，即标志符。<br>value：必选参数，常量的值。<br>case_sensitive：可选参数，指定是否大小写敏感，设定为 true 表示不敏感。   </p>
-<hr>
-<h2 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量:"></a>字符串变量:</h2><p>PHP并置运算符:<br>并置运算符 (.) 用于把两个字符串值连接起来。<br>strlen()函数返回字符串的长度（字符数）。<br>strpos() 函数用于在字符串内查找一个字符或一段指定的文本。  </p>
-<pre><code>   
-echo strpos("Hello world!","world");
-</code></pre>  
-
-<hr>
-<h2 id="PHP数组"><a href="#PHP数组" class="headerlink" title="PHP数组:"></a>PHP数组:</h2><p>在 PHP 中，array() 函数用于创建数组：<br>在 PHP 中，有三种类型的数组：<br>数值数组 - 带有数字 ID 键的数组<br>关联数组 - 带有指定的键的数组，每个键关联一个值<br>多维数组 - 包含一个或多个数组的数组  </p>
-<p>count() 函数用于返回数组的长度（元素的数量）  </p>
-<p>PHP 关联数组  </p>
-<pre><code>   
-$age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
-</code></pre>  
-遍历并打印关联数组中的所有值，您可以使用foreach循环.  
-
-PHP 数组排序函数：
-sort() - 对数组进行升序排列  
-rsort() - 对数组进行降序排列  
-asort() - 根据关联数组的值，对数组进行升序排列  
-ksort() - 根据关联数组的键，对数组进行升序排列  
-arsort() - 根据关联数组的值，对数组进行降序排列  
-krsort() - 根据关联数组的键，对数组进行降序排列  
-
----
-
-## PHP函数:  
-<pre><code>   
-function functionName()
-{
-要执行的代码;
-}
-</code></pre> 
-
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/10/25/2015-10-25-learn-PHP-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1049,11 +1688,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1073,7 +1712,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
             
             <div class="clearfix"></div>

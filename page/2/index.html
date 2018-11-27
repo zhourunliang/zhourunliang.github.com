@@ -130,6 +130,411 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2018-02-20-learn-PHP-8" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/20/2018-02-20-learn-PHP-8/">异常和错误处理</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/20/2018-02-20-learn-PHP-8/" class="archive-article-date">
+  	<time datetime="2018-02-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>PHP只有手动抛出异常后才能捕获异常</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $a = <span class="number">5</span>/<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> $a,PHP_EOL;</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="keyword">exception</span> $e) &#123;</span><br><span class="line">    $e -&gt; getMessage();</span><br><span class="line">    $a = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> $a;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于除零这种“异常”情况，PHP认为这是一个错误，直接触发错误（warning也是错误，只是错误等级不一样），而不会自动抛出异常使程序进入异常流程，故最终a值并不是预想中的-1，也就是说，并没有进入异常分支，也没有处理异常。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定义两个异常类，它们需要继承自系统的exception</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">emailException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pwdException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"&lt;div clas=\"error\"&gt;Exception&#123;$this-&gt;getCode()&#125;:</span></span><br><span class="line"><span class="string">        &#123;$this-&gt;getMessage()&#125;</span></span><br><span class="line"><span class="string">        in File:&#123;$this-&gt;getFile()&#125;on line:&#123;$this-&gt;getLine()&#125;&lt;/div&gt;"</span>;</span><br><span class="line">        <span class="comment">//改写抛出异常结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 根据业务需求抛出不同异常</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reg</span><span class="params">($reginfo=null)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo)||!<span class="keyword">isset</span>($reginfo)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"参数非法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo[<span class="string">'email'</span>])) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> emailException(<span class="string">"邮件为空"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ($reginfo[<span class="string">'pwd'</span>]!=$reginfo[<span class="string">'repwd'</span>]) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> pwdException(<span class="string">"两次密码不一致"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'注册成功'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对异常进行分拣并做处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    reg(<span class="keyword">array</span>(<span class="string">'email'</span>=&gt;<span class="string">'waitfox@qq.com'</span>,<span class="string">'pwd'</span>=&gt;<span class="number">123456</span>,<span class="string">'repwd'</span>=&gt;<span class="number">12345678</span>));</span><br><span class="line">    <span class="comment">// reg();</span></span><br><span class="line">&#125;<span class="keyword">catch</span> (emailException $ee) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $ee-&gt;getMessage();</span><br><span class="line">&#125;<span class="keyword">catch</span>(pwdException $ep)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $ep;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'特殊处理'</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getTraceAsString();</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'其他情况，统一处理'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在下面三种场景下会用到异常处理机制:1.对程序的悲观预测;2.程序的需要和对业务的关注;3.语言级别的健壮性要求</li>
+<li><p>PHP中的异常机制是不足的，绝大多数情况下无法自动抛出异常，必须用if……else先进行判断，再手动抛出异常。手动抛异常的意义不是很大，因为这意味着在代码里已经充分预期到错误的出现，也就算不上真正的“异常”，而是意料之中。同时，这种方式还会使你陷入纷繁复杂的业务逻辑判断和处理中。</p>
+</li>
+<li><p>PHP错误就是会使脚本运行不正常的情况</p>
+</li>
+<li><p>错误大致分为以下几类。</p>
+</li>
+<li>deprecated是最低级别的错误，表示“不推荐，不建议”。比如在PHP 5中使用ereg系列的正则匹配函数就会报此类错误。这种错误一般由于使用不推荐的、过时的函数或语法造成的。其虽不影响PHP正常流程，但一般情况下建议修正。</li>
+<li>其次是notice。这种错误一般告诉你语法中存在不当的地方。如使用变量但是未定义就会报此错。最常见的，数组索引是字符时没有加引号，PHP就视为一个常量，先查找常量表，找不到再视为变量。虽然PHP是脚本语言，语法要求不严，但是仍然建议对变量进行初始化。这种错误不影响PHP正常流程。</li>
+<li>warning是级别比较高的错误，在语法中出现很不恰当的情况时才会报此错误，比如函数参数不匹配。这种级别的错误会导致得不到预期结果，故需要修改代码。</li>
+<li>更高级别的错误是fetal error。这是致命错误，直接导致PHP流程终结，后面的代码不再执行。这种问题非改不可。</li>
+<li><p>最高级别的错误是语法解析错误prase error。上面提到的错误都属于PHP代码运行期间错误，而语法解析错误属于语法检查阶段错误，这将导致PHP代码无法通过语法检查。错误级别不止这几个，最主要的都在前面提到了。PHP手册中一共定义了16个级别的错误，最常用的就这几个。</p>
+</li>
+<li><p>在代码质量或者环境不可控时（比如数据库连接失败），使用error＿reporting（0），这样就能屏蔽错误了，正式部署时可以采取这样的策略，防止错误消息泄露敏感信息。另外一个技巧就是在函数前加@符号，抑制错误信息输出，如@mysql＿connect（）。</p>
+</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/20/2018-02-20-learn-PHP-8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-19-learn-PHP-7" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/19/2018-02-19-learn-PHP-7/">反射</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/19/2018-02-19-learn-PHP-7/" class="archive-article-date">
+  	<time datetime="2018-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="反射"><a href="#反射" class="headerlink" title="反射:"></a>反射:</h2><ul>
+<li>反射指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name,$value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Setting $name to $value \r\n"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$name=$value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'末设置'</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$name=<span class="string">"正在为你设置默认值"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$student = <span class="keyword">new</span> person();</span><br><span class="line">$student -&gt; name=<span class="string">'Tom'</span>;</span><br><span class="line">$student -&gt; gender=<span class="string">'male'</span>;</span><br><span class="line">$student -&gt;age=<span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取对象属性列表</span></span><br><span class="line">$reflect = <span class="keyword">new</span> ReflectionObject($student);</span><br><span class="line">$props = $reflect -&gt; getProperties();</span><br><span class="line"><span class="keyword">foreach</span> ($props <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取对象方法列表</span></span><br><span class="line">$m = $reflect -&gt; getMethods();</span><br><span class="line"><span class="keyword">foreach</span> ($m <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回对象属性的关联数组</span></span><br><span class="line">var_dump(get_object_vars($student));</span><br><span class="line"><span class="comment">//类属性</span></span><br><span class="line">var_dump(get_class_vars(get_class($student)));</span><br><span class="line"><span class="comment">//返回由类的方法名组成的数组</span></span><br><span class="line">var_dump(get_class_methods(get_class($student)));</span><br><span class="line"><span class="comment">//获取对象属性列表所属的类</span></span><br><span class="line"><span class="keyword">echo</span> get_class($student);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>反射API的功能显然更强大，甚至能还原这个类的原型，包括方法的访问权限,代码如下</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//反射获取类的原型</span></span><br><span class="line">$obj = <span class="keyword">new</span> ReflectionClass(<span class="string">'person'</span>);</span><br><span class="line">$className = $obj -&gt; getName();</span><br><span class="line">$Methods = $Properties = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt; getProperties() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Properties[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt;getMethods() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Methods[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"class &#123;$className&#125;\n&#123;\n"</span>;</span><br><span class="line">is_array($Properties)&amp;&amp;ksort($Properties);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($Properties <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $v -&gt; isPublic()?<span class="string">'public'</span>:<span class="string">''</span>,$v -&gt; isPrivate()?<span class="string">'private'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isProtected()?<span class="string">'protected'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isStatic()?<span class="string">'static'</span>:<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t&#123;$k&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">if</span> (is_array($Methods)) ksort($Methods);</span><br><span class="line"><span class="keyword">foreach</span> ($Methods <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\tfunction &#123;$k&#125;()&#123;&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&#125;\n"</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>反射可以探知类的内部结构，可以用它做hook实现插件功能或者是做动态代理</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysql</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">($db)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"连接到数据库$&#123;db[0]&#125;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqlproxy</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $target;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($tar)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span> -&gt; target[] = <span class="keyword">new</span> $tar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span> -&gt; target <span class="keyword">as</span> $obj) &#123;</span><br><span class="line">            $r = <span class="keyword">new</span> ReflectionClass($obj);</span><br><span class="line">            <span class="keyword">if</span> ($method = $r -&gt; getMethod($name)) &#123;</span><br><span class="line">                <span class="keyword">if</span> ($method -&gt; isPublic() &amp;&amp; !$method -&gt; isAbstract()) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截记录LOG\r\n"</span>;</span><br><span class="line">                    $method -&gt; invoke($obj,$args);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截\r\n"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> sqlproxy(<span class="string">'mysql'</span>);</span><br><span class="line">$obj -&gt; connect(<span class="string">'member'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>真正的操作类是mysql类，但是sqlproxy类实现了根据动态传入参数，代替实际的类运行，并且在方法运行前后进行拦截，并且动态地改变类中的方法和属性。这就是简单的动态代理。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/19/2018-02-19-learn-PHP-7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-18-learn-PHP-6" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/18/2018-02-18-learn-PHP-6/">接口</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/18/2018-02-18-learn-PHP-6/" class="archive-article-date">
+  	<time datetime="2018-02-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口:"></a>接口:</h2><ul>
+<li>接口这样描述自己：对于实现我的所有类，看起来都应该像我现在这个样子</li>
+<li><p>接口含义：采用一个特定接口的所有代码都知道对于那个接口会调用什么方法。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>; <span class="comment">//驱动方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">plain</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是飞机"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fly</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"飞行"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是汽车\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">machine</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">demo</span><span class="params">(mobile $a)</span></span>&#123;</span><br><span class="line">        $a-&gt;fly();  <span class="comment">//mobile接口是没有这个方法的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> machine();</span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> plain()); <span class="comment">//运行成功</span></span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> car()); <span class="comment">//运行失败</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口本身并不提供实现，只是提供一个规范。如果我们知道一个类实现了某个接口，那么就知道了可以调用该接口的哪些方法，我们只需要知道这些就够了。</p>
+</li>
+<li>PHP中，接口的语义是有限的，使用接口的地方并不多，PHP中接口可以淡化为设计文档，起到一个团队基本契约的作用</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">cache</span></span>&#123;</span><br><span class="line">    <span class="comment">// @describe：缓存管理，项目经理定义接口，技术人员负责实现</span></span><br><span class="line">    <span class="keyword">const</span> maxKey = <span class="number">100000</span>; <span class="comment">//最大缓存量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getc</span><span class="params">($key)</span></span>; <span class="comment">//获取缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setc</span><span class="params">($key,$value)</span></span>;<span class="comment">//设置缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">flush</span><span class="params">()</span></span>; <span class="comment">//清空缓存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>PHP5对面向对象的特性做了许多增强，其中就有一个SPL（标准PHP库）的尝试。SPL中实现一些接口，其中最主要的就是Iterator迭代器接口，通过实现这个接口，就能使对象能够用于foreach结构，从而在使用形式上比较统一</li>
+<li>DirectoryIterator类之所以拿来就能用，是因为系统已经实现了Iterator接口，所以可以像下面这样使用</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$dir = <span class="keyword">new</span> DirectoryIterator(dirname(<span class="keyword">__FILE__</span>));</span><br><span class="line"><span class="keyword">foreach</span> ($dir <span class="keyword">as</span> $fileinfo) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!$fileinfo-&gt;isDir()) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $fileinfo-&gt;getFilename(),<span class="string">"\t"</span>,$fileinfo-&gt;getSize(),PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在对PHP实例对象使用foreach语法时，会检查这个实例有没有实现Iterator接口，如果实现了，就会通过内置方法或使用实现类中的方法模拟foreach语句</li>
+<li>接口是对多重继承的一种变相实现，而在讲继承时，我们提到了用来实现混入（Mixin）式的Traits，实际上，Traits可以被视为一种加强型的接口。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> Hello&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Hello '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">trait</span> World&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayWord</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'World'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHelloWorld</span></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Hello</span>,<span class="title">World</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayExclamationMark</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$o = <span class="keyword">new</span> MyHelloWorld();</span><br><span class="line">$o -&gt; sayHello();</span><br><span class="line">$o -&gt; sayWord();</span><br><span class="line">$o -&gt; sayExclamationMark();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里的MyHelloWorld同时实现了两个Traits，从而使其可以分别调用两个Traits里的代码段。从代码中就可以看出，Traits和接口很像，不同的是Traits是可以导入包含代码的接口。从某种意义上来说，Traits和接口都是对“多重继承”的一种变相实现<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2></li>
+<li>接口作为一种规范和契约存在。作为规范，接口应该保证可用性；作为契约，接口应该保证可控性。</li>
+<li>接口只是一个声明，一旦使用interface关键字，就应该实现它。可以由程序员实现（外部接口），也可以由系统实现（内部接口）。接口本身什么都不做，但是它可以告诉我们它能做什么。</li>
+<li>PHP中的接口存在两个不足，一是没有契约限制，二是缺少足够多的内部接口。</li>
+<li>接口其实很简单，但是接口的各种应用很灵活，设计模式中也有很大一部分是围绕接口展开的。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/18/2018-02-18-learn-PHP-6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-17-learn-PHP-5" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/17/2018-02-17-learn-PHP-5/">继承与多态</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/17/2018-02-17-learn-PHP-5/" class="archive-article-date">
+  	<time datetime="2018-02-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="继承"><a href="#继承" class="headerlink" title="继承:"></a>继承:</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name=<span class="string">'Tom'</span>;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是父类'</span>,PHP_EOL;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">family</span> <span class="keyword">extends</span> <span class="title">person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::__construct(); <span class="comment">//调用父类构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是子类'</span>,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::say();</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis\t"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">",and is\t"</span>,<span class="keyword">$this</span>-&gt;age,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">cry</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">parent</span>::$money,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'%&gt;_&lt;%'</span>,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">self</span>::$money,PHP_EOL; <span class="comment">//调用自身构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'(*^__^)'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poor=<span class="keyword">new</span> family();</span><br><span class="line">$poor-&gt;name=<span class="string">'Lee'</span>;</span><br><span class="line">$poor-&gt;gender=<span class="string">'female'</span>;</span><br><span class="line">$poor-&gt;age=<span class="number">25</span>;</span><br><span class="line">$poor-&gt;say();</span><br><span class="line">$poor-&gt;cry();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在继承中，用parent指代父类，用self指代自身。使用“::”运算符（范围解析操作符）调用父类的方法。“::”操作符还用来作为类常量和静态方法的调用，不要把这两种应用混淆。</li>
+<li>如果声明类成员或方法为static，就可以不实例化类而直接访问，同时也就不能通过一个对象访问其中的静态成员（静态方法除外），也不能用“::”访问一个非静态方法。比如，把上例中的poor-&gt;cry（）；换成poor::cry（）。</li>
+<li>继承存在什么问题：1）继承破坏封装性 2）继承是紧耦合的 3）继承扩展复杂 4）不恰当地使用继承可能违反现实世界中的逻辑。</li>
+<li>继承拥有比组合更少的代码量</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Add oil\t\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bmw</span> <span class="keyword">extends</span> <span class="title">car</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">benz</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $car;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car=<span class="keyword">new</span> car;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car-&gt;addoil();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$bmw=<span class="keyword">new</span> bmw;</span><br><span class="line">$bmw-&gt;addoil();</span><br><span class="line">$benz=<span class="keyword">new</span> benz();</span><br><span class="line">$benz-&gt;addoil();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>精心设计专门用于被继承的类，继承树的抽象层应该比较稳定，一般不要多于三层。</li>
+<li>对于不是专门用于被继承的类，禁止其被继承，也就是使用final修饰符。使用final修饰符既可防止重要方法被非法覆写，又能给编辑器寻找优化的机会。</li>
+<li>优先考虑用组合关系提高代码的可重用性。</li>
+<li>子类是一种特殊的类型，而不只是父类的一个角色。</li>
+<li>子类扩展，而不是覆盖或者使父类的功能失效。</li>
+<li>底层代码多用组合，顶层/业务层代码多用继承。底层用组合可以提高效率，避免对象臃肿。顶层代码用继承可以提高灵活性，让业务使用更方便。</li>
+</ul>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态:"></a>多态:</h2><ul>
+<li>多态确切的含义是：同一类的对象收到相同消息时，会得到不同的结果。而这个消息是不可预测的。多态，顾名思义，就是多种状态，也就是多种结果。</li>
+<li>多态性是一种通过多种状态或阶段描述相同对象的编程方式。它的真正意义在于：实际开发中，只要关心一个接口或基类的编程，而不必关心一个对象所属于的具体类。</li>
+<li>很多地方会看到“PHP没有多态”这种说法。事实上，不是它没有，而是它本来就是多态的</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'本方法需要重载才能运行'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">($obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (get_class($obj)==<span class="string">'employee'</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Error'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $obj-&gt;working();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">doprint(<span class="keyword">new</span> teacher());</span><br><span class="line">doprint(<span class="keyword">new</span> coder());</span><br><span class="line">doprint(<span class="keyword">new</span> employee());</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过接口实现多态</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">(employee $i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $i-&gt;working();</span><br><span class="line">&#125;</span><br><span class="line">$a=<span class="keyword">new</span> teacher;</span><br><span class="line">$b=<span class="keyword">new</span> coder;</span><br><span class="line">doprint($a);</span><br><span class="line">doprint($b);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>弱类型的PHP里多态和传统强类型语言里的多态在实现和概念上是有一些区别的，而且弱类型语言实现起多态来会更简单，更灵活。</li>
+<li>至于多态是怎么实现的，各种语言的策略是不一样的。但是，最终的实现无非就是查表和判断。</li>
+<li>类型转换不是多态。</li>
+<li>PHP中父类和子类看做“继父”和“继子”关系，它们存在继承关系，但不存在血缘关系。因此子类无法向上转型为父类，从而失去多态最典型的特征。</li>
+<li>多态的本质就是if……else，只不过实现的层级不同。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/17/2018-02-17-learn-PHP-5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2017-12-25-learn-PHP-4" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -689,765 +1094,9 @@
 
 
   
-    <article id="post-2017-04-30-python-spider-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/30/2017-04-30-python-spider-1/">python爬虫下载Bilibili番剧弹幕</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/30/2017-04-30-python-spider-1/" class="archive-article-date">
-  	<time datetime="2017-04-30T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文绍如何利用python爬虫下载bilibili番剧弹幕。  </p>
-<hr>
-<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><ol>
-<li>python3环境</li>
-<li>需要安装BeautifulSoup,selenium包</li>
-<li>phantomjs</li>
-</ol>
-<hr>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h2><ol>
-<li>通过aid下载bilibili番剧弹幕</li>
-<li>通过aid获取cid，如: <a href="http://www.bilibili.com/widget/getPageList?aid=9654289" target="_blank" rel="noopener">http://www.bilibili.com/widget/getPageList?aid=9654289</a></li>
-<li>下载弹幕地址：<a href="http://comment.bilibili.tv/cid.xml" target="_blank" rel="noopener">http://comment.bilibili.tv/cid.xml</a></li>
-</ol>
-<hr>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">headers = &#123; <span class="string">'Accept'</span>:<span class="string">'*/*'</span>,</span><br><span class="line">    <span class="string">'Accept-Encoding'</span>:<span class="string">'gzip, deflate, sdch, br'</span>,</span><br><span class="line">    <span class="string">'Accept-Language'</span>:<span class="string">'zh-CN,zh;q=0.8'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Request-Headers'</span>:<span class="string">'content-encoding, content-type, x-za-batch-size, x-za-log-version, x-za-platform, x-za-product'</span>,</span><br><span class="line">    <span class="string">'Access-Control-Request-Method'</span>:<span class="string">'POST'</span>,</span><br><span class="line">    <span class="string">'Cache-Control'</span>:<span class="string">'no-cache'</span>,</span><br><span class="line">    <span class="string">'Connection'</span>:<span class="string">'keep-alive'</span>,</span><br><span class="line">    <span class="string">'Host'</span>:<span class="string">'bilibili-web-analytics.bilibili.com'</span>,</span><br><span class="line">    <span class="string">'Origin'</span>:<span class="string">'https://www.bilibili.com'</span>,</span><br><span class="line">    <span class="string">'Pragma'</span>:<span class="string">'no-cache'</span>,</span><br><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> enumerate(headers):</span><br><span class="line">    webdriver.DesiredCapabilities.PHANTOMJS[<span class="string">'phantomjs.page.customHeaders.&#123;&#125;'</span>.format(key)] = value</span><br><span class="line">driver = webdriver.PhantomJS(executable_path=<span class="string">'./phantomjs-2.1.1-windows/bin/phantomjs.exe'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">geAidByKeyword</span><span class="params">(Keyword)</span>:</span></span><br><span class="line">    print(<span class="string">'正在搜索，请等待......'</span>)</span><br><span class="line">    search_url=<span class="string">"http://search.bilibili.com/bangumi?keyword="</span>+Keyword</span><br><span class="line">    search_url=quote(search_url,safe=<span class="string">'/:?='</span>)</span><br><span class="line">    search_html = urllib.request.urlopen(search_url)</span><br><span class="line">    search_bsObj = BeautifulSoup(search_html,<span class="string">'html.parser'</span>)</span><br><span class="line">    search_linkList = search_bsObj.findAll(<span class="string">"a"</span>,&#123;<span class="string">"class"</span>:<span class="string">"title"</span>&#125;)</span><br><span class="line">    count=len(search_linkList)</span><br><span class="line">    print(<span class="string">'已找到%s个'</span> %count)</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> search_linkList:</span><br><span class="line">        print(<span class="string">'%s:%s'</span> % (i,search_linkList[i][<span class="string">'title'</span>]))</span><br><span class="line">        i=i+<span class="number">1</span></span><br><span class="line">    <span class="comment"># 选择</span></span><br><span class="line">    select=input(<span class="string">'请选择你要下载的编号：'</span>)</span><br><span class="line">    select=int(select)</span><br><span class="line">    <span class="comment"># print(select)</span></span><br><span class="line">    search_link=search_linkList[select][<span class="string">'href'</span>]</span><br><span class="line">    <span class="keyword">if</span> search_link==<span class="string">''</span>:</span><br><span class="line">        print(<span class="string">'输入无效字符'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="comment"># 进入</span></span><br><span class="line">    <span class="comment"># print(search_link)</span></span><br><span class="line">    search_link=<span class="string">"http:"</span>+search_link</span><br><span class="line">    select_link_html = urllib.request.urlopen(search_link)</span><br><span class="line">    select_link_bsObj = BeautifulSoup(select_link_html,<span class="string">'html.parser'</span>)</span><br><span class="line">    select_link_list=select_link_bsObj.findAll(<span class="string">"li"</span>,&#123;<span class="string">"data-newest-ep-id"</span>:re.compile(<span class="string">"[0-9]+"</span>)&#125;)</span><br><span class="line">    data_season_id=select_link_list[<span class="number">0</span>][<span class="string">'data-season-id'</span>]</span><br><span class="line">    data_newest_ep_id=select_link_list[<span class="number">0</span>][<span class="string">'data-newest-ep-id'</span>]</span><br><span class="line">    new_aid_url=<span class="string">"http://bangumi.bilibili.com/anime/%s/play#%s"</span> % (data_season_id,data_newest_ep_id)</span><br><span class="line">    getNewAid(new_aid_url)</span><br><span class="line">    <span class="comment"># print(data_season_id)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNewAid</span><span class="params">(url)</span>:</span></span><br><span class="line">    driver.get(url)</span><br><span class="line">    html = driver.page_source</span><br><span class="line">    bsObj = BeautifulSoup(html,<span class="string">'html.parser'</span>)</span><br><span class="line">    aid_list=bsObj.findAll(<span class="string">"a"</span>,&#123;<span class="string">"class"</span>:<span class="string">"v-av-link"</span>&#125;)</span><br><span class="line">    aid=aid_list[<span class="number">0</span>].get_text()</span><br><span class="line">    aid=aid[<span class="number">2</span>:]</span><br><span class="line">    checkAndDown(aid)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkAndDown</span><span class="params">(aid)</span>:</span></span><br><span class="line">    title=getAnimeName(aid)</span><br><span class="line">    check=input(<span class="string">'你要下载的是%s,是否要下载(1：是；0：否)：'</span> %title)</span><br><span class="line">    print(check)</span><br><span class="line">    <span class="keyword">if</span> int(check)==<span class="number">1</span>:</span><br><span class="line">        getPageList(aid)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getAnimeName</span><span class="params">(aid)</span>:</span></span><br><span class="line">    <span class="comment"># print(aid)</span></span><br><span class="line">    html = urllib.request.urlopen(<span class="string">"http://www.bilibili.com/video/av%s"</span> %aid)</span><br><span class="line">    bsObj = BeautifulSoup(html,<span class="string">'html.parser'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">       title=bsObj.find(<span class="string">"title"</span>).get_text()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'获取失败,aid=%s'</span> %aid)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> title</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPageList</span><span class="params">(aid)</span>:</span></span><br><span class="line">    url=<span class="string">"http://www.bilibili.com/widget/getPageList"</span></span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">'aid'</span>:aid</span><br><span class="line">    &#125;</span><br><span class="line">    re = requests.get(url,params)</span><br><span class="line">    cidDic=json.loads(re.text)</span><br><span class="line">    animeName=getAnimeName(aid)</span><br><span class="line">    <span class="keyword">for</span> cidItem <span class="keyword">in</span> cidDic:</span><br><span class="line">        cidItem[<span class="string">'animeName'</span>]=animeName</span><br><span class="line">        downloadDanmu(cidItem)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">downloadDanmu</span><span class="params">(cidItem)</span>:</span></span><br><span class="line">    cid=cidItem[<span class="string">'cid'</span>]</span><br><span class="line">    animeName=cidItem[<span class="string">'animeName'</span>]</span><br><span class="line">    pagename=cidItem[<span class="string">'pagename'</span>]</span><br><span class="line">    comment_url=<span class="string">"http://comment.bilibili.tv/%s.xml"</span> %cid</span><br><span class="line">    comment_page_zip=urllib.request.urlopen(comment_url).read()</span><br><span class="line">    comment=zlib.decompressobj(-zlib.MAX_WBITS).decompress(comment_page_zip)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(<span class="string">'%s'</span> % animeName)==<span class="keyword">False</span>:</span><br><span class="line">        os.makedirs(<span class="string">'%s'</span> % animeName)</span><br><span class="line">    fout=open(<span class="string">'%s/%s.xml'</span> % (animeName,pagename),<span class="string">'wb'</span>)</span><br><span class="line">    fout.write(comment)</span><br><span class="line">    fout.close()</span><br><span class="line">    print(<span class="string">'%s %s下载完成'</span> % (animeName,pagename))</span><br><span class="line"></span><br><span class="line"><span class="comment"># aid=input('请输入aid：')</span></span><br><span class="line"><span class="comment"># getPageList(aid)</span></span><br><span class="line">keyword=input(<span class="string">'请输入番剧的关键字：'</span>)</span><br><span class="line">geAidByKeyword(keyword)</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/30/2017-04-30-python-spider-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2016-06-29-js-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/29/2016-06-29-js-1/">AJAX加载更多</a>
-    </h1>
-  
-
-        
-        <a href="/2016/06/29/2016-06-29-js-1/" class="archive-article-date">
-  	<time datetime="2016-06-29T14:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="利用ajax实现下拉加载更多。"><a href="#利用ajax实现下拉加载更多。" class="headerlink" title="利用ajax实现下拉加载更多。"></a>利用ajax实现下拉加载更多。</h1><hr>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>加载更多<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 内容 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"footer"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"loading"</span> <span class="attr">style</span>=<span class="string">"display: none;text-align: center;font-size: small;"</span>&gt;</span>加载中，请稍后...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"loaded"</span> <span class="attr">style</span>=<span class="string">"display: block;text-align: center;font-size: small;"</span>&gt;</span>加载完成<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">$(document).ready(function() &#123;</span></span><br><span class="line"><span class="undefined">    $('.loaded').hide();</span></span><br><span class="line"><span class="undefined">    var loading = $(".loading").data("on", false);</span></span><br><span class="line"><span class="undefined">    var next_page=2;</span></span><br><span class="line"><span class="undefined">    $(window).scroll(function()&#123;</span></span><br><span class="line"><span class="undefined">        if(loading.data("on")) return;</span></span><br><span class="line"><span class="undefined">        if($(document).scrollTop() &gt; $(document).height()-$(window).height()-$('#footer').height())&#123;</span></span><br><span class="line"><span class="undefined">            $(".loading").css(&#123;'display':'block'&#125;);</span></span><br><span class="line"><span class="undefined">            loading.data("on", true).fadeIn();</span></span><br><span class="line"><span class="undefined">            $.ajax(&#123;</span></span><br><span class="line"><span class="undefined">                type     : "post",</span></span><br><span class="line"><span class="undefined">                dataType : "json",      </span></span><br><span class="line"><span class="undefined">                url      : GET_DATA_URL,</span></span><br><span class="line"><span class="undefined">                data     : &#123;</span></span><br><span class="line"><span class="undefined">                    "page"      : next_page,</span></span><br><span class="line"><span class="undefined">                    "limit"        : 12,</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="undefined">                success: function(data) &#123;</span></span><br><span class="line"><span class="undefined">                    if (data.status==1) &#123;</span></span><br><span class="line"><span class="undefined">                         // alert("success");</span></span><br><span class="line"><span class="undefined">                         // 在main显示</span></span><br><span class="line"><span class="undefined">                         // $(data.data).appendTo("#main");</span></span><br><span class="line"><span class="undefined">                         // 加入vue 数组</span></span><br><span class="line"><span class="undefined">                         var new_data=data.data;</span></span><br><span class="line"><span class="undefined">                         for (var i = 0; i &lt; new_data.length; i++) &#123;</span></span><br><span class="line"><span class="undefined">                             initData.data.push(new_data[i]);</span></span><br><span class="line"><span class="undefined">                         &#125;</span></span><br><span class="line"><span class="undefined">                         next_page=next_page+1;</span></span><br><span class="line"><span class="undefined">                         loading.data("on", false);     </span></span><br><span class="line"><span class="undefined">                    &#125; else &#123;</span></span><br><span class="line"><span class="undefined">                          loading.fadeOut();</span></span><br><span class="line"><span class="undefined">                         $('.loaded').fadeIn();</span></span><br><span class="line"><span class="undefined">                          window.setTimeout(" $('.loaded').fadeOut();",2000);</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                &#125;,</span></span><br><span class="line"><span class="undefined">                error: function() &#123;</span></span><br><span class="line"><span class="undefined">                    alert('加载失败,请检测网络!');</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;);  </span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">     &#125;);</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/06/29/2016-06-29-js-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2015-11-24-PHP-demo-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/2015-11-24-PHP-demo-2/">用PHP和MySql实现简单的留言本-注册和登录功能</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/24/2015-11-24-PHP-demo-2/" class="archive-article-date">
-  	<time datetime="2015-11-24T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。  </p>
-<hr>
-<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。<br>content.sql:  </p>
-<pre><code>CREATE TABLE IF NOT EXISTS `content` (
-`id` int(11) NOT NULL auto_increment,
-`title` varchar(50) NOT NULL,
-`name` varchar(20) NOT NULL,
-`content` varchar(200) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;  
-</code></pre><p>userinfo.sql:  </p>
-<pre><code>CREATE TABLE IF NOT EXISTS `userinfo` (
-`id` int(11) NOT NULL auto_increment,
-`name` varchar(20) NOT NULL,
-`password` varchar(20) NOT NULL,
-`sex` varchar(20) NOT NULL,
-`email` varchar(20) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
-</code></pre><p>分别用来存放留言数据和用户数据。</p>
-<hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>config.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-$servername = &quot;localhost&quot;;
-$username = &quot;user&quot;;
-$password = &quot;123456&quot;;
-$dbname = &quot;bbs&quot;;
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-// 检测连接
-if ($conn-&gt;connect_error) {
-    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
-} 
-
-mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
-?&gt;
---&gt;    
-</code></pre><h3 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h3><p>register.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;title&gt;注册&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎新用户注册&lt;/font&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;login.php&quot;&gt;登录&lt;/a&gt;&lt;/p&gt;
-&lt;table align=&quot;center&quot;&gt;
-
-    &lt;form name=&quot;register&quot; method=&quot;post&quot; action=&quot;register_get.php&quot;&gt;
-        &lt;tr&gt;
-            &lt;td&gt;用户名：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;再次输入密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;re_password&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;性别：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;男&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;男&quot; /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;女&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;女&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;邮箱：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td colspan=&quot;2&quot;&gt;其中加&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;为必填&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot; /&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/form&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;    
-</code></pre><h3 id="上传注册信息"><a href="#上传注册信息" class="headerlink" title="上传注册信息"></a>上传注册信息</h3><p>register_get.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$username= trim($_POST[&apos;username&apos;]);
-$email = $_POST[&apos;email&apos;];
-$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
-WHERE name=&apos;&quot;.$username.&quot;&apos;&quot;);
-if (empty($username)) {
-    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (mysqli_num_rows($result)!=0) {
-    echo &quot;&lt;script&gt;alert(&apos;此用户名已注册!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($_POST[&apos;password&apos;])) {
-    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif($_POST[&apos;password&apos;]!=$_POST[&apos;re_password&apos;]){
-    echo &quot;&lt;script&gt;alert(&apos;两次密码输入不一致!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($_POST[&apos;sex&apos;])) {
-    echo &quot;&lt;script&gt;alert(&apos;性别不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (!preg_match(&quot;/([\w\-]+\@[\w\-]+\.[\w\-]+)/&quot;,$email)) {
-    echo &quot;&lt;script&gt;alert(&apos;非法邮件地址!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$sql = &quot;INSERT INTO userinfo (name, password, sex, email)
-VALUES (&apos;$username&apos;,&apos;&quot;.$_POST[&apos;password&apos;].&quot;&apos;,&apos;&quot;.$_POST[&apos;sex&apos;].&quot;&apos;,&apos;$email&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;注册成功!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-$conn-&gt;close();
-}
-?&gt;
---&gt;    
-</code></pre><h3 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h3><p>login.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;title&gt;登录&lt;/title&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎登录&lt;/font&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;register.php&quot;&gt;注册&lt;/a&gt;&lt;/p&gt;
-&lt;table align=&quot;center&quot;&gt;
-    &lt;form name=&quot;login&quot; method=&quot;post&quot; action=&quot;login_get.php&quot;&gt;
-        &lt;tr&gt;
-            &lt;td&gt;用户名：&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;密码：&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;确定&quot;&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/form&gt;
-&lt;/table&gt;
-&lt;/head&gt;
-&lt;/html&gt;
---&gt;
-</code></pre><h3 id="上传登录信息"><a href="#上传登录信息" class="headerlink" title="上传登录信息"></a>上传登录信息</h3><p>login_get.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$name= $_POST[&apos;name&apos;];
-$password = $_POST[&apos;password&apos;];
-if (empty($name)) {
-    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($password)) {
-    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
-WHERE name=&apos;&quot;.$name.&quot;&apos;&quot;);
-if (mysqli_num_rows($result)==0) {
-    echo &quot;&lt;script&gt;alert(&apos;账号不存在!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-} 
-
-    while($row = mysqli_fetch_array($result))
-    {
-        if ($row[&apos;password&apos;]==$password) {
-            session_start();
-            $_SESSION[&quot;pass&quot;]=&quot;ok&quot;;
-            $_SESSION[&quot;name&quot;]=$_POST[&apos;name&apos;];
-            echo &quot;&lt;script&gt;alert(&apos;登录成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-        }
-        else
-            echo &quot;&lt;script&gt;alert(&apos;密码不正确!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-    }
-}
-
-$conn-&gt;close();
-?&gt;
---&gt;  
-</code></pre><h3 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h3><p>index.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;?php session_start(); 
-if(empty($_SESSION[&quot;pass&quot;])){  //如果输入的的密码为空
-    echo &quot;&lt;script&gt;alert(&apos;请先登录!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
-{
-    $name=$_SESSION[&apos;name&apos;];
-}
-?&gt;
-&lt;title&gt;留言本&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;当前账号：&lt;?php echo $name; ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;session_destroy.php&quot;&gt;注销&lt;/a&gt;&lt;/td&gt;  
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;
-&lt;?php
-include(&quot;config.php&quot;);
-$sql = &quot;SELECT title, name, content FROM content&quot;;
-$result = $conn-&gt;query($sql);
-if ($result-&gt;num_rows &gt; 0) {
-    // 输出每行数据
-    while($row = $result-&gt;fetch_assoc()) 
-    {
-?&gt;
-    &lt;/p&gt;
-    &lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
-    &lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
-    &lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
-    &lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
-    &lt;/tr bgColor=&quot;#ffffff&quot;&gt;
-    &lt;tr&gt;
-    &lt;td colspan=&quot;4&quot;&gt;&lt;?php echo wordwrap($row[&quot;content&quot;],50); ?&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-    &lt;/table&gt;
-&lt;?php
-    }
-} else 
-{
-    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
-}
-$conn-&gt;close();
-?&gt;
-&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
-&lt;p&gt;
-标题：
-&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
-&lt;/p&gt;
-&lt;p&gt;
-留言：
-&lt;/p&gt;
-&lt;p&gt;
-&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
-&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
-&lt;/p&gt;
-&lt;/form&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;  
-</code></pre><h3 id="上传留言信息"><a href="#上传留言信息" class="headerlink" title="上传留言信息"></a>上传留言信息</h3><p>post.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-session_start(); 
-if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
-{
-    $name=$_SESSION[&apos;name&apos;];
-}
-include(&quot;config.php&quot;);
-$title= $_POST[&apos;title&apos;];
-$patch = $_POST[&apos;content&apos;];
-$content = str_replace(&quot;
-&quot;,&quot;&lt;br /&gt;&quot;,$patch);
-if (empty($title)) {
-    echo &quot;&lt;script&gt;alert(&apos;标题不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($name)) {
-    echo &quot;&lt;script&gt;alert(&apos;名字不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($content)) {
-    echo &quot;&lt;script&gt;alert(&apos;内容不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$sql = &quot;INSERT INTO content (title, name, content)
-VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-$conn-&gt;close();
-}
-?&gt;
---&gt;      
-</code></pre><h3 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h3><p>session_destroy.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-session_start();
-session_destroy();
-echo &quot;&lt;script&gt;alert(&apos;已注销!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-?&gt;
---&gt;    
-</code></pre><hr>
-<h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/001.JPG" alt="注册">  </p>
-<p><img src="http://7xok5a.com1.z0.glb.clouddn.com/002.JPG" alt="登录">  </p>
-<p><img src="http://7xok5a.com1.z0.glb.clouddn.com/003.JPG" alt="主页"></p>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">demo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/24/2015-11-24-PHP-demo-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2015-11-20-PHP-demo" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/20/2015-11-20-PHP-demo/">用PHP和MySql实现简单的留言本</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/20/2015-11-20-PHP-demo/" class="archive-article-date">
-  	<time datetime="2015-11-20T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近学习了PHP和MySql，实现了一个简单的留言本。<br>当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。<br>PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。  </p>
-<hr>
-<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。  </p>
-<pre><code>
-CREATE TABLE IF NOT EXISTS `content` (
-`id` int(11) NOT NULL auto_increment,
-`title` varchar(50) NOT NULL,
-`name` varchar(20) NOT NULL,
-`content` varchar(200) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
-</code></pre>
-
-<hr>
-<p>我写了3个PHP文件，分别是config.php,用于连接数据库；post.php,用于提交数据；index.php,主页，用于提供用户操作界面。  </p>
-<hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><p>config.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-$servername = &quot;localhost&quot;;
-$username = &quot;user&quot;;
-$password = &quot;123456&quot;;
-$dbname = &quot;bbs&quot;;
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-// 检测连接
-if ($conn-&gt;connect_error) {
-    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
-}
-
-mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
-?&gt;
---&gt;
-</code></pre><p>post.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$title= $_POST[&apos;title&apos;];
-$name= $_POST[&apos;name&apos;];
-$patch = $_POST[&apos;content&apos;];
-$content = str_replace(&quot;
-&quot;,&quot;&lt;br /&gt;&quot;,$patch);
-$sql = &quot;INSERT INTO content (title, name, content)
-VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-
-$conn-&gt;close();
-?&gt;  
---&gt;
-</code></pre><p>index.php:</p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;body&gt;
-&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;
-&lt;?php
-include(&quot;config.php&quot;);
-$sql = &quot;SELECT title, name, content FROM content&quot;;
-$result = $conn-&gt;query($sql);
-if ($result-&gt;num_rows &gt; 0) {
-    // 输出每行数据
-    while($row = $result-&gt;fetch_assoc())
-    {
-?&gt;
-&lt;/p&gt;
-&lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
-&lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
-&lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
-&lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
-&lt;/tr bgColor=&quot;#ffffff&quot;&gt;
-&lt;tr&gt;
-&lt;td colspan=&quot;4&quot;&gt;&lt;?php echo $row[&quot;content&quot;] ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;/table&gt;
-&lt;?php
-    }
-} else
-{
-    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
-}
-$conn-&gt;close();
-?&gt;
-&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
-&lt;p&gt;
-标题：
-&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
-&lt;/p&gt;
-&lt;p&gt;用户：&lt;input type=&quot;test&quot; name=&quot;name&quot; id=&quot;name&quot;&gt;&lt;/p&gt;
-&lt;p&gt;
-留言：
-&lt;/p&gt;
-&lt;p&gt;
-&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
-&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
-&lt;/p&gt;
-&lt;/form&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;
-</code></pre><hr>
-<h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/000.JPG" alt="picture"></p>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">demo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/20/2015-11-20-PHP-demo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1550,11 +1199,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1574,7 +1223,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
             
             <div class="clearfix"></div>

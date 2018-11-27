@@ -130,6 +130,419 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2018-11-20-Python" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/20/2018-11-20-Python/">Python笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/20/2018-11-20-Python/" class="archive-article-date">
+  	<time datetime="2018-11-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python笔记"><a href="#Python笔记" class="headerlink" title="Python笔记"></a>Python笔记</h1><ul>
+<li><p>列表[List] 元组(truple) 字典{dict}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列表中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推</span></span><br><span class="line"><span class="comment"># list comprehension</span></span><br><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line"><span class="comment"># 元组与列表类似，不同之处在于元组的元素不能修改</span></span><br><span class="line"><span class="comment"># truple generator</span></span><br><span class="line">(i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 字典的每个键值 key=&gt;value 对用冒号 : 分割，每个键值对之间用逗号 , 分割，整个字典包括在花括号 &#123;&#125; 中</span></span><br><span class="line"><span class="comment"># dict comprehension</span></span><br><span class="line">&#123;k:<span class="number">1</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">10</span>)&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成器（generator）<br>带有 yield 的函数在 Python 中被称之为 generator（生成器）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_range</span><span class="params">(n)</span>:</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i != n:</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = my_range(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> r:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迭代器 iterator</p>
+<ul>
+<li>迭代器是访问集合元素的一种方式。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = next(iter_obj)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pow2</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, max)</span>:</span></span><br><span class="line">        self.max = max</span><br><span class="line">        self.n = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.n = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.n &lt; self.max:</span><br><span class="line">            self.n += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span> ** self.n</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = Pow2(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>实例方法(instance method), 类方法(class method), 静态方法(static method)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instance method </span></span><br><span class="line">a = A() a.foo() a.bar()</span><br><span class="line"><span class="comment"># class method bind class</span></span><br><span class="line"><span class="comment"># static method</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">s_foo</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">c_foo</span><span class="params">(cls)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.foo()</span><br><span class="line">A.c_foo()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>深拷贝 浅拷贝</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 深拷贝</span></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line">l1 = []</span><br><span class="line">l2 = deepcopy(l1)</span><br><span class="line">l1.append(<span class="number">1</span>)</span><br><span class="line">print(l2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浅拷贝</span></span><br><span class="line">l1 = [<span class="number">1</span>, [<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>]</span><br><span class="line">l2 = l1[:]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a=[])</span>:</span></span><br><span class="line">    a.append(<span class="number">1</span>)</span><br><span class="line">    print(a)</span><br><span class="line">foo()</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>lambda表达式, 闭包(closure)</p>
+<ul>
+<li><p>lambda</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line">mul2 = <span class="keyword">lambda</span> x: <span class="number">2</span> * x</span><br><span class="line">print(mul2(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">print(list(map(<span class="keyword">lambda</span> x: <span class="number">3</span> * x, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])))</span><br><span class="line">print(list(filter(<span class="keyword">lambda</span> x: x % <span class="number">3</span> == <span class="number">0</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])))</span><br><span class="line">print(functools.reduce(operator.add, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>closure</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例子一</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greeting</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(name)</span>:</span></span><br><span class="line">        print(msg, name)</span><br><span class="line">    <span class="keyword">return</span> hello</span><br><span class="line"></span><br><span class="line">h = greeting(<span class="string">"welcome"</span>)</span><br><span class="line">h(<span class="string">"akira"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例子二</span></span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(i=i)</span>:</span></span><br><span class="line">        print(i)</span><br><span class="line">    l.append(_)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> l:</span><br><span class="line">    f()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>*args, **kwargs<br>args获取tuple, kwargs获取kwargs</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">    print(<span class="string">"args"</span>, args)</span><br><span class="line">    print(<span class="string">"kwargs"</span>, kwargs)</span><br><span class="line">log(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">log(<span class="number">1</span>, <span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], c=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>递推式构造列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list comprehension</span></span><br><span class="line">r1 = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">print(r1)</span><br><span class="line"><span class="comment"># dict comprehension</span></span><br><span class="line">r2 = &#123;k:<span class="number">1</span> <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">10</span>)&#125;</span><br><span class="line">print(r2)</span><br><span class="line"><span class="comment"># list generator</span></span><br><span class="line">r3 = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line">print(list(r3))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>装饰器(decorator)<br>可用于AOP(aspect oriential programming)<br>例如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> debug:</span><br><span class="line">    xxx</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    yyy</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>decorator例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simple_wrapper</span><span class="params">(fn)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="comment">#print(fn.__name__)</span></span><br><span class="line">        <span class="keyword">return</span> fn()</span><br><span class="line">    <span class="keyword">return</span> _</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fix_arg_wrapper</span><span class="params">(fn)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="comment">#print(fn.__name__)</span></span><br><span class="line">        <span class="keyword">return</span> fn(x)</span><br><span class="line">    <span class="keyword">return</span> _</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">all_args_wrapper</span><span class="params">(fn)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> fn(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> _</span><br><span class="line"></span><br><span class="line"><span class="meta">@simple_wrapper</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@all_args_wrapper</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">foo()</span><br><span class="line">bar(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>魔法方法(magic method)</li>
+</ul>
+<p>形如:<br><code>__xxx__</code></p>
+<p>例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogAll</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a = <span class="number">1</span></span><br><span class="line">        self.b = <span class="number">2</span></span><br><span class="line">        self.c = <span class="number">3</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        print(item)</span><br><span class="line"></span><br><span class="line">l = LogAll()</span><br><span class="line">print(l.a)</span><br><span class="line">l.a = <span class="number">1</span></span><br><span class="line">l.b</span><br><span class="line">l.c</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Any</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        print(item)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        print(<span class="string">"set"</span>, key, value)</span><br><span class="line"></span><br><span class="line">a = Any()</span><br><span class="line">a.a</span><br><span class="line">a.a = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Any2</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, item)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            print(<span class="string">"function name"</span>, item)</span><br><span class="line">            print(<span class="string">"args"</span>, args)</span><br><span class="line">            print(<span class="string">"kwargs"</span>, kwargs)</span><br><span class="line"></span><br><span class="line">        setattr(self, item, _)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> _</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Any2()</span><br><span class="line">a.a1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">a.a2(<span class="number">1</span>, <span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], c=[])</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Mixin模式<br>例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"foo"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"bar"</span>)</span><br><span class="line">        self.shit()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">shit</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"shit"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A, B)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">c = C()</span><br><span class="line">c.bar()</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/20/2018-11-20-Python/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-11-19-MongoDB" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/19/2018-11-19-MongoDB/">MongoDB笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/19/2018-11-19-MongoDB/" class="archive-article-date">
+  	<time datetime="2018-11-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MongoDB笔记"><a href="#MongoDB笔记" class="headerlink" title="MongoDB笔记"></a>MongoDB笔记</h1><ul>
+<li><p>连接数据库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接 mongo 数据库, 主机是本机, 端口是默认的端口</span></span><br><span class="line">client = pymongo.MongoClient(<span class="string">"mongodb://localhost:27017"</span>)</span><br><span class="line">print(<span class="string">'连接数据库成功'</span>, client)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置要使用的数据库</span></span><br><span class="line">mongodb_name = <span class="string">'test'</span></span><br><span class="line"><span class="comment"># 直接这样就使用数据库了，相当于一个字典</span></span><br><span class="line"><span class="comment"># 也可以这样用 db = client.test</span></span><br><span class="line">db = client[mongodb_name]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>插入数据 </p>
+<ul>
+<li>mongo 中的 document 相当于 sql 中的 table</li>
+<li>不需要定义，直接使用</li>
+<li>不限定每条数据的字段</li>
+<li>直接插入新数据，数据以字典的形式提供</li>
+<li>下面的例子中， user 是文档名（表名），不存在的文档会自动创建</li>
+<li>每个数据有一个自动创建的字段 _id，可以认为是 mongo 自动创建的主键<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">()</span>:</span></span><br><span class="line">    u = &#123;</span><br><span class="line">        <span class="string">'name'</span>: join,</span><br><span class="line">        <span class="string">'passward'</span>:<span class="number">123</span></span><br><span class="line">        <span class="string">'age'</span>: <span class="number">10</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    db.user.insert(u)</span><br><span class="line">    <span class="comment"># 相当于 db['user'].insert</span></span><br><span class="line">insert()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>查找数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find 返回一个可迭代对象，使用 list 函数转为数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">()</span>:</span></span><br><span class="line">    user_list = list(db.user.find())</span><br><span class="line">    print(<span class="string">'所有用户'</span>, user_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># find 可以传入参数来做条件查询</span></span><br><span class="line"><span class="comment"># 具体可以很复杂 我们这里只演示简单的</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 查询 name 为 join 的所有数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find1</span><span class="params">()</span>:</span></span><br><span class="line">    query = &#123;</span><br><span class="line">        <span class="string">'name'</span>: <span class="string">'join'</span></span><br><span class="line">    &#125;</span><br><span class="line">    us = list(db.user.find(query))</span><br><span class="line">    print(<span class="string">'len '</span>, len(us))</span><br><span class="line">    <span class="comment"># for u in us:</span></span><br><span class="line">    <span class="comment">#     print(u['name'])</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># 查询 age 大于 1 的所有数据</span></span><br><span class="line">    query = &#123;</span><br><span class="line">        <span class="string">'age'</span>: &#123;</span><br><span class="line">            <span class="string">'$gt'</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="string">'age &gt; 1'</span>, list(db.user.find(query)))</span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># $or 查询</span></span><br><span class="line">    query = &#123;</span><br><span class="line">        <span class="string">'$or'</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">'age'</span>: <span class="number">2</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">'name'</span>: <span class="string">'join'</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    us = list(db.user.find(query))</span><br><span class="line">    print(<span class="string">'or 查询'</span>, us)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># find1()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 此外还有 $lt $let $get $ne $or 等条件</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 部分查询, 相当于 select xx, yy from 表名 语句</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_cond</span><span class="params">()</span>:</span></span><br><span class="line">    query = &#123;&#125;</span><br><span class="line">    field = &#123;</span><br><span class="line">        <span class="comment"># 字段: 1 表示提取这个字段</span></span><br><span class="line">        <span class="comment"># 不传的 默认是 0 表示不提取</span></span><br><span class="line">        <span class="comment"># _id 默认是 1</span></span><br><span class="line">        <span class="string">'name'</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">'_id'</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="string">'部分查询，只查询'</span>, list(db.user.find(query, field)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># find_cond()</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认更新第一条查询到的数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">()</span>:</span></span><br><span class="line">    query = &#123;</span><br><span class="line">        <span class="string">'age'</span>: <span class="number">10</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    form = &#123;</span><br><span class="line">        <span class="string">'$set'</span>: &#123;</span><br><span class="line">            <span class="string">'name'</span>: <span class="string">'new name'</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    options = &#123;</span><br><span class="line">        <span class="string">'multi'</span>: <span class="keyword">True</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 相当于 db.user.update(query, form, multi=True)</span></span><br><span class="line">    db.user.update(query, form, **options)</span><br><span class="line">update()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果想要更新所有查询到的数据</span></span><br><span class="line"><span class="comment"># 需要加入下面的参数 &#123;'multi': True&#125;</span></span><br><span class="line"><span class="comment"># db.user.update(query, form, &#123;'multi': True&#125;)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除和 find 是一样的</span></span><br><span class="line"><span class="comment"># db.user.remove()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># all 是给用户使用的查询函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">()</span>:</span></span><br><span class="line">    query = &#123;</span><br><span class="line">        <span class="string">'_deleted'</span>: <span class="keyword">False</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    user_list = list(db.user.find(query))</span><br><span class="line">    us = []</span><br><span class="line">    <span class="keyword">for</span> u <span class="keyword">in</span> user_list:</span><br><span class="line">        u.pop(<span class="string">'_deleted'</span>)</span><br><span class="line">        us.append(u)</span><br><span class="line">    print(<span class="string">'所有用户'</span>, len(us), us)</span><br><span class="line"></span><br><span class="line"><span class="comment"># all()</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关联查询</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.uestion.aggregate([&#123;</span><br><span class="line">  $lookup: &#123; <span class="comment">// 左连接</span></span><br><span class="line">    <span class="keyword">from</span>: <span class="string">"Answer"</span>, <span class="comment">// 关联到answer表</span></span><br><span class="line">    localField: <span class="string">"id"</span>, <span class="comment">// question 表关联的字段</span></span><br><span class="line">    foreignField: <span class="string">"qid"</span>, <span class="comment">// answer 表关联的字段</span></span><br><span class="line">    <span class="keyword">as</span>: <span class="string">"answers"</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/19/2018-11-19-MongoDB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-11-16-ES6" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/16/2018-11-16-ES6/">ECMAScript6笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/16/2018-11-16-ES6/" class="archive-article-date">
+  	<time datetime="2018-11-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ECMAScript6笔记"><a href="#ECMAScript6笔记" class="headerlink" title="ECMAScript6笔记"></a>ECMAScript6笔记</h1><ul>
+<li><p>定义log函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>let与var</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var 是以函数为单位限制作用于的修饰符号</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> foo1 = <span class="number">1</span></span><br><span class="line">        <span class="keyword">let</span> foo2 = <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    log(<span class="string">'foo1'</span>, foo1)</span><br><span class="line">    log(<span class="string">'foo2'</span>, foo2)</span><br><span class="line">&#125;</span><br><span class="line">log(foo1)</span><br><span class="line"></span><br><span class="line"><span class="comment">// let 就是限制作用域在 &#123;&#125; 内的 var</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">   log(i)</span><br><span class="line">&#125;</span><br><span class="line">log(i)</span><br><span class="line"><span class="comment">// 结果是 undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">   log(i)</span><br><span class="line">&#125;</span><br><span class="line">log(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> aa = <span class="number">1</span></span><br><span class="line">  log(aa)</span><br><span class="line">&#125;</span><br><span class="line">log(aa)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">  log(a)</span><br><span class="line">&#125;</span><br><span class="line">log(a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>const</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const 用来声明一个不可赋值的变量</span></span><br><span class="line"><span class="comment">// 变量的值只能在声明的时候赋予</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">1</span></span><br><span class="line">a = <span class="number">2</span> <span class="comment">// 错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的不是赋值 是操作 所以是可以的</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">arr.push(<span class="number">3</span>)</span><br><span class="line"><span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Set</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set 在其他语言里面称为集合</span></span><br><span class="line"><span class="comment">// 是一种和 Array 相似的数据结构</span></span><br><span class="line"><span class="comment">// 不同之处在于, Set 中的元素都是不重复的</span></span><br><span class="line"><span class="comment">// 用法如下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// add 方法添加元素, 和 push 一样</span></span><br><span class="line">s.add(<span class="number">1</span>)</span><br><span class="line">s.add(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// has 方法检查元素是否在 set 中</span></span><br><span class="line">s.has(<span class="number">1</span>) <span class="comment">// true</span></span><br><span class="line">s.has(<span class="number">3</span>) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// size 属性相当于 length</span></span><br><span class="line">s.size  <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// delete 方法删除一个元素</span></span><br><span class="line">s.delete(<span class="number">1</span>)</span><br><span class="line">s.has(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">s.size  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// set 类型的主要作用是去重</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Map 和 Object 很相似</span></span><br><span class="line"><span class="comment">// 在其他语言中 通常会有 dict 和 object 两种数据结构</span></span><br><span class="line"><span class="comment">// 现在 js 也有独立的 dict 那就是 Map</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用法如下</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// set 方法增加一个值</span></span><br><span class="line">m.set(<span class="string">'a'</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// get 属性得到一个值</span></span><br><span class="line">m.get(<span class="string">'a'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Object</span></span><br><span class="line"><span class="keyword">let</span> o = &#123;&#125;</span><br><span class="line">o.a = <span class="number">1</span></span><br><span class="line">o.a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ... 叫扩展符号, 作用是把数组解开成单独的元素</span></span><br><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">var</span> a2 = [...a1, <span class="number">4</span>]</span><br><span class="line"><span class="comment">// 结果是 [1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...可以用来传参</span></span><br><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">log(...a1)</span><br><span class="line"><span class="comment">// 相当于 log(1, 2, 3)</span></span><br><span class="line"><span class="comment">// 类似于 log.apply(window, a1)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解包</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解包是其他语言(Python) 中学过来的特性, 见下方例子</span></span><br><span class="line"><span class="keyword">var</span> [a, b] = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="comment">// a b 分别被赋值为 1 2</span></span><br><span class="line"><span class="comment">// 相当于下面的老代码</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">var</span> a = arr[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">var</span> b = arr[<span class="number">1</span>]</span><br><span class="line"><span class="comment">// 使用这个语法可以一行代码给多个变量赋值</span></span><br><span class="line"><span class="comment">// 所以也就可以一行代码交换变量值</span></span><br><span class="line">[a, b] = [b, a]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数默认参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a, name=<span class="string">'aa'</span></span>) </span>&#123;</span><br><span class="line">    log(a, name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可变参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用 ... 语法可以实现可变长度的参数</span></span><br><span class="line"><span class="comment">// 多余的参数会被放进 args 数组中</span></span><br><span class="line"><span class="comment">// args 是任意的变量名</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a, ...args</span>) </span>&#123;</span><br><span class="line">   log(a, args.length)</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>箭头函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭头函数就是匿名函数定义的简化版, 宣称能使得代码更简洁</span></span><br><span class="line"><span class="comment">// 箭头函数的 this 值是绑定了的</span></span><br><span class="line"><span class="comment">// 箭头函数没有 arguments 对象</span></span><br><span class="line"><span class="comment">// 如果要多参数, 必须用 ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 语法如下</span></span><br><span class="line"><span class="comment">// (参数1, 参数2) =&gt; &#123; 语句 &#125;</span></span><br><span class="line"><span class="comment">// (参数1, 参数2) =&gt; 语句</span></span><br><span class="line"><span class="comment">// 上面两行相当于下面这函数</span></span><br><span class="line"><span class="comment">// function(参数1, 参数2) &#123;</span></span><br><span class="line"><span class="comment">//     return 语句</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果只有一个参数，圆括号可省略的</span></span><br><span class="line"><span class="comment">// (参数1) =&gt; &#123; 语句 &#125;</span></span><br><span class="line"><span class="comment">// 参数1 =&gt; &#123; 语句 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 但是如果没有参数, 必须需要使用圆括号</span></span><br><span class="line"><span class="comment">// () =&gt; &#123; 语句 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment">// 下面两个等价</span></span><br><span class="line"><span class="keyword">var</span> a2 = a1.map(<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n * n</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> a3 = a1.map( <span class="function"><span class="params">n</span> =&gt;</span> n * n )</span><br><span class="line"></span><br><span class="line">n =&gt; n * n</span><br><span class="line"><span class="comment">// 上面 1 行等价于下面 3 行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n * n</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用方式如下</span></span><br><span class="line"><span class="keyword">var</span> c = foo(<span class="number">1</span>)</span><br><span class="line">c(<span class="number">2</span>)</span><br><span class="line"><span class="comment">// 也可以写在一行</span></span><br><span class="line">foo(<span class="number">1</span>)(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面等价于下面</span></span><br><span class="line">a =&gt; <span class="function"><span class="params">b</span> =&gt;</span> a + b</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(str.includes(<span class="string">'测试'</span>))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="literal">true</span>);    <span class="comment">//  包含</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="literal">false</span>)    <span class="comment">//不包含</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/16/2018-11-16-ES6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-11-12-tp5" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/12/2018-11-12-tp5/">tp5笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/12/2018-11-12-tp5/" class="archive-article-date">
+  	<time datetime="2018-11-12T13:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="tp5的笔记"><a href="#tp5的笔记" class="headerlink" title="tp5的笔记"></a>tp5的笔记</h1><ul>
+<li><p>FIND_IN_SET的写法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$map[] = [<span class="string">'exp'</span>,Db::raw(<span class="string">"FIND_IN_SET($tag_id,i.tag_ids)"</span>)];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Model中追加属性</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 追加属性</span></span><br><span class="line"><span class="keyword">protected</span> $append = [</span><br><span class="line">    <span class="string">'signup_count'</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置属性的值</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSignupCountAttr</span><span class="params">($value,$data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $Signup =  <span class="keyword">new</span> \app\admin\model\Signup;</span><br><span class="line">    $count = $Signup-&gt;where(<span class="string">'act_id'</span>,<span class="string">'='</span>,$data[<span class="string">'id'</span>])-&gt;count();</span><br><span class="line">    <span class="keyword">return</span> $count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查字段</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">admin</span>\<span class="title">validate</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Validate</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Validate</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证规则</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $rule = [</span><br><span class="line">        <span class="string">'title'</span> =&gt; <span class="string">'require|unique:item,title'</span>,</span><br><span class="line">    ];</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提示消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $message = [</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 字段描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $field = [</span><br><span class="line">    ];</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证场景</span></span><br><span class="line"><span class="comment">     * 检查title是否唯一，除本身</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $scene = [</span><br><span class="line">        <span class="string">'add'</span>  =&gt; [ <span class="string">'title'</span>],</span><br><span class="line">        <span class="string">'edit'</span> =&gt; [ <span class="string">'title'</span> =&gt; <span class="string">'require|unique:item,title^id'</span> ], </span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(array $rules = [], $message = [], $field = [])</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;field = [</span><br><span class="line">            <span class="string">'title'</span> =&gt; __(<span class="string">'Title'</span>),</span><br><span class="line">        ];</span><br><span class="line">        <span class="keyword">parent</span>::__construct($rules, $message, $field);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">thinkphp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/12/2018-11-12-tp5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2018-11-06-git" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -167,7 +580,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>把stage中的修改提交到本地库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">'comments here'</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">'comments here'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建了本地一个版本 V1.2 ,并且添加了附注信息 'WebSite version 1.2' </span></span><br><span class="line">git tag -a V1.2 -m <span class="string">'WebSite version 1.2'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tag 远程推送</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -350,9 +773,59 @@
 <li>复合索引  ：多个列构成的索引 （相当于 二级目录 ：  z: zhao）  (name,age)   (a,b,c,d,…,n)<h2 id="分析SQL"><a href="#分析SQL" class="headerlink" title="分析SQL"></a>分析SQL</h2></li>
 <li>分析SQL的执行计划  : explain   ，可以模拟SQL优化器执行SQL语句，从而让开发人员 知道自己编写的SQL状况</li>
 <li>MySQL查询优化其会干扰我们的优化</li>
-<li><p>explain字段</p>
-<p>  | id | select_type | table | type | possible_keys | key | key_len | ref | rows | Extra |<br>  | —— | —— | —— | —— | —— | —— | —— | —— | —— | —— |<br>  | 编号 | 查询类型 | 表 | 类型 | 预测用到的索引 | 实际使用的索引 | 实际使用索引的长度 | 表之间的引用 | 通过索引查询到的数据量 | 额外的信息 |</p>
-</li>
+<li>explain字段</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td style="text-align:center">编号</td>
+</tr>
+<tr>
+<td>select_type</td>
+<td style="text-align:center">查询类型</td>
+</tr>
+<tr>
+<td>table</td>
+<td style="text-align:center">表</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:center">类型</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td style="text-align:center">预测用到的索引</td>
+</tr>
+<tr>
+<td>key</td>
+<td style="text-align:center">实际使用的索引</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td style="text-align:center">实际使用索引的长度</td>
+</tr>
+<tr>
+<td>ref</td>
+<td style="text-align:center">表之间的引用</td>
+</tr>
+<tr>
+<td>rows</td>
+<td style="text-align:center">通过索引查询到的数据量</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td style="text-align:center">额外的信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>例子数据</p>
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> course</span><br><span class="line">(</span><br><span class="line">cid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">cname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacher</span><br><span class="line">(</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacherCard</span><br><span class="line">(</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tcdesc <span class="built_in">varchar</span>(<span class="number">200</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'java'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'html'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'sql'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">'web'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tz'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'tw'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tl'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tzdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'twdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tldesc'</span>) ;</span><br></pre></td></tr></table></figure>
 </li>
@@ -729,414 +1202,9 @@
 
 
   
-    <article id="post-2018-02-20-learn-PHP-8" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/20/2018-02-20-learn-PHP-8/">异常和错误处理</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/20/2018-02-20-learn-PHP-8/" class="archive-article-date">
-  	<time datetime="2018-02-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>PHP只有手动抛出异常后才能捕获异常</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $a = <span class="number">5</span>/<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> $a,PHP_EOL;</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="keyword">exception</span> $e) &#123;</span><br><span class="line">    $e -&gt; getMessage();</span><br><span class="line">    $a = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> $a;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>对于除零这种“异常”情况，PHP认为这是一个错误，直接触发错误（warning也是错误，只是错误等级不一样），而不会自动抛出异常使程序进入异常流程，故最终a值并不是预想中的-1，也就是说，并没有进入异常分支，也没有处理异常。</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定义两个异常类，它们需要继承自系统的exception</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">emailException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pwdException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"&lt;div clas=\"error\"&gt;Exception&#123;$this-&gt;getCode()&#125;:</span></span><br><span class="line"><span class="string">        &#123;$this-&gt;getMessage()&#125;</span></span><br><span class="line"><span class="string">        in File:&#123;$this-&gt;getFile()&#125;on line:&#123;$this-&gt;getLine()&#125;&lt;/div&gt;"</span>;</span><br><span class="line">        <span class="comment">//改写抛出异常结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 根据业务需求抛出不同异常</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reg</span><span class="params">($reginfo=null)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo)||!<span class="keyword">isset</span>($reginfo)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"参数非法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo[<span class="string">'email'</span>])) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> emailException(<span class="string">"邮件为空"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ($reginfo[<span class="string">'pwd'</span>]!=$reginfo[<span class="string">'repwd'</span>]) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> pwdException(<span class="string">"两次密码不一致"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'注册成功'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对异常进行分拣并做处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    reg(<span class="keyword">array</span>(<span class="string">'email'</span>=&gt;<span class="string">'waitfox@qq.com'</span>,<span class="string">'pwd'</span>=&gt;<span class="number">123456</span>,<span class="string">'repwd'</span>=&gt;<span class="number">12345678</span>));</span><br><span class="line">    <span class="comment">// reg();</span></span><br><span class="line">&#125;<span class="keyword">catch</span> (emailException $ee) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $ee-&gt;getMessage();</span><br><span class="line">&#125;<span class="keyword">catch</span>(pwdException $ep)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $ep;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'特殊处理'</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getTraceAsString();</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'其他情况，统一处理'</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在下面三种场景下会用到异常处理机制:1.对程序的悲观预测;2.程序的需要和对业务的关注;3.语言级别的健壮性要求</li>
-<li><p>PHP中的异常机制是不足的，绝大多数情况下无法自动抛出异常，必须用if……else先进行判断，再手动抛出异常。手动抛异常的意义不是很大，因为这意味着在代码里已经充分预期到错误的出现，也就算不上真正的“异常”，而是意料之中。同时，这种方式还会使你陷入纷繁复杂的业务逻辑判断和处理中。</p>
-</li>
-<li><p>PHP错误就是会使脚本运行不正常的情况</p>
-</li>
-<li><p>错误大致分为以下几类。</p>
-</li>
-<li>deprecated是最低级别的错误，表示“不推荐，不建议”。比如在PHP 5中使用ereg系列的正则匹配函数就会报此类错误。这种错误一般由于使用不推荐的、过时的函数或语法造成的。其虽不影响PHP正常流程，但一般情况下建议修正。</li>
-<li>其次是notice。这种错误一般告诉你语法中存在不当的地方。如使用变量但是未定义就会报此错。最常见的，数组索引是字符时没有加引号，PHP就视为一个常量，先查找常量表，找不到再视为变量。虽然PHP是脚本语言，语法要求不严，但是仍然建议对变量进行初始化。这种错误不影响PHP正常流程。</li>
-<li>warning是级别比较高的错误，在语法中出现很不恰当的情况时才会报此错误，比如函数参数不匹配。这种级别的错误会导致得不到预期结果，故需要修改代码。</li>
-<li>更高级别的错误是fetal error。这是致命错误，直接导致PHP流程终结，后面的代码不再执行。这种问题非改不可。</li>
-<li><p>最高级别的错误是语法解析错误prase error。上面提到的错误都属于PHP代码运行期间错误，而语法解析错误属于语法检查阶段错误，这将导致PHP代码无法通过语法检查。错误级别不止这几个，最主要的都在前面提到了。PHP手册中一共定义了16个级别的错误，最常用的就这几个。</p>
-</li>
-<li><p>在代码质量或者环境不可控时（比如数据库连接失败），使用error＿reporting（0），这样就能屏蔽错误了，正式部署时可以采取这样的策略，防止错误消息泄露敏感信息。另外一个技巧就是在函数前加@符号，抑制错误信息输出，如@mysql＿connect（）。</p>
-</li>
-</ul>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>[PHP核心技术与最佳实践]</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/20/2018-02-20-learn-PHP-8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2018-02-19-learn-PHP-7" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/19/2018-02-19-learn-PHP-7/">反射</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/19/2018-02-19-learn-PHP-7/" class="archive-article-date">
-  	<time datetime="2018-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反射"><a href="#反射" class="headerlink" title="反射:"></a>反射:</h2><ul>
-<li>反射指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name,$value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Setting $name to $value \r\n"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$name=$value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'末设置'</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$name=<span class="string">"正在为你设置默认值"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$student = <span class="keyword">new</span> person();</span><br><span class="line">$student -&gt; name=<span class="string">'Tom'</span>;</span><br><span class="line">$student -&gt; gender=<span class="string">'male'</span>;</span><br><span class="line">$student -&gt;age=<span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取对象属性列表</span></span><br><span class="line">$reflect = <span class="keyword">new</span> ReflectionObject($student);</span><br><span class="line">$props = $reflect -&gt; getProperties();</span><br><span class="line"><span class="keyword">foreach</span> ($props <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取对象方法列表</span></span><br><span class="line">$m = $reflect -&gt; getMethods();</span><br><span class="line"><span class="keyword">foreach</span> ($m <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回对象属性的关联数组</span></span><br><span class="line">var_dump(get_object_vars($student));</span><br><span class="line"><span class="comment">//类属性</span></span><br><span class="line">var_dump(get_class_vars(get_class($student)));</span><br><span class="line"><span class="comment">//返回由类的方法名组成的数组</span></span><br><span class="line">var_dump(get_class_methods(get_class($student)));</span><br><span class="line"><span class="comment">//获取对象属性列表所属的类</span></span><br><span class="line"><span class="keyword">echo</span> get_class($student);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>反射API的功能显然更强大，甚至能还原这个类的原型，包括方法的访问权限,代码如下</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//反射获取类的原型</span></span><br><span class="line">$obj = <span class="keyword">new</span> ReflectionClass(<span class="string">'person'</span>);</span><br><span class="line">$className = $obj -&gt; getName();</span><br><span class="line">$Methods = $Properties = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt; getProperties() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Properties[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt;getMethods() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Methods[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"class &#123;$className&#125;\n&#123;\n"</span>;</span><br><span class="line">is_array($Properties)&amp;&amp;ksort($Properties);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($Properties <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $v -&gt; isPublic()?<span class="string">'public'</span>:<span class="string">''</span>,$v -&gt; isPrivate()?<span class="string">'private'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isProtected()?<span class="string">'protected'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isStatic()?<span class="string">'static'</span>:<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t&#123;$k&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">if</span> (is_array($Methods)) ksort($Methods);</span><br><span class="line"><span class="keyword">foreach</span> ($Methods <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\tfunction &#123;$k&#125;()&#123;&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&#125;\n"</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>反射可以探知类的内部结构，可以用它做hook实现插件功能或者是做动态代理</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysql</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">($db)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"连接到数据库$&#123;db[0]&#125;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqlproxy</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $target;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($tar)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span> -&gt; target[] = <span class="keyword">new</span> $tar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span> -&gt; target <span class="keyword">as</span> $obj) &#123;</span><br><span class="line">            $r = <span class="keyword">new</span> ReflectionClass($obj);</span><br><span class="line">            <span class="keyword">if</span> ($method = $r -&gt; getMethod($name)) &#123;</span><br><span class="line">                <span class="keyword">if</span> ($method -&gt; isPublic() &amp;&amp; !$method -&gt; isAbstract()) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截记录LOG\r\n"</span>;</span><br><span class="line">                    $method -&gt; invoke($obj,$args);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截\r\n"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> sqlproxy(<span class="string">'mysql'</span>);</span><br><span class="line">$obj -&gt; connect(<span class="string">'member'</span>);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>真正的操作类是mysql类，但是sqlproxy类实现了根据动态传入参数，代替实际的类运行，并且在方法运行前后进行拦截，并且动态地改变类中的方法和属性。这就是简单的动态代理。</li>
-</ul>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>[PHP核心技术与最佳实践]</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/19/2018-02-19-learn-PHP-7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2018-02-18-learn-PHP-6" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/18/2018-02-18-learn-PHP-6/">接口</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/18/2018-02-18-learn-PHP-6/" class="archive-article-date">
-  	<time datetime="2018-02-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="接口"><a href="#接口" class="headerlink" title="接口:"></a>接口:</h2><ul>
-<li>接口这样描述自己：对于实现我的所有类，看起来都应该像我现在这个样子</li>
-<li><p>接口含义：采用一个特定接口的所有代码都知道对于那个接口会调用什么方法。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>; <span class="comment">//驱动方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">plain</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是飞机"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fly</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"飞行"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是汽车\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">machine</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">demo</span><span class="params">(mobile $a)</span></span>&#123;</span><br><span class="line">        $a-&gt;fly();  <span class="comment">//mobile接口是没有这个方法的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> machine();</span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> plain()); <span class="comment">//运行成功</span></span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> car()); <span class="comment">//运行失败</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口本身并不提供实现，只是提供一个规范。如果我们知道一个类实现了某个接口，那么就知道了可以调用该接口的哪些方法，我们只需要知道这些就够了。</p>
-</li>
-<li>PHP中，接口的语义是有限的，使用接口的地方并不多，PHP中接口可以淡化为设计文档，起到一个团队基本契约的作用</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">cache</span></span>&#123;</span><br><span class="line">    <span class="comment">// @describe：缓存管理，项目经理定义接口，技术人员负责实现</span></span><br><span class="line">    <span class="keyword">const</span> maxKey = <span class="number">100000</span>; <span class="comment">//最大缓存量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getc</span><span class="params">($key)</span></span>; <span class="comment">//获取缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setc</span><span class="params">($key,$value)</span></span>;<span class="comment">//设置缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">flush</span><span class="params">()</span></span>; <span class="comment">//清空缓存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>PHP5对面向对象的特性做了许多增强，其中就有一个SPL（标准PHP库）的尝试。SPL中实现一些接口，其中最主要的就是Iterator迭代器接口，通过实现这个接口，就能使对象能够用于foreach结构，从而在使用形式上比较统一</li>
-<li>DirectoryIterator类之所以拿来就能用，是因为系统已经实现了Iterator接口，所以可以像下面这样使用</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$dir = <span class="keyword">new</span> DirectoryIterator(dirname(<span class="keyword">__FILE__</span>));</span><br><span class="line"><span class="keyword">foreach</span> ($dir <span class="keyword">as</span> $fileinfo) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!$fileinfo-&gt;isDir()) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $fileinfo-&gt;getFilename(),<span class="string">"\t"</span>,$fileinfo-&gt;getSize(),PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在对PHP实例对象使用foreach语法时，会检查这个实例有没有实现Iterator接口，如果实现了，就会通过内置方法或使用实现类中的方法模拟foreach语句</li>
-<li>接口是对多重继承的一种变相实现，而在讲继承时，我们提到了用来实现混入（Mixin）式的Traits，实际上，Traits可以被视为一种加强型的接口。</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> Hello&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Hello '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">trait</span> World&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayWord</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'World'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHelloWorld</span></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Hello</span>,<span class="title">World</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayExclamationMark</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$o = <span class="keyword">new</span> MyHelloWorld();</span><br><span class="line">$o -&gt; sayHello();</span><br><span class="line">$o -&gt; sayWord();</span><br><span class="line">$o -&gt; sayExclamationMark();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这里的MyHelloWorld同时实现了两个Traits，从而使其可以分别调用两个Traits里的代码段。从代码中就可以看出，Traits和接口很像，不同的是Traits是可以导入包含代码的接口。从某种意义上来说，Traits和接口都是对“多重继承”的一种变相实现<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2></li>
-<li>接口作为一种规范和契约存在。作为规范，接口应该保证可用性；作为契约，接口应该保证可控性。</li>
-<li>接口只是一个声明，一旦使用interface关键字，就应该实现它。可以由程序员实现（外部接口），也可以由系统实现（内部接口）。接口本身什么都不做，但是它可以告诉我们它能做什么。</li>
-<li>PHP中的接口存在两个不足，一是没有契约限制，二是缺少足够多的内部接口。</li>
-<li>接口其实很简单，但是接口的各种应用很灵活，设计模式中也有很大一部分是围绕接口展开的。</li>
-</ul>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>[PHP核心技术与最佳实践]</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/18/2018-02-18-learn-PHP-6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2018-02-17-learn-PHP-5" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/17/2018-02-17-learn-PHP-5/">继承与多态</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/17/2018-02-17-learn-PHP-5/" class="archive-article-date">
-  	<time datetime="2018-02-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="继承"><a href="#继承" class="headerlink" title="继承:"></a>继承:</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name=<span class="string">'Tom'</span>;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是父类'</span>,PHP_EOL;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">family</span> <span class="keyword">extends</span> <span class="title">person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::__construct(); <span class="comment">//调用父类构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是子类'</span>,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::say();</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis\t"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">",and is\t"</span>,<span class="keyword">$this</span>-&gt;age,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">cry</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">parent</span>::$money,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'%&gt;_&lt;%'</span>,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">self</span>::$money,PHP_EOL; <span class="comment">//调用自身构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'(*^__^)'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poor=<span class="keyword">new</span> family();</span><br><span class="line">$poor-&gt;name=<span class="string">'Lee'</span>;</span><br><span class="line">$poor-&gt;gender=<span class="string">'female'</span>;</span><br><span class="line">$poor-&gt;age=<span class="number">25</span>;</span><br><span class="line">$poor-&gt;say();</span><br><span class="line">$poor-&gt;cry();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在继承中，用parent指代父类，用self指代自身。使用“::”运算符（范围解析操作符）调用父类的方法。“::”操作符还用来作为类常量和静态方法的调用，不要把这两种应用混淆。</li>
-<li>如果声明类成员或方法为static，就可以不实例化类而直接访问，同时也就不能通过一个对象访问其中的静态成员（静态方法除外），也不能用“::”访问一个非静态方法。比如，把上例中的poor-&gt;cry（）；换成poor::cry（）。</li>
-<li>继承存在什么问题：1）继承破坏封装性 2）继承是紧耦合的 3）继承扩展复杂 4）不恰当地使用继承可能违反现实世界中的逻辑。</li>
-<li>继承拥有比组合更少的代码量</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Add oil\t\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bmw</span> <span class="keyword">extends</span> <span class="title">car</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">benz</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $car;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car=<span class="keyword">new</span> car;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car-&gt;addoil();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$bmw=<span class="keyword">new</span> bmw;</span><br><span class="line">$bmw-&gt;addoil();</span><br><span class="line">$benz=<span class="keyword">new</span> benz();</span><br><span class="line">$benz-&gt;addoil();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>精心设计专门用于被继承的类，继承树的抽象层应该比较稳定，一般不要多于三层。</li>
-<li>对于不是专门用于被继承的类，禁止其被继承，也就是使用final修饰符。使用final修饰符既可防止重要方法被非法覆写，又能给编辑器寻找优化的机会。</li>
-<li>优先考虑用组合关系提高代码的可重用性。</li>
-<li>子类是一种特殊的类型，而不只是父类的一个角色。</li>
-<li>子类扩展，而不是覆盖或者使父类的功能失效。</li>
-<li>底层代码多用组合，顶层/业务层代码多用继承。底层用组合可以提高效率，避免对象臃肿。顶层代码用继承可以提高灵活性，让业务使用更方便。</li>
-</ul>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态:"></a>多态:</h2><ul>
-<li>多态确切的含义是：同一类的对象收到相同消息时，会得到不同的结果。而这个消息是不可预测的。多态，顾名思义，就是多种状态，也就是多种结果。</li>
-<li>多态性是一种通过多种状态或阶段描述相同对象的编程方式。它的真正意义在于：实际开发中，只要关心一个接口或基类的编程，而不必关心一个对象所属于的具体类。</li>
-<li>很多地方会看到“PHP没有多态”这种说法。事实上，不是它没有，而是它本来就是多态的</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'本方法需要重载才能运行'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">($obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (get_class($obj)==<span class="string">'employee'</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Error'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $obj-&gt;working();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">doprint(<span class="keyword">new</span> teacher());</span><br><span class="line">doprint(<span class="keyword">new</span> coder());</span><br><span class="line">doprint(<span class="keyword">new</span> employee());</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过接口实现多态</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">(employee $i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $i-&gt;working();</span><br><span class="line">&#125;</span><br><span class="line">$a=<span class="keyword">new</span> teacher;</span><br><span class="line">$b=<span class="keyword">new</span> coder;</span><br><span class="line">doprint($a);</span><br><span class="line">doprint($b);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>弱类型的PHP里多态和传统强类型语言里的多态在实现和概念上是有一些区别的，而且弱类型语言实现起多态来会更简单，更灵活。</li>
-<li>至于多态是怎么实现的，各种语言的策略是不一样的。但是，最终的实现无非就是查表和判断。</li>
-<li>类型转换不是多态。</li>
-<li>PHP中父类和子类看做“继父”和“继子”关系，它们存在继承关系，但不存在血缘关系。因此子类无法向上转型为父类，从而失去多态最典型的特征。</li>
-<li>多态的本质就是if……else，只不过实现的层级不同。</li>
-</ul>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>[PHP核心技术与最佳实践]</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/17/2018-02-17-learn-PHP-5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1239,11 +1307,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1263,7 +1331,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
             
             <div class="clearfix"></div>
