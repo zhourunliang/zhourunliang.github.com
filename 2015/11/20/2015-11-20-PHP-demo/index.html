@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>用PHP和MySql实现简单的留言本 | Run的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。    CREATE TABLE IF NOT EXISTS `content` ( `id` int(11)">
+  <meta name="description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(1">
 <meta name="keywords" content="demo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用PHP和MySql实现简单的留言本">
 <meta property="og:url" content="http://yoursite.com/2015/11/20/2015-11-20-PHP-demo/index.html">
 <meta property="og:site_name" content="Run的博客">
-<meta property="og:description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。    CREATE TABLE IF NOT EXISTS `content` ( `id` int(11)">
+<meta property="og:description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(1">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://7xok5a.com1.z0.glb.clouddn.com/000.JPG">
-<meta property="og:updated_time" content="2018-11-11T12:59:28.799Z">
+<meta property="og:updated_time" content="2019-07-22T13:16:57.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用PHP和MySql实现简单的留言本">
-<meta name="twitter:description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。    CREATE TABLE IF NOT EXISTS `content` ( `id` int(11)">
+<meta name="twitter:description" content="最近学习了PHP和MySql，实现了一个简单的留言本。当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。    创建数据库：在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(1">
 <meta name="twitter:image" content="http://7xok5a.com1.z0.glb.clouddn.com/000.JPG">
   
     <link rel="alternative" href="/atom.xml" title="Run的博客" type="application/atom+xml">
@@ -38,6 +38,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?6fdd23415d0be9b0c990a710bf869475";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 </html>
@@ -53,7 +63,7 @@
 			<img src="/assets/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Run Joe</a></h1>
+		  <h1 class="header-author"><a href="/">Run John</a></h1>
 		</hgroup>
 		
 
@@ -99,7 +109,7 @@
 				<img src="/assets/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Run Joe</h1>
+			  <h1 class="header-author js-header-author">Run John</h1>
 			</hgroup>
 			
 			
@@ -157,124 +167,17 @@
       
         <p>最近学习了PHP和MySql，实现了一个简单的留言本。<br>当用户提交数据，就会将数据存储在数据库中，然后再将数据库的数据显示在浏览器上。<br>PHP连接数据库有多种连接方式，这次用的是MySQLi方式连接数据库。  </p>
 <hr>
-<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。  </p>
-<pre><code>
-CREATE TABLE IF NOT EXISTS `content` (
-`id` int(11) NOT NULL auto_increment,
-`title` varchar(50) NOT NULL,
-`name` varchar(20) NOT NULL,
-`content` varchar(200) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
-</code></pre>
-
+<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据据，选择数据库，在其中创建一个表。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`content`</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</span><br><span class="line"><span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`content`</span> <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 AUTO_INCREMENT=<span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>我写了3个PHP文件，分别是config.php,用于连接数据库；post.php,用于提交数据；index.php,主页，用于提供用户操作界面。  </p>
 <hr>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><p>config.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-$servername = &quot;localhost&quot;;
-$username = &quot;user&quot;;
-$password = &quot;123456&quot;;
-$dbname = &quot;bbs&quot;;
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-// 检测连接
-if ($conn-&gt;connect_error) {
-    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
-}
-
-mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
-?&gt;
---&gt;
-</code></pre><p>post.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$title= $_POST[&apos;title&apos;];
-$name= $_POST[&apos;name&apos;];
-$patch = $_POST[&apos;content&apos;];
-$content = str_replace(&quot;
-&quot;,&quot;&lt;br /&gt;&quot;,$patch);
-$sql = &quot;INSERT INTO content (title, name, content)
-VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-
-$conn-&gt;close();
-?&gt;  
---&gt;
-</code></pre><p>index.php:</p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;body&gt;
-&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;
-&lt;?php
-include(&quot;config.php&quot;);
-$sql = &quot;SELECT title, name, content FROM content&quot;;
-$result = $conn-&gt;query($sql);
-if ($result-&gt;num_rows &gt; 0) {
-    // 输出每行数据
-    while($row = $result-&gt;fetch_assoc())
-    {
-?&gt;
-&lt;/p&gt;
-&lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
-&lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
-&lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
-&lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
-&lt;/tr bgColor=&quot;#ffffff&quot;&gt;
-&lt;tr&gt;
-&lt;td colspan=&quot;4&quot;&gt;&lt;?php echo $row[&quot;content&quot;] ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;/table&gt;
-&lt;?php
-    }
-} else
-{
-    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
-}
-$conn-&gt;close();
-?&gt;
-&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
-&lt;p&gt;
-标题：
-&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
-&lt;/p&gt;
-&lt;p&gt;用户：&lt;input type=&quot;test&quot; name=&quot;name&quot; id=&quot;name&quot;&gt;&lt;/p&gt;
-&lt;p&gt;
-留言：
-&lt;/p&gt;
-&lt;p&gt;
-&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
-&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
-&lt;/p&gt;
-&lt;/form&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;
-</code></pre><hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"user"</span>;</span><br><span class="line">$password = <span class="string">"123456"</span>;</span><br><span class="line">$dbname = <span class="string">"bbs"</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password, $dbname);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysqli_query($conn, <span class="string">"set names utf8"</span>);<span class="comment">//以utf8读取数据</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>post.php:  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"content-Type: text/html; charset=utf-8"</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">$title= $_POST[<span class="string">'title'</span>];</span><br><span class="line">$name= $_POST[<span class="string">'name'</span>];</span><br><span class="line">$patch = $_POST[<span class="string">'content'</span>];</span><br><span class="line">$content = str_replace(<span class="string">"</span></span><br><span class="line"><span class="string">"</span>,<span class="string">"&lt;br /&gt;"</span>,$patch);</span><br><span class="line">$sql = <span class="string">"INSERT INTO content (title, name, content)</span></span><br><span class="line"><span class="string">VALUES ('$title','$name','$content');"</span>;</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;multi_query($sql) === <span class="keyword">TRUE</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('提交成功!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"Error: "</span> . $sql . <span class="string">"&lt;br&gt;"</span> . $conn-&gt;error;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$conn-&gt;close();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>index.php:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;table width=<span class="string">"678"</span> align=<span class="string">"center"</span>&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">$sql = <span class="string">"SELECT title, name, content FROM content"</span>;</span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span> ($result-&gt;num_rows &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="comment">// 输出每行数据</span></span><br><span class="line">	<span class="keyword">while</span>($row = $result-&gt;fetch_assoc())</span><br><span class="line">	&#123;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;table width=<span class="string">"678"</span> border=<span class="string">"1"</span> align=<span class="string">"center"</span> cellpadding=<span class="string">"5"</span> cellspacing=<span class="string">"1"</span> bgcolor=<span class="string">"#add3ef"</span>&gt;</span><br><span class="line">&lt;tr bgcolor=<span class="string">"#eff3ff"</span>&gt;</span><br><span class="line">&lt;td width=<span class="string">"178"</span>&gt;&lt;big&gt;标题:&lt;/big&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $row[<span class="string">"title"</span>] <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">&lt;td width=<span class="string">"223"</span>&gt;&lt;big&gt;用户:&lt;/big&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $row[<span class="string">"name"</span>] <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">&lt;/tr bgColor=<span class="string">"#ffffff"</span>&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td colspan=<span class="string">"4"</span>&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $row[<span class="string">"content"</span>] <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125; <span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('没有数据!');&lt;/script&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$conn-&gt;close();</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;table align=<span class="string">"center"</span> width=<span class="string">"678"</span>&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;</span><br><span class="line">&lt;form name=<span class="string">"form1"</span> method=<span class="string">"post"</span> action=<span class="string">"post.php"</span>&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">标题：</span><br><span class="line">&lt;input name=<span class="string">"title"</span> type=<span class="string">"text"</span> id=<span class="string">"title"</span>&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;p&gt;用户：&lt;input type=<span class="string">"test"</span> name=<span class="string">"name"</span> id=<span class="string">"name"</span>&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">留言：</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;textarea name=<span class="string">"content"</span> id=<span class="string">"content"</span> cols=<span class="string">"45"</span> rows=<span class="string">"5"</span>&gt;&lt;/textarea&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;input type=<span class="string">"submit"</span> name=<span class="string">"button"</span> id=<span class="string">"button"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">"reset"</span> name=<span class="string">"button2"</span> id=<span class="string">"button2"</span> value=<span class="string">"重置"</span>&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/000.JPG" alt="picture"></p>
 <hr>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
@@ -438,7 +341,7 @@ $conn-&gt;close();
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Run Joe
+    		&copy; 2019 Run John
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -529,15 +432,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,11 +456,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,7 +472,59 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
             
             <div class="clearfix"></div>

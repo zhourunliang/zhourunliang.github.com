@@ -31,6 +31,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?6fdd23415d0be9b0c990a710bf869475";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 </html>
@@ -46,7 +56,7 @@
 			<img src="/assets/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Run Joe</a></h1>
+		  <h1 class="header-author"><a href="/">Run John</a></h1>
 		</hgroup>
 		
 
@@ -92,7 +102,7 @@
 				<img src="/assets/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Run Joe</h1>
+			  <h1 class="header-author js-header-author">Run John</h1>
 			</hgroup>
 			
 			
@@ -130,69 +140,679 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-2015-10-25-learn-PHP-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+    <article id="post-2018-11-04-hexo" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/25/2015-10-25-learn-PHP-1/">PHP学习笔记（1）</a>
+      <a class="article-title" href="/2018/11/04/2018-11-04-hexo/">hexo</a>
     </h1>
   
 
         
-        <a href="/2015/10/25/2015-10-25-learn-PHP-1/" class="archive-article-date">
-  	<time datetime="2015-10-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-25</time>
+        <a href="/2018/11/04/2018-11-04-hexo/" class="archive-article-date">
+  	<time datetime="2018-11-04T03:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量:"></a>PHP变量:</h2><p>变量以 $ 符号开始，后面跟着变量的名称。<br>PHP语句和 PHP 变量都是区分大小写的。<br>PHP是一门弱类型语言，不必向 PHP 声明该变量的数据类型。PHP 会根据变量的值，自动把变量转换为正确的数据类型。  </p>
-<h3 id="PHP变量作用域："><a href="#PHP变量作用域：" class="headerlink" title="PHP变量作用域："></a>PHP变量作用域：</h3><p>PHP 有四种不同的变量作用域：local，global，static，parameter。  </p>
-<h3 id="局部和全局作用域："><a href="#局部和全局作用域：" class="headerlink" title="局部和全局作用域："></a>局部和全局作用域：</h3><p>在所有函数外部定义的变量，拥有全局作用域。除了函数外，全局变量可以被脚本中的任何部分访问，要在一个函数中访问一个全局变量，需要使用 global 关键字。<br>global 关键字用于函数内访问全局变量。<br>当一个函数完成时，它的所有变量通常都会被删除。然而，有时候您希望某个局部变量不要被删除。要做到这一点，请在您第一次声明变量时使用 static 关键字。  </p>
+        <h2 id="使用Hexo主题Yilia"><a href="#使用Hexo主题Yilia" class="headerlink" title="使用Hexo主题Yilia"></a>使用Hexo主题<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">Yilia</a></h2><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清空缓存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成缓存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/04/2018-11-04-hexo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-11-06-MySql-optimization" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/02/2018-11-06-MySql-optimization/">MySql优化分析</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/02/2018-11-06-MySql-optimization/" class="archive-article-date">
+  	<time datetime="2018-11-02T13:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySql优化分析"><a href="#MySql优化分析" class="headerlink" title="MySql优化分析"></a>MySql优化分析</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+<li>MYSQL逻辑分层 ：连接层 服务层 引擎层 存储层</li>
+<li>InnoDB(默认) ：事务优先 （适合高并发操作；行锁）</li>
+<li>MyISAM ：性能优先  （表锁）<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2></li>
+<li><p>编写过程：</p>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dinstinct  ..from  ..join ..on ..where ..group <span class="keyword">by</span> ...having ..order <span class="keyword">by</span> ..limit ..</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>解析过程：</p>
+<pre><code><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from .. on.. join ..where ..group by ....having ...select dinstinct ..order by limit ...</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><ul>
+<li>主键索引  ： 不能重复。id    不能是null</li>
+<li>唯一索引  ： 不能重复。id    可以是null</li>
+<li>单值索引  ： 单列， age ;一个表可以多个单值索引,name。</li>
+<li>复合索引  ： 多个列构成的索引 （相当于 二级目录 ：  z: zhao）  (name,age)   (a,b,c,d,…,n)<h2 id="分析SQL"><a href="#分析SQL" class="headerlink" title="分析SQL"></a>分析SQL</h2></li>
+<li>分析SQL的执行计划  : explain   ，可以模拟SQL优化器执行SQL语句，从而让开发人员 知道自己编写的SQL状况</li>
+<li>MySQL查询优化其会干扰我们的优化</li>
+<li>explain字段</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td style="text-align:center">编号</td>
+</tr>
+<tr>
+<td>select_type</td>
+<td style="text-align:center">查询类型</td>
+</tr>
+<tr>
+<td>table</td>
+<td style="text-align:center">表</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:center">类型</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td style="text-align:center">预测用到的索引</td>
+</tr>
+<tr>
+<td>key</td>
+<td style="text-align:center">实际使用的索引</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td style="text-align:center">实际使用索引的长度</td>
+</tr>
+<tr>
+<td>ref</td>
+<td style="text-align:center">表之间的引用</td>
+</tr>
+<tr>
+<td>rows</td>
+<td style="text-align:center">通过索引查询到的数据量</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td style="text-align:center">额外的信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>例子数据</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> course</span><br><span class="line">(</span><br><span class="line">cid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">cname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacher</span><br><span class="line">(</span><br><span class="line">tid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tname <span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> teacherCard</span><br><span class="line">(</span><br><span class="line">tcid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">tcdesc <span class="built_in">varchar</span>(<span class="number">200</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'java'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'html'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'sql'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">'web'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tz'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'tw'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacher <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tl'</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'tzdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'twdesc'</span>) ;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> teacherCard <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'tldesc'</span>) ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>id（编号）:</p>
+<ul>
+<li><p>id值相同，从上往下 顺序执行</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查询教授SQL课程的老师的描述（desc）</span></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> tc.tcdesc <span class="keyword">from</span> teacherCard tc,course c,teacher t <span class="keyword">where</span> c.tid = t.tid</span><br><span class="line"><span class="keyword">and</span> t.tcid = tc.tcid <span class="keyword">and</span> c.cname = <span class="string">'sql'</span> ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>id值不同：id值越大越优先查询 (本质：在嵌套子查询时，先查内层 再查外层)</p>
+   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--将以上 多表查询 转为子查询形式：</span></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> tc.tcdesc <span class="keyword">from</span> teacherCard tc <span class="keyword">where</span> tc.tcid = </span><br><span class="line">(<span class="keyword">select</span> t.tcid <span class="keyword">from</span> teacher t <span class="keyword">where</span>  t.tid =  </span><br><span class="line">    (<span class="keyword">select</span> c.tid <span class="keyword">from</span> course c <span class="keyword">where</span> c.cname = <span class="string">'sql'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>id值有相同，又有不同： id值越大越优先；id值相同，从上往下 顺序执行</p>
+   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--子查询+多表：</span></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> t.tname ,tc.tcdesc <span class="keyword">from</span> teacher t,teacherCard tc <span class="keyword">where</span> t.tcid= tc.tcid</span><br><span class="line"><span class="keyword">and</span> t.tid = (<span class="keyword">select</span> c.tid <span class="keyword">from</span> course c <span class="keyword">where</span> cname = <span class="string">'sql'</span>) ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>select_type（查询类型）:</p>
+<ul>
+<li>PRIMARY:包含子查询SQL中的 主查询 （最外层）</li>
+<li>SUBQUERY：包含子查询SQL中的 子查询 （非最外层）</li>
+<li>simple:简单查询（不包含子查询、union）</li>
+<li>derived:衍生查询(使用到了临时表)</li>
+<li><p>union:</p>
+<ul>
+<li><p>a.在from子查询中只有一张表      </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span>  cr.cname 	<span class="keyword">from</span> ( <span class="keyword">select</span> * <span class="keyword">from</span> course <span class="keyword">where</span> tid <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>) ) cr ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>b.在from子查询中， 如果有table1 union table2 ，则table1 就是derived,table2就是union</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span>  cr.cname 	<span class="keyword">from</span> ( <span class="keyword">select</span> * <span class="keyword">from</span> course <span class="keyword">where</span> tid = <span class="number">1</span>  <span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> course <span class="keyword">where</span> tid = <span class="number">2</span> ) cr ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>union result :那些表之间存在union查询</p>
+</li>
+</ul>
+</li>
+<li><p>type（索引类型、类型）</p>
+<ul>
+<li><p>例子数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test01</span><br><span class="line">(</span><br><span class="line">    tid <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line">    tname <span class="built_in">varchar</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> test01 <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'a'</span>) ;</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"><span class="comment">--增加索引</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> test01 <span class="keyword">add</span> <span class="keyword">constraint</span> tid_pk primary <span class="keyword">key</span>(tid) ;</span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> * <span class="keyword">from</span> test01 )t <span class="keyword">where</span> tid =<span class="number">1</span> ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行效率：system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL</p>
+</li>
+<li>常用的类型：system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;all</li>
+<li>要对type进行优化的前提：有索引,其中：system,const只是理想情况；实际能达到 ref&gt;range;</li>
+<li>system（忽略）: 只有一条数据的系统表 ；或 衍生表只有一条数据的主查询</li>
+<li>const:仅仅能查到一条数据的SQL ,用于Primary key 或unique索引  （类型 与索引类型有关）</li>
+<li>eq_ref:唯一性索引：对于每个索引键的查询，返回匹配唯一行数据（有且只有1个，不能多 、不能0）</li>
+<li>ref：非唯一性索引，对于每个索引键的查询，返回匹配的所有行（0，多）</li>
+<li>range：检索指定范围的行 ,where后面是一个范围查询(between   ,&gt; &lt; &gt;=,     特殊:in有时候会失效 ，从而转为 无索引all)</li>
+<li>index：查询全部索引中数据</li>
+<li>all：查询全部表中的数据 </li>
+</ul>
+</li>
+<li><p>possible_keys</p>
+<ul>
+<li>可能用到的索引，是一种预测，不准</li>
+<li>如果 possible_key/key是NULL，则说明没用索引</li>
+</ul>
+</li>
+<li><p>key</p>
+<ul>
+<li>实际使用到的索引</li>
+</ul>
+</li>
+<li><p>key_len</p>
+<ul>
+<li>作用：用于判断复合索引是否被完全使用  （a,b,c）</li>
+</ul>
+</li>
+<li><p>ref</p>
+<ul>
+<li>注意与type中的ref值区分，作用： 指明当前表所 参照的 字段</li>
+</ul>
+</li>
+<li><p>rows</p>
+<ul>
+<li>被索引优化查询的 数据个数 (实际通过索引而查询到的 数据个数)</li>
+</ul>
+</li>
+<li><p>Extra</p>
+<ul>
+<li>using filesort ： 性能消耗大；需要“额外”的一次排序（查询）  。常见于 order by 语句中</li>
+</ul>
+</li>
+</ul>
+<h2 id="MySql最大连接数"><a href="#MySql最大连接数" class="headerlink" title="MySql最大连接数"></a>MySql最大连接数</h2><p>mysql的最大连接数默认是100, 最大可以达到16384，可以通过max_connections设置</p>
+<h2 id="对MySQL语句性能优化的16条经验"><a href="#对MySQL语句性能优化的16条经验" class="headerlink" title="对MySQL语句性能优化的16条经验"></a>对MySQL语句性能优化的16条经验</h2><ul>
+<li>为查询缓存优化查询</li>
+<li>EXPLAIN 我们的SELECT查询(可以查看执行的行数)</li>
+<li>当只要一行数据时使用LIMIT 1</li>
+<li>为搜索字段建立索引</li>
+<li>在Join表的时候使用相当类型的列，并将其索引</li>
+<li>千万不要 ORDER BY RAND  ()</li>
+<li>避免SELECT *</li>
+<li>永远为每张表设置一个ID</li>
+<li>可以使用ENUM 而不要VARCHAR</li>
+<li>尽可能的使用NOT NULL</li>
+<li>固定长度的表会更快</li>
+<li>垂直分割</li>
+<li>拆分打的DELETE或INSERT语句</li>
+<li>越小的列会越快</li>
+<li>选择正确的存储引擎</li>
+<li>小心 “永久链接”</li>
+</ul>
+<h2 id="MyISAM和InnoDB比较"><a href="#MyISAM和InnoDB比较" class="headerlink" title="MyISAM和InnoDB比较"></a>MyISAM和InnoDB比较</h2><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">MyISAM</th>
+<th style="text-align:center">InnoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事务</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td>数据行锁定</td>
+<td style="text-align:center">不支持，只有表锁定</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td>表空间大小</td>
+<td style="text-align:center">相对小</td>
+<td style="text-align:center">相对大</td>
+</tr>
+<tr>
+<td>全文索引</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">不支持</td>
+</tr>
+<tr>
+<td>关注点</td>
+<td style="text-align:center">性能（select）</td>
+<td style="text-align:center">事务</td>
+</tr>
+<tr>
+<td>MVCC(多版本并发控制)</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/02/2018-11-06-MySql-optimization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-04-29-python-spider-4" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/29/2018-04-29-python-spider-4/">利用python爬虫获取json数据并保存</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/29/2018-04-29-python-spider-4/" class="archive-article-date">
+  	<time datetime="2018-04-29T08:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>利用python爬虫获取json数据并保存  </p>
 <hr>
-<h2 id="echo和print语句"><a href="#echo和print语句" class="headerlink" title="echo和print语句:"></a>echo和print语句:</h2><p>echo 和 print 区别:<br>echo - 可以输出一个或多个字符串<br>print - 只允许输出一个字符串，返回值总为 1<br>echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。  </p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>,user=</span><br><span class="line">                       <span class="string">'root'</span>, passwd=<span class="string">''</span>, db=<span class="string">'mysql'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">cur = conn.cursor()</span><br><span class="line">cur.execute(<span class="string">"USE spider"</span>)</span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://urllink.com/getdata/'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getData</span><span class="params">(url, group, type)</span>:</span></span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">'group'</span>:group,</span><br><span class="line">        <span class="string">'type'</span>:type,</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'application/json, text/plain, */*'</span>,</span><br><span class="line">        <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.9,en;q=0.8'</span>,</span><br><span class="line">        <span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: <span class="string">'xxx'</span>,</span><br><span class="line">        <span class="string">'Host'</span>: <span class="string">'urllink.com'</span>,</span><br><span class="line">        <span class="string">'Pragma'</span>: <span class="string">'no-cache'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>: <span class="string">'http://urllink.com/'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    re = requests.get(url,params, headers=headers)</span><br><span class="line">    result = json.loads(re.text)</span><br><span class="line">    result = result[<span class="string">'results'</span>]</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">saveData</span><span class="params">(data)</span>:</span></span><br><span class="line">    cur.execute(<span class="string">"SELECT * FROM spdier_data WHERE id = %s"</span>,int(data[<span class="string">'id'</span>]))</span><br><span class="line">    <span class="keyword">if</span> cur.rowcount == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'插入数据库...id='</span>+str(data[<span class="string">'id'</span>]))</span><br><span class="line">        cur.execute(<span class="string">"INSERT INTO spdier_data (id, group, type,content) VALUES (%s, %s, %s, %s)"</span>,(int(data[<span class="string">'id'</span>]), int(data[<span class="string">'group'</span>]),int(data[<span class="string">'type'</span>]), str(data[<span class="string">'content'</span>])))</span><br><span class="line">        conn.commit()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> group <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">7</span>):</span><br><span class="line">        <span class="keyword">for</span> type <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">7</span>):</span><br><span class="line">            result = getData(url,group,type)</span><br><span class="line">            <span class="keyword">for</span> data <span class="keyword">in</span> result:</span><br><span class="line">                saveData(data)</span><br><span class="line">main()</span><br><span class="line">cur.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/29/2018-04-29-python-spider-4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-04-23-php-cache-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/23/2018-04-23-php-cache-1/">PHP访问数缓存处理</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/23/2018-04-23-php-cache-1/" class="archive-article-date">
+  	<time datetime="2018-04-23T14:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>利用Redis或Memcache作为MySQL的缓存，采用是ThinkPHP框架。  </p>
 <hr>
-<h2 id="PHP常量："><a href="#PHP常量：" class="headerlink" title="PHP常量："></a>PHP常量：</h2><p>设置常量，使用 define() 函数，函数语法如下：<br>define(string constant_name, mixed value, case_sensitive = true)<br>该函数有三个参数:<br>constant_name：必选参数，常量名称，即标志符。<br>value：必选参数，常量的值。<br>case_sensitive：可选参数，指定是否大小写敏感，设定为 true 表示不敏感。   </p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><ul>
+<li>采用ThinkPHP的S方法：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$savedata[<span class="string">'uid'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line">$savedata[<span class="string">'ip'</span>]=$_SERVER[<span class="string">'REMOTE_ADDR'</span>];    </span><br><span class="line">$savedata[<span class="string">'url'</span>]=$_SERVER[<span class="string">'REQUEST_URI'</span>];         </span><br><span class="line">$savedata[<span class="string">'created_time'</span>]=time();</span><br><span class="line">$savedata[<span class="string">'created_by'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line"></span><br><span class="line">$cache = S(<span class="keyword">array</span>(<span class="string">'type'</span>=&gt;<span class="string">'redis'</span>,<span class="string">'host'</span>=&gt;<span class="string">'127.0.0.1'</span>,<span class="string">'port'</span>=&gt;<span class="string">'6379'</span>,<span class="string">'prefix'</span>=&gt;<span class="string">'think'</span>,<span class="string">'expire'</span>=&gt;<span class="number">600000</span>));</span><br><span class="line"><span class="comment">// 获取缓存</span></span><br><span class="line">$visitor_data = $cache-&gt;visitor_data;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($visitor_data))&#123;</span><br><span class="line">    $visitor_data=<span class="keyword">array</span>();</span><br><span class="line">&#125;</span><br><span class="line">array_push($visitor_data, $savedata);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置缓存</span></span><br><span class="line">$cache-&gt;visitor_data = $visitor_data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(count($visitor_data)&gt;<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($visitor_data <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">      　$m = M(<span class="string">"VisitorLog"</span>);</span><br><span class="line">        $m-&gt;add($value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除缓存</span></span><br><span class="line">    <span class="keyword">unset</span>($cache-&gt;visitor_data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量:"></a>字符串变量:</h2><p>PHP并置运算符:<br>并置运算符 (.) 用于把两个字符串值连接起来。<br>strlen()函数返回字符串的长度（字符数）。<br>strpos() 函数用于在字符串内查找一个字符或一段指定的文本。  </p>
-<pre><code>   
-echo strpos("Hello world!","world");
-</code></pre>  
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><ul>
+<li>采用Redis</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$savedata[<span class="string">'uid'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line">$savedata[<span class="string">'ip'</span>]=$_SERVER[<span class="string">'REMOTE_ADDR'</span>];    </span><br><span class="line">$savedata[<span class="string">'url'</span>]=$_SERVER[<span class="string">'REQUEST_URI'</span>];         </span><br><span class="line">$savedata[<span class="string">'created_time'</span>]=time();</span><br><span class="line">$savedata[<span class="string">'created_by'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接本地的 Redis 服务</span></span><br><span class="line">$redis = <span class="keyword">new</span> \Redis();</span><br><span class="line">$redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//查看服务是否运行</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($redis))&#123;</span><br><span class="line">    <span class="keyword">return</span> dataResult(<span class="keyword">null</span>,<span class="string">''</span>,<span class="number">0</span>);            </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//存储数据到列表中</span></span><br><span class="line">$redis-&gt;lpush(<span class="string">"visitor_data"</span>,json_encode($savedata));</span><br><span class="line"><span class="comment">// 获取存储的数据并输出</span></span><br><span class="line">$len=$redis-&gt;llen(<span class="string">"visitor_data"</span>);</span><br><span class="line"><span class="keyword">if</span>($len&gt;<span class="number">2</span>)&#123;</span><br><span class="line">    $visitor_data = $redis-&gt;lrange(<span class="string">"visitor_data"</span>,<span class="number">0</span>,$len);</span><br><span class="line">    <span class="keyword">foreach</span> ($visitor_data <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        $m = M(<span class="string">"VisitorLog"</span>);</span><br><span class="line">        $m-&gt;add(json_decode($value,<span class="keyword">true</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    $redis-&gt;del(<span class="string">"visitor_data"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><ul>
+<li>采用Memcache：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$savedata[<span class="string">'uid'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line">$savedata[<span class="string">'ip'</span>]=$_SERVER[<span class="string">'REMOTE_ADDR'</span>];    </span><br><span class="line">$savedata[<span class="string">'url'</span>]=$_SERVER[<span class="string">'REQUEST_URI'</span>];         </span><br><span class="line">$savedata[<span class="string">'created_time'</span>]=time();</span><br><span class="line">$savedata[<span class="string">'created_by'</span>]=session(<span class="string">'uid'</span>);</span><br><span class="line"></span><br><span class="line">$memcache = <span class="keyword">new</span> \Memcache;             <span class="comment">//创建一个memcache对象</span></span><br><span class="line">$memcache-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">11211</span>) <span class="keyword">or</span> <span class="keyword">die</span> (<span class="string">"Could not connect"</span>); <span class="comment">//连接Memcached服务器</span></span><br><span class="line">$visitor_data = $memcache-&gt;get(<span class="string">'visitor_data'</span>);   <span class="comment">//从内存中取出key的值</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($visitor_data))&#123;</span><br><span class="line">    $visitor_data=<span class="keyword">array</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(count($visitor_data)&gt;<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($visitor_data <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        $m = M(<span class="string">"VisitorLog"</span>);</span><br><span class="line">        $m-&gt;add($value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">unset</span>($visitor_data);</span><br><span class="line">    $visitor_data=<span class="keyword">array</span>();</span><br><span class="line">&#125;</span><br><span class="line">array_push($visitor_data,$savedata);</span><br><span class="line">$memcache-&gt;set(<span class="string">'visitor_data'</span>, $visitor_data);        <span class="comment">//设置一个变量到内存中，名称是key 值是test</span></span><br></pre></td></tr></table></figure>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/23/2018-04-23-php-cache-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-03-29-python-spider-3" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/29/2018-03-29-python-spider-3/">利用python爬虫下载文件</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/29/2018-03-29-python-spider-3/" class="archive-article-date">
+  	<time datetime="2018-03-29T07:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>利用python爬虫下载文件。  </p>
 <hr>
-<h2 id="PHP数组"><a href="#PHP数组" class="headerlink" title="PHP数组:"></a>PHP数组:</h2><p>在 PHP 中，array() 函数用于创建数组：<br>在 PHP 中，有三种类型的数组：<br>数值数组 - 带有数字 ID 键的数组<br>关联数组 - 带有指定的键的数组，每个键关联一个值<br>多维数组 - 包含一个或多个数组的数组  </p>
-<p>count() 函数用于返回数组的长度（元素的数量）  </p>
-<p>PHP 关联数组  </p>
-<pre><code>   
-$age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
-</code></pre>  
-遍历并打印关联数组中的所有值，您可以使用foreach循环.  
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"ready"</span>)</span><br><span class="line">url = <span class="string">'http://xxxx.com/'</span>   </span><br><span class="line">savePath = <span class="string">"C:/savePath/"</span></span><br><span class="line">fileName = <span class="string">"xxx"</span></span><br><span class="line">getCount = <span class="number">0</span></span><br><span class="line">lastCount = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">downFile</span><span class="params">(url,fileName,savePath)</span>:</span></span><br><span class="line">    print(<span class="string">'-----------------'</span>)</span><br><span class="line">    <span class="keyword">global</span> getCount</span><br><span class="line">    <span class="keyword">global</span> lastCount</span><br><span class="line">    print(<span class="string">'getCount=%s'</span> %getCount)</span><br><span class="line">    getCount = getCount+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> lastCount&gt;=getCount:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"jump"</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"geting"</span>+fileName)</span><br><span class="line">    getUrl=url+fileName</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"getUrl="</span>+getUrl)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = urllib.request.urlopen(getUrl)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"url not exit"</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">if</span> f.getcode()==<span class="number">200</span>:</span><br><span class="line">        print(<span class="string">"getUrl success"</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(savePath+fileName):</span><br><span class="line">            print(<span class="string">"file exits"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            data = f.read() </span><br><span class="line">            <span class="keyword">with</span> open(savePath+fileName, <span class="string">"wb"</span>) <span class="keyword">as</span> code:     </span><br><span class="line">                code.write(data)</span><br><span class="line">                print(<span class="string">'success down '</span>+fileName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    fileName=<span class="string">'a.xxx'</span></span><br><span class="line">    downFile(url,fileName,savePath)</span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
 
-PHP 数组排序函数：
-sort() - 对数组进行升序排列  
-rsort() - 对数组进行降序排列  
-asort() - 根据关联数组的值，对数组进行升序排列  
-ksort() - 根据关联数组的键，对数组进行升序排列  
-arsort() - 根据关联数组的值，对数组进行降序排列  
-krsort() - 根据关联数组的键，对数组进行降序排列  
+      
 
----
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-## PHP函数:  
-<pre><code>   
-function functionName()
-{
-要执行的代码;
-}
-</code></pre> 
+      
 
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/29/2018-03-29-python-spider-3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-20-learn-PHP-8" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/20/2018-02-20-learn-PHP-8/">PHP核心技术——异常和错误处理</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/20/2018-02-20-learn-PHP-8/" class="archive-article-date">
+  	<time datetime="2018-02-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>PHP只有手动抛出异常后才能捕获异常</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $a = <span class="number">5</span>/<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> $a,PHP_EOL;</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="keyword">exception</span> $e) &#123;</span><br><span class="line">    $e -&gt; getMessage();</span><br><span class="line">    $a = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> $a;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于除零这种“异常”情况，PHP认为这是一个错误，直接触发错误（warning也是错误，只是错误等级不一样），而不会自动抛出异常使程序进入异常流程，故最终a值并不是预想中的-1，也就是说，并没有进入异常分支，也没有处理异常。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定义两个异常类，它们需要继承自系统的exception</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">emailException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pwdException</span> <span class="keyword">extends</span> <span class="title">exception</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"&lt;div clas=\"error\"&gt;Exception&#123;$this-&gt;getCode()&#125;:</span></span><br><span class="line"><span class="string">        &#123;$this-&gt;getMessage()&#125;</span></span><br><span class="line"><span class="string">        in File:&#123;$this-&gt;getFile()&#125;on line:&#123;$this-&gt;getLine()&#125;&lt;/div&gt;"</span>;</span><br><span class="line">        <span class="comment">//改写抛出异常结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 根据业务需求抛出不同异常</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reg</span><span class="params">($reginfo=null)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo)||!<span class="keyword">isset</span>($reginfo)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"参数非法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($reginfo[<span class="string">'email'</span>])) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> emailException(<span class="string">"邮件为空"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ($reginfo[<span class="string">'pwd'</span>]!=$reginfo[<span class="string">'repwd'</span>]) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> pwdException(<span class="string">"两次密码不一致"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'注册成功'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对异常进行分拣并做处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    reg(<span class="keyword">array</span>(<span class="string">'email'</span>=&gt;<span class="string">'waitfox@qq.com'</span>,<span class="string">'pwd'</span>=&gt;<span class="number">123456</span>,<span class="string">'repwd'</span>=&gt;<span class="number">12345678</span>));</span><br><span class="line">    <span class="comment">// reg();</span></span><br><span class="line">&#125;<span class="keyword">catch</span> (emailException $ee) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $ee-&gt;getMessage();</span><br><span class="line">&#125;<span class="keyword">catch</span>(pwdException $ep)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $ep;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'特殊处理'</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getTraceAsString();</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL,<span class="string">'其他情况，统一处理'</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在下面三种场景下会用到异常处理机制:1.对程序的悲观预测;2.程序的需要和对业务的关注;3.语言级别的健壮性要求</li>
+<li><p>PHP中的异常机制是不足的，绝大多数情况下无法自动抛出异常，必须用if……else先进行判断，再手动抛出异常。手动抛异常的意义不是很大，因为这意味着在代码里已经充分预期到错误的出现，也就算不上真正的“异常”，而是意料之中。同时，这种方式还会使你陷入纷繁复杂的业务逻辑判断和处理中。</p>
+</li>
+<li><p>PHP错误就是会使脚本运行不正常的情况</p>
+</li>
+<li><p>错误大致分为以下几类。</p>
+</li>
+<li>deprecated是最低级别的错误，表示“不推荐，不建议”。比如在PHP 5中使用ereg系列的正则匹配函数就会报此类错误。这种错误一般由于使用不推荐的、过时的函数或语法造成的。其虽不影响PHP正常流程，但一般情况下建议修正。</li>
+<li>其次是notice。这种错误一般告诉你语法中存在不当的地方。如使用变量但是未定义就会报此错。最常见的，数组索引是字符时没有加引号，PHP就视为一个常量，先查找常量表，找不到再视为变量。虽然PHP是脚本语言，语法要求不严，但是仍然建议对变量进行初始化。这种错误不影响PHP正常流程。</li>
+<li>warning是级别比较高的错误，在语法中出现很不恰当的情况时才会报此错误，比如函数参数不匹配。这种级别的错误会导致得不到预期结果，故需要修改代码。</li>
+<li>更高级别的错误是fetal error。这是致命错误，直接导致PHP流程终结，后面的代码不再执行。这种问题非改不可。</li>
+<li><p>最高级别的错误是语法解析错误prase error。上面提到的错误都属于PHP代码运行期间错误，而语法解析错误属于语法检查阶段错误，这将导致PHP代码无法通过语法检查。错误级别不止这几个，最主要的都在前面提到了。PHP手册中一共定义了16个级别的错误，最常用的就这几个。</p>
+</li>
+<li><p>在代码质量或者环境不可控时（比如数据库连接失败），使用error＿reporting（0），这样就能屏蔽错误了，正式部署时可以采取这样的策略，防止错误消息泄露敏感信息。另外一个技巧就是在函数前加@符号，抑制错误信息输出，如@mysql＿connect（）。</p>
+</li>
+</ul>
 <hr>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.runoob.com/" target="_blank" rel="noopener">w3cschool菜鸟教程</a></li>
+<li>[PHP核心技术与最佳实践]</li>
 </ul>
 
       
@@ -217,7 +837,407 @@ function functionName()
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/10/25/2015-10-25-learn-PHP-1/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/02/20/2018-02-20-learn-PHP-8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-19-learn-PHP-7" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/19/2018-02-19-learn-PHP-7/">PHP核心技术——反射</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/19/2018-02-19-learn-PHP-7/" class="archive-article-date">
+  	<time datetime="2018-02-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="反射"><a href="#反射" class="headerlink" title="反射:"></a>反射:</h2><ul>
+<li>反射指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name,$value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Setting $name to $value \r\n"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$name=$value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'末设置'</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$name=<span class="string">"正在为你设置默认值"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$student = <span class="keyword">new</span> person();</span><br><span class="line">$student -&gt; name=<span class="string">'Tom'</span>;</span><br><span class="line">$student -&gt; gender=<span class="string">'male'</span>;</span><br><span class="line">$student -&gt;age=<span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取对象属性列表</span></span><br><span class="line">$reflect = <span class="keyword">new</span> ReflectionObject($student);</span><br><span class="line">$props = $reflect -&gt; getProperties();</span><br><span class="line"><span class="keyword">foreach</span> ($props <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取对象方法列表</span></span><br><span class="line">$m = $reflect -&gt; getMethods();</span><br><span class="line"><span class="keyword">foreach</span> ($m <span class="keyword">as</span> $prop) &#123;</span><br><span class="line">    <span class="keyword">print</span> $prop -&gt; getName().<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回对象属性的关联数组</span></span><br><span class="line">var_dump(get_object_vars($student));</span><br><span class="line"><span class="comment">//类属性</span></span><br><span class="line">var_dump(get_class_vars(get_class($student)));</span><br><span class="line"><span class="comment">//返回由类的方法名组成的数组</span></span><br><span class="line">var_dump(get_class_methods(get_class($student)));</span><br><span class="line"><span class="comment">//获取对象属性列表所属的类</span></span><br><span class="line"><span class="keyword">echo</span> get_class($student);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>反射API的功能显然更强大，甚至能还原这个类的原型，包括方法的访问权限,代码如下</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//反射获取类的原型</span></span><br><span class="line">$obj = <span class="keyword">new</span> ReflectionClass(<span class="string">'person'</span>);</span><br><span class="line">$className = $obj -&gt; getName();</span><br><span class="line">$Methods = $Properties = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt; getProperties() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Properties[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($obj -&gt;getMethods() <span class="keyword">as</span> $v) &#123;</span><br><span class="line">    $Methods[$v -&gt; getName()] = $v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"class &#123;$className&#125;\n&#123;\n"</span>;</span><br><span class="line">is_array($Properties)&amp;&amp;ksort($Properties);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($Properties <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t"</span>;</span><br><span class="line">    <span class="keyword">echo</span> $v -&gt; isPublic()?<span class="string">'public'</span>:<span class="string">''</span>,$v -&gt; isPrivate()?<span class="string">'private'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isProtected()?<span class="string">'protected'</span>:<span class="string">''</span>,</span><br><span class="line">    $v -&gt; isStatic()?<span class="string">'static'</span>:<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\t&#123;$k&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">if</span> (is_array($Methods)) ksort($Methods);</span><br><span class="line"><span class="keyword">foreach</span> ($Methods <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"\tfunction &#123;$k&#125;()&#123;&#125;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&#125;\n"</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>反射可以探知类的内部结构，可以用它做hook实现插件功能或者是做动态代理</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysql</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">connect</span><span class="params">($db)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"连接到数据库$&#123;db[0]&#125;\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqlproxy</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $target;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($tar)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span> -&gt; target[] = <span class="keyword">new</span> $tar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span> -&gt; target <span class="keyword">as</span> $obj) &#123;</span><br><span class="line">            $r = <span class="keyword">new</span> ReflectionClass($obj);</span><br><span class="line">            <span class="keyword">if</span> ($method = $r -&gt; getMethod($name)) &#123;</span><br><span class="line">                <span class="keyword">if</span> ($method -&gt; isPublic() &amp;&amp; !$method -&gt; isAbstract()) &#123;</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截记录LOG\r\n"</span>;</span><br><span class="line">                    $method -&gt; invoke($obj,$args);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"方法前拦截\r\n"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> sqlproxy(<span class="string">'mysql'</span>);</span><br><span class="line">$obj -&gt; connect(<span class="string">'member'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>真正的操作类是mysql类，但是sqlproxy类实现了根据动态传入参数，代替实际的类运行，并且在方法运行前后进行拦截，并且动态地改变类中的方法和属性。这就是简单的动态代理。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/19/2018-02-19-learn-PHP-7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-18-learn-PHP-6" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/18/2018-02-18-learn-PHP-6/">PHP核心技术——接口</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/18/2018-02-18-learn-PHP-6/" class="archive-article-date">
+  	<time datetime="2018-02-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口:"></a>接口:</h2><ul>
+<li>接口这样描述自己：对于实现我的所有类，看起来都应该像我现在这个样子</li>
+<li><p>接口含义：采用一个特定接口的所有代码都知道对于那个接口会调用什么方法。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>; <span class="comment">//驱动方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">plain</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是飞机"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fly</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"飞行"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span> <span class="keyword">implements</span> <span class="title">mobile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"我是汽车\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">machine</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">demo</span><span class="params">(mobile $a)</span></span>&#123;</span><br><span class="line">        $a-&gt;fly();  <span class="comment">//mobile接口是没有这个方法的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> machine();</span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> plain()); <span class="comment">//运行成功</span></span><br><span class="line">$obj -&gt; demo(<span class="keyword">new</span> car()); <span class="comment">//运行失败</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口本身并不提供实现，只是提供一个规范。如果我们知道一个类实现了某个接口，那么就知道了可以调用该接口的哪些方法，我们只需要知道这些就够了。</p>
+</li>
+<li>PHP中，接口的语义是有限的，使用接口的地方并不多，PHP中接口可以淡化为设计文档，起到一个团队基本契约的作用</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">cache</span></span>&#123;</span><br><span class="line">    <span class="comment">// @describe：缓存管理，项目经理定义接口，技术人员负责实现</span></span><br><span class="line">    <span class="keyword">const</span> maxKey = <span class="number">100000</span>; <span class="comment">//最大缓存量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getc</span><span class="params">($key)</span></span>; <span class="comment">//获取缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setc</span><span class="params">($key,$value)</span></span>;<span class="comment">//设置缓存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">flush</span><span class="params">()</span></span>; <span class="comment">//清空缓存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>PHP5对面向对象的特性做了许多增强，其中就有一个SPL（标准PHP库）的尝试。SPL中实现一些接口，其中最主要的就是Iterator迭代器接口，通过实现这个接口，就能使对象能够用于foreach结构，从而在使用形式上比较统一</li>
+<li>DirectoryIterator类之所以拿来就能用，是因为系统已经实现了Iterator接口，所以可以像下面这样使用</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$dir = <span class="keyword">new</span> DirectoryIterator(dirname(<span class="keyword">__FILE__</span>));</span><br><span class="line"><span class="keyword">foreach</span> ($dir <span class="keyword">as</span> $fileinfo) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!$fileinfo-&gt;isDir()) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $fileinfo-&gt;getFilename(),<span class="string">"\t"</span>,$fileinfo-&gt;getSize(),PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在对PHP实例对象使用foreach语法时，会检查这个实例有没有实现Iterator接口，如果实现了，就会通过内置方法或使用实现类中的方法模拟foreach语句</li>
+<li>接口是对多重继承的一种变相实现，而在讲继承时，我们提到了用来实现混入（Mixin）式的Traits，实际上，Traits可以被视为一种加强型的接口。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> Hello&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Hello '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">trait</span> World&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayWord</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'World'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHelloWorld</span></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Hello</span>,<span class="title">World</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayExclamationMark</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$o = <span class="keyword">new</span> MyHelloWorld();</span><br><span class="line">$o -&gt; sayHello();</span><br><span class="line">$o -&gt; sayWord();</span><br><span class="line">$o -&gt; sayExclamationMark();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里的MyHelloWorld同时实现了两个Traits，从而使其可以分别调用两个Traits里的代码段。从代码中就可以看出，Traits和接口很像，不同的是Traits是可以导入包含代码的接口。从某种意义上来说，Traits和接口都是对“多重继承”的一种变相实现<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2></li>
+<li>接口作为一种规范和契约存在。作为规范，接口应该保证可用性；作为契约，接口应该保证可控性。</li>
+<li>接口只是一个声明，一旦使用interface关键字，就应该实现它。可以由程序员实现（外部接口），也可以由系统实现（内部接口）。接口本身什么都不做，但是它可以告诉我们它能做什么。</li>
+<li>PHP中的接口存在两个不足，一是没有契约限制，二是缺少足够多的内部接口。</li>
+<li>接口其实很简单，但是接口的各种应用很灵活，设计模式中也有很大一部分是围绕接口展开的。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/18/2018-02-18-learn-PHP-6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-02-17-learn-PHP-5" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/17/2018-02-17-learn-PHP-5/">PHP核心技术——继承与多态</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/17/2018-02-17-learn-PHP-5/" class="archive-article-date">
+  	<time datetime="2018-02-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="继承"><a href="#继承" class="headerlink" title="继承:"></a>继承:</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name=<span class="string">'Tom'</span>;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">10000</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是父类'</span>,PHP_EOL;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">"\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">family</span> <span class="keyword">extends</span> <span class="title">person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $gender;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">static</span> $money=<span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::__construct(); <span class="comment">//调用父类构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'这里是子类'</span>,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::say();</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;name,<span class="string">"\tis\t"</span>,<span class="keyword">$this</span>-&gt;gender,<span class="string">",and is\t"</span>,<span class="keyword">$this</span>-&gt;age,PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">cry</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">parent</span>::$money,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'%&gt;_&lt;%'</span>,PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">self</span>::$money,PHP_EOL; <span class="comment">//调用自身构造方法</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'(*^__^)'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poor=<span class="keyword">new</span> family();</span><br><span class="line">$poor-&gt;name=<span class="string">'Lee'</span>;</span><br><span class="line">$poor-&gt;gender=<span class="string">'female'</span>;</span><br><span class="line">$poor-&gt;age=<span class="number">25</span>;</span><br><span class="line">$poor-&gt;say();</span><br><span class="line">$poor-&gt;cry();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在继承中，用parent指代父类，用self指代自身。使用“::”运算符（范围解析操作符）调用父类的方法。“::”操作符还用来作为类常量和静态方法的调用，不要把这两种应用混淆。</li>
+<li>如果声明类成员或方法为static，就可以不实例化类而直接访问，同时也就不能通过一个对象访问其中的静态成员（静态方法除外），也不能用“::”访问一个非静态方法。比如，把上例中的poor-&gt;cry（）；换成poor::cry（）。</li>
+<li>继承存在什么问题：1）继承破坏封装性 2）继承是紧耦合的 3）继承扩展复杂 4）不恰当地使用继承可能违反现实世界中的逻辑。</li>
+<li>继承拥有比组合更少的代码量</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">car</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Add oil\t\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bmw</span> <span class="keyword">extends</span> <span class="title">car</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">benz</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $car;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car=<span class="keyword">new</span> car;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addoil</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;car-&gt;addoil();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$bmw=<span class="keyword">new</span> bmw;</span><br><span class="line">$bmw-&gt;addoil();</span><br><span class="line">$benz=<span class="keyword">new</span> benz();</span><br><span class="line">$benz-&gt;addoil();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>精心设计专门用于被继承的类，继承树的抽象层应该比较稳定，一般不要多于三层。</li>
+<li>对于不是专门用于被继承的类，禁止其被继承，也就是使用final修饰符。使用final修饰符既可防止重要方法被非法覆写，又能给编辑器寻找优化的机会。</li>
+<li>优先考虑用组合关系提高代码的可重用性。</li>
+<li>子类是一种特殊的类型，而不只是父类的一个角色。</li>
+<li>子类扩展，而不是覆盖或者使父类的功能失效。</li>
+<li>底层代码多用组合，顶层/业务层代码多用继承。底层用组合可以提高效率，避免对象臃肿。顶层代码用继承可以提高灵活性，让业务使用更方便。</li>
+</ul>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态:"></a>多态:</h2><ul>
+<li>多态确切的含义是：同一类的对象收到相同消息时，会得到不同的结果。而这个消息是不可预测的。多态，顾名思义，就是多种状态，也就是多种结果。</li>
+<li>多态性是一种通过多种状态或阶段描述相同对象的编程方式。它的真正意义在于：实际开发中，只要关心一个接口或基类的编程，而不必关心一个对象所属于的具体类。</li>
+<li>很多地方会看到“PHP没有多态”这种说法。事实上，不是它没有，而是它本来就是多态的</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'本方法需要重载才能运行'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">extends</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">($obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (get_class($obj)==<span class="string">'employee'</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Error'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $obj-&gt;working();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">doprint(<span class="keyword">new</span> teacher());</span><br><span class="line">doprint(<span class="keyword">new</span> coder());</span><br><span class="line">doprint(<span class="keyword">new</span> employee());</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过接口实现多态</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">teacher</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'教书'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">coder</span> <span class="keyword">implements</span> <span class="title">employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">working</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'敲代码'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doprint</span><span class="params">(employee $i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $i-&gt;working();</span><br><span class="line">&#125;</span><br><span class="line">$a=<span class="keyword">new</span> teacher;</span><br><span class="line">$b=<span class="keyword">new</span> coder;</span><br><span class="line">doprint($a);</span><br><span class="line">doprint($b);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>弱类型的PHP里多态和传统强类型语言里的多态在实现和概念上是有一些区别的，而且弱类型语言实现起多态来会更简单，更灵活。</li>
+<li>至于多态是怎么实现的，各种语言的策略是不一样的。但是，最终的实现无非就是查表和判断。</li>
+<li>类型转换不是多态。</li>
+<li>PHP中父类和子类看做“继父”和“继子”关系，它们存在继承关系，但不存在血缘关系。因此子类无法向上转型为父类，从而失去多态最典型的特征。</li>
+<li>多态的本质就是if……else，只不过实现的层级不同。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/17/2018-02-17-learn-PHP-5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2017-12-25-learn-PHP-4" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/25/2017-12-25-learn-PHP-4/">PHP核心技术——魔术方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/25/2017-12-25-learn-PHP-4/" class="archive-article-date">
+  	<time datetime="2017-12-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法:"></a>魔术方法:</h2><ul>
+<li>魔术方法是以两个下画线开头、具有特殊作用的一些方法，可以看做PHP的“语法糖”。</li>
+</ul>
+<h2 id="set和get方法"><a href="#set和get方法" class="headerlink" title="set和get方法:"></a>set和get方法:</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $user=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> $pwd=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name,$value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Setting"</span>.$name.<span class="string">" to "</span>.$value.<span class="string">"\r\n"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$name=$value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;$name)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"not default"</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;$name=<span class="string">"setting default"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a=<span class="keyword">new</span> Account();</span><br><span class="line"><span class="keyword">echo</span> $a-&gt;user;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"-----------\n"</span>;</span><br><span class="line">$a-&gt;name=<span class="number">5</span>;</span><br><span class="line"><span class="keyword">echo</span> $a-&gt;name;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"-----------\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> $a-&gt;big;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>而PHP则在一个类中只允许有一个构造函数</li>
+<li>PHP提供的“重载”指动态地“创建”类属性和方法。因此，set和get方法被归到重载里。</li>
+</ul>
+<h2 id="call和callStatic方法"><a href="#call和callStatic方法" class="headerlink" title="call和callStatic方法:"></a>call和callStatic方法:</h2><ul>
+<li>当调用一个不可访问的方法（如未定义，或者不可见）时，call（）会被调用。其中name参数是要调用的方法名称。arguments参数是一个数组，包含着要传递给方法的参数</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">callFun</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$arguments)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (count($arguments)) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">echo</span> $arguments[<span class="number">0</span>]*$arguments[<span class="number">1</span>],PHP_EOL;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">echo</span> array_sum($arguments),PHP_EOL;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'wrong'</span>,PHP_EOL;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a =<span class="keyword">new</span> callFun;</span><br><span class="line">$a-&gt;make(<span class="number">5</span>);</span><br><span class="line">$a-&gt;make(<span class="number">5</span>,<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这段代码通过使用callStatic这一魔术方法进行方法的动态创建和延迟绑定，实现一个简单的ORM模型。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ActiveRecord</span></span>&#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">static</span> $table;</span><br><span class="line">        <span class="keyword">protected</span> $fieldvalues;</span><br><span class="line">        <span class="keyword">public</span> $select;</span><br><span class="line">        <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">findById</span><span class="params">($id)</span></span>&#123;</span><br><span class="line">            $query=<span class="string">"select * from "</span>.<span class="keyword">static</span>::$table.<span class="string">" where id="</span>.$id;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>::createDomain($query);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($fieldname)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span><span class="keyword">$this</span>-&gt;fieldvalues[$fieldname];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">($method,$args)</span></span>&#123;</span><br><span class="line">            $field=preg_replace(<span class="string">'/^findBy(＼w*)$/'</span>,<span class="string">'$&#123;1&#125;'</span>,$method);</span><br><span class="line">            $query=<span class="string">"select * from "</span>.<span class="keyword">static</span>::$table.<span class="string">" where "</span>.$field.<span class="string">"="</span>.$args[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>::createDomain($query);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">createDomain</span><span class="params">($query)</span></span>&#123;</span><br><span class="line">            $klass=get_called_class();</span><br><span class="line">            $domain=<span class="keyword">new</span> $klass();</span><br><span class="line">            $domain-&gt;fieldvalues=<span class="keyword">array</span>();</span><br><span class="line">            $domain-&gt;select=$query;</span><br><span class="line">            <span class="keyword">foreach</span>($klass::$fields <span class="keyword">as</span> $field=&gt;$type)&#123;</span><br><span class="line">                $domain-&gt;fieldvalues[$field]=<span class="string">'TODO:set from sql result'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> $domain;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $table=<span class="string">'custdb'</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $fields=<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'id'</span>=&gt;<span class="string">'int'</span>,</span><br><span class="line">        <span class="string">'email'</span>=&gt;<span class="string">'varchar'</span>,</span><br><span class="line">        <span class="string">'lastname'</span>=&gt;<span class="string">'varchar'</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sales</span> <span class="keyword">extends</span> <span class="title">ActiveRecord</span></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $table=<span class="string">'salesdb'</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $fields=<span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'id'</span>=&gt;<span class="string">'int'</span>,</span><br><span class="line">    <span class="string">'item'</span>=&gt;<span class="string">'varchar'</span>,</span><br><span class="line">    <span class="string">'qty'</span>=&gt;<span class="string">'int'</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">assert(<span class="string">"select * from custdb where id=123"</span>==Customer::findById(<span class="number">123</span>)-&gt;select);</span><br><span class="line">assert(<span class="string">"TODO:set from sql result"</span>==Customer::findById(<span class="number">123</span>)-&gt;email);</span><br><span class="line">assert(<span class="string">"select * from salesdb where id=321"</span>==Sales::findById(<span class="number">321</span>)-&gt;select);</span><br><span class="line">assert(<span class="string">"select * from custdb where Lastname='Denoncourt'"</span>==Customer::findByLastname(<span class="string">'Denoncourt'</span>)-&gt;select);</span><br></pre></td></tr></table></figure>
+<h2 id="toString方法"><a href="#toString方法" class="headerlink" title="toString方法:"></a>toString方法:</h2><ul>
+<li>当进行测试时，需要知道是否得出正确的数据。比如打印一个对象时，看看这个对象都有哪些属性，其值是什么，如果类定义了toString方法，就能在测试时，echo打印对象体，对象就会自动调用它所属类定义的toString方法，格式化输出这个对象所包含的数据。如果没有这个方法，那么echo一个对象将报错，例如“Catchable fatal error：Object of class Account could not be converted to string”语法错误，实际上这是一个类型匹配失败错误。不过仍然可以用print＿r（）和var＿dump（）函数输出一个对象。当然，toString是可以定制的，所提供的信息和样式更丰富。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $user=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> $pwd=<span class="number">2</span>;</span><br><span class="line">    <span class="comment">//自定义的格式化输出方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"&#123;$this-&gt;user&#125;, &#123;$this-&gt;pwd&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> Account();</span><br><span class="line"><span class="keyword">echo</span> $a;</span><br><span class="line"><span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">print_r($a);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>[PHP核心技术与最佳实践]</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/25/2017-12-25-learn-PHP-4/">展开全文 >></a>
         </p>
       
 
@@ -249,7 +1269,7 @@ function functionName()
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -261,7 +1281,7 @@ function functionName()
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Run Joe
+    		&copy; 2019 Run John
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -352,15 +1372,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -376,11 +1396,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -388,7 +1412,59 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
             
             <div class="clearfix"></div>

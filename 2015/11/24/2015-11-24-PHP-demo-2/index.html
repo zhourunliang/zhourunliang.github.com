@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>用PHP和MySql实现简单的留言本-注册和登录功能 | Run的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:   CREATE TABLE IF NOT EXISTS `content` ( `id` int(11) NOT NULL auto_increment, `title` varchar(50) NOT N">
+  <meta name="description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(11) NOT NULL auto_increment,`title` varchar(50) NOT">
 <meta name="keywords" content="demo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用PHP和MySql实现简单的留言本-注册和登录功能">
 <meta property="og:url" content="http://yoursite.com/2015/11/24/2015-11-24-PHP-demo-2/index.html">
 <meta property="og:site_name" content="Run的博客">
-<meta property="og:description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:   CREATE TABLE IF NOT EXISTS `content` ( `id` int(11) NOT NULL auto_increment, `title` varchar(50) NOT N">
+<meta property="og:description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(11) NOT NULL auto_increment,`title` varchar(50) NOT">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://7xok5a.com1.z0.glb.clouddn.com/001.JPG">
 <meta property="og:image" content="http://7xok5a.com1.z0.glb.clouddn.com/002.JPG">
 <meta property="og:image" content="http://7xok5a.com1.z0.glb.clouddn.com/003.JPG">
-<meta property="og:updated_time" content="2018-11-11T12:59:28.799Z">
+<meta property="og:updated_time" content="2019-07-22T13:16:57.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用PHP和MySql实现简单的留言本-注册和登录功能">
-<meta name="twitter:description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:   CREATE TABLE IF NOT EXISTS `content` ( `id` int(11) NOT NULL auto_increment, `title` varchar(50) NOT N">
+<meta name="twitter:description" content="上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。    创建数据库：在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。content.sql:1234567CREATE TABLE IF NOT EXISTS `content` (`id` int(11) NOT NULL auto_increment,`title` varchar(50) NOT">
 <meta name="twitter:image" content="http://7xok5a.com1.z0.glb.clouddn.com/001.JPG">
   
     <link rel="alternative" href="/atom.xml" title="Run的博客" type="application/atom+xml">
@@ -40,6 +40,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?6fdd23415d0be9b0c990a710bf869475";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 </html>
@@ -55,7 +65,7 @@
 			<img src="/assets/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Run Joe</a></h1>
+		  <h1 class="header-author"><a href="/">Run John</a></h1>
 		</hgroup>
 		
 
@@ -101,7 +111,7 @@
 				<img src="/assets/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Run Joe</h1>
+			  <h1 class="header-author js-header-author">Run John</h1>
 			</hgroup>
 			
 			
@@ -159,319 +169,21 @@
       
         <p>上次用PHP和MySql实现了留言本，这次在原有的基础上增加了注册和登录功能。  </p>
 <hr>
-<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。<br>content.sql:  </p>
-<pre><code>CREATE TABLE IF NOT EXISTS `content` (
-`id` int(11) NOT NULL auto_increment,
-`title` varchar(50) NOT NULL,
-`name` varchar(20) NOT NULL,
-`content` varchar(200) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;  
-</code></pre><p>userinfo.sql:  </p>
-<pre><code>CREATE TABLE IF NOT EXISTS `userinfo` (
-`id` int(11) NOT NULL auto_increment,
-`name` varchar(20) NOT NULL,
-`password` varchar(20) NOT NULL,
-`sex` varchar(20) NOT NULL,
-`email` varchar(20) NOT NULL,
-PRIMARY KEY (`id`))
-ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
-</code></pre><p>分别用来存放留言数据和用户数据。</p>
+<h2 id="创建数据库："><a href="#创建数据库：" class="headerlink" title="创建数据库："></a>创建数据库：</h2><p>在数据库中创建一个名为bbs的数据库，选择数据库，在其中创建两个表。<br>content.sql:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`content`</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</span><br><span class="line"><span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`content`</span> <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 AUTO_INCREMENT=<span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
+<p>userinfo.sql:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`userinfo`</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`password`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`sex`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"><span class="string">`email`</span> <span class="built_in">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</span><br><span class="line"><span class="keyword">ENGINE</span>=MyISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 AUTO_INCREMENT=<span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
+<p>分别用来存放留言数据和用户数据。</p>
 <hr>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>config.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-$servername = &quot;localhost&quot;;
-$username = &quot;user&quot;;
-$password = &quot;123456&quot;;
-$dbname = &quot;bbs&quot;;
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-// 检测连接
-if ($conn-&gt;connect_error) {
-    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
-} 
-
-mysqli_query($conn, &quot;set names utf8&quot;);//以utf8读取数据
-?&gt;
---&gt;    
-</code></pre><h3 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h3><p>register.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;title&gt;注册&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎新用户注册&lt;/font&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;login.php&quot;&gt;登录&lt;/a&gt;&lt;/p&gt;
-&lt;table align=&quot;center&quot;&gt;
-
-    &lt;form name=&quot;register&quot; method=&quot;post&quot; action=&quot;register_get.php&quot;&gt;
-        &lt;tr&gt;
-            &lt;td&gt;用户名：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;再次输入密码：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;re_password&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;性别：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;男&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;男&quot; /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;女&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;女&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;邮箱：&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td colspan=&quot;2&quot;&gt;其中加&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;为必填&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot; /&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot; /&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/form&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;    
-</code></pre><h3 id="上传注册信息"><a href="#上传注册信息" class="headerlink" title="上传注册信息"></a>上传注册信息</h3><p>register_get.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$username= trim($_POST[&apos;username&apos;]);
-$email = $_POST[&apos;email&apos;];
-$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
-WHERE name=&apos;&quot;.$username.&quot;&apos;&quot;);
-if (empty($username)) {
-    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (mysqli_num_rows($result)!=0) {
-    echo &quot;&lt;script&gt;alert(&apos;此用户名已注册!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($_POST[&apos;password&apos;])) {
-    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif($_POST[&apos;password&apos;]!=$_POST[&apos;re_password&apos;]){
-    echo &quot;&lt;script&gt;alert(&apos;两次密码输入不一致!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($_POST[&apos;sex&apos;])) {
-    echo &quot;&lt;script&gt;alert(&apos;性别不能为空!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (!preg_match(&quot;/([\w\-]+\@[\w\-]+\.[\w\-]+)/&quot;,$email)) {
-    echo &quot;&lt;script&gt;alert(&apos;非法邮件地址!&apos;);location.href=&apos;register.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$sql = &quot;INSERT INTO userinfo (name, password, sex, email)
-VALUES (&apos;$username&apos;,&apos;&quot;.$_POST[&apos;password&apos;].&quot;&apos;,&apos;&quot;.$_POST[&apos;sex&apos;].&quot;&apos;,&apos;$email&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;注册成功!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-$conn-&gt;close();
-}
-?&gt;
---&gt;    
-</code></pre><h3 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h3><p>login.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;title&gt;登录&lt;/title&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;+3&quot; color=&quot;#3300ff&quot;&gt;欢迎登录&lt;/font&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;index.php&quot;&gt;首页&lt;/a&gt;|&lt;a href=&quot;register.php&quot;&gt;注册&lt;/a&gt;&lt;/p&gt;
-&lt;table align=&quot;center&quot;&gt;
-    &lt;form name=&quot;login&quot; method=&quot;post&quot; action=&quot;login_get.php&quot;&gt;
-        &lt;tr&gt;
-            &lt;td&gt;用户名：&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;密码：&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;确定&quot;&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;input type=&quot;reset&quot; name=&quot;reset&quot; value=&quot;重置&quot;&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/form&gt;
-&lt;/table&gt;
-&lt;/head&gt;
-&lt;/html&gt;
---&gt;
-</code></pre><h3 id="上传登录信息"><a href="#上传登录信息" class="headerlink" title="上传登录信息"></a>上传登录信息</h3><p>login_get.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-include(&quot;config.php&quot;);
-$name= $_POST[&apos;name&apos;];
-$password = $_POST[&apos;password&apos;];
-if (empty($name)) {
-    echo &quot;&lt;script&gt;alert(&apos;用户名不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($password)) {
-    echo &quot;&lt;script&gt;alert(&apos;密码不能为空!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$result = mysqli_query($conn,&quot;SELECT * FROM userinfo
-WHERE name=&apos;&quot;.$name.&quot;&apos;&quot;);
-if (mysqli_num_rows($result)==0) {
-    echo &quot;&lt;script&gt;alert(&apos;账号不存在!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-} 
-
-    while($row = mysqli_fetch_array($result))
-    {
-        if ($row[&apos;password&apos;]==$password) {
-            session_start();
-            $_SESSION[&quot;pass&quot;]=&quot;ok&quot;;
-            $_SESSION[&quot;name&quot;]=$_POST[&apos;name&apos;];
-            echo &quot;&lt;script&gt;alert(&apos;登录成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-        }
-        else
-            echo &quot;&lt;script&gt;alert(&apos;密码不正确!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-    }
-}
-
-$conn-&gt;close();
-?&gt;
---&gt;  
-</code></pre><h3 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h3><p>index.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;html&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-&lt;head&gt;
-&lt;?php session_start(); 
-if(empty($_SESSION[&quot;pass&quot;])){  //如果输入的的密码为空
-    echo &quot;&lt;script&gt;alert(&apos;请先登录!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-}
-if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
-{
-    $name=$_SESSION[&apos;name&apos;];
-}
-?&gt;
-&lt;title&gt;留言本&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table width=&quot;678&quot; align=&quot;center&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;当前账号：&lt;?php echo $name; ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;session_destroy.php&quot;&gt;注销&lt;/a&gt;&lt;/td&gt;  
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;
-&lt;?php
-include(&quot;config.php&quot;);
-$sql = &quot;SELECT title, name, content FROM content&quot;;
-$result = $conn-&gt;query($sql);
-if ($result-&gt;num_rows &gt; 0) {
-    // 输出每行数据
-    while($row = $result-&gt;fetch_assoc()) 
-    {
-?&gt;
-    &lt;/p&gt;
-    &lt;table width=&quot;678&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;5&quot; cellspacing=&quot;1&quot; bgcolor=&quot;#add3ef&quot;&gt;
-    &lt;tr bgcolor=&quot;#eff3ff&quot;&gt;
-    &lt;td width=&quot;178&quot;&gt;&lt;big&gt;标题:&lt;/big&gt;&lt;?php echo $row[&quot;title&quot;] ?&gt;&lt;/td&gt;
-    &lt;td width=&quot;223&quot;&gt;&lt;big&gt;用户:&lt;/big&gt;&lt;?php echo $row[&quot;name&quot;] ?&gt;&lt;/td&gt;
-    &lt;/tr bgColor=&quot;#ffffff&quot;&gt;
-    &lt;tr&gt;
-    &lt;td colspan=&quot;4&quot;&gt;&lt;?php echo wordwrap($row[&quot;content&quot;],50); ?&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-    &lt;/table&gt;
-&lt;?php
-    }
-} else 
-{
-    echo &quot;&lt;script&gt;alert(&apos;没有数据!&apos;);&lt;/script&gt;&quot;;
-}
-$conn-&gt;close();
-?&gt;
-&lt;table align=&quot;center&quot; width=&quot;678&quot;&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
-&lt;p&gt;
-标题：
-&lt;input name=&quot;title&quot; type=&quot;text&quot; id=&quot;title&quot;&gt;
-&lt;/p&gt;
-&lt;p&gt;
-留言：
-&lt;/p&gt;
-&lt;p&gt;
-&lt;textarea name=&quot;content&quot; id=&quot;content&quot; cols=&quot;45&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;input type=&quot;submit&quot; name=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot;&gt;
-&lt;input type=&quot;reset&quot; name=&quot;button2&quot; id=&quot;button2&quot; value=&quot;重置&quot;&gt;
-&lt;/p&gt;
-&lt;/form&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
---&gt;  
-</code></pre><h3 id="上传留言信息"><a href="#上传留言信息" class="headerlink" title="上传留言信息"></a>上传留言信息</h3><p>post.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-session_start(); 
-if($_SESSION[&quot;pass&quot;]==&quot;ok&quot;) //如果密码正确
-{
-    $name=$_SESSION[&apos;name&apos;];
-}
-include(&quot;config.php&quot;);
-$title= $_POST[&apos;title&apos;];
-$patch = $_POST[&apos;content&apos;];
-$content = str_replace(&quot;
-&quot;,&quot;&lt;br /&gt;&quot;,$patch);
-if (empty($title)) {
-    echo &quot;&lt;script&gt;alert(&apos;标题不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($name)) {
-    echo &quot;&lt;script&gt;alert(&apos;名字不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-elseif (empty($content)) {
-    echo &quot;&lt;script&gt;alert(&apos;内容不能为空!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-}
-else
-{ 
-$sql = &quot;INSERT INTO content (title, name, content)
-VALUES (&apos;$title&apos;,&apos;$name&apos;,&apos;$content&apos;);&quot;;
-if ($conn-&gt;multi_query($sql) === TRUE) {
-    echo &quot;&lt;script&gt;alert(&apos;提交成功!&apos;);location.href=&apos;index.php&apos;;&lt;/script&gt;&quot;;
-} else {
-    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
-}
-$conn-&gt;close();
-}
-?&gt;
---&gt;      
-</code></pre><h3 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h3><p>session_destroy.php:  </p>
-<pre><code>&lt;!--lang:php
-&lt;?php
-header(&quot;content-Type: text/html; charset=utf-8&quot;);
-session_start();
-session_destroy();
-echo &quot;&lt;script&gt;alert(&apos;已注销!&apos;);location.href=&apos;login.php&apos;;&lt;/script&gt;&quot;;
-?&gt;
---&gt;    
-</code></pre><hr>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"user"</span>;</span><br><span class="line">$password = <span class="string">"123456"</span>;</span><br><span class="line">$dbname = <span class="string">"bbs"</span>;</span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password, $dbname);</span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">mysqli_query($conn, <span class="string">"set names utf8"</span>);<span class="comment">//以utf8读取数据</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h3><p>register.php:  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">	&lt;html&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">	&lt;title&gt;注册&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	&lt;p align=<span class="string">"center"</span>&gt;&lt;font size=<span class="string">"+3"</span> color=<span class="string">"#3300ff"</span>&gt;欢迎新用户注册&lt;/font&gt;&lt;/p&gt;</span><br><span class="line">	&lt;p align=<span class="string">"center"</span>&gt;&lt;a href=<span class="string">"index.php"</span>&gt;首页&lt;/a&gt;|&lt;a href=<span class="string">"login.php"</span>&gt;登录&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	&lt;table align=<span class="string">"center"</span>&gt;</span><br><span class="line"></span><br><span class="line">		&lt;form name=<span class="string">"register"</span> method=<span class="string">"post"</span> action=<span class="string">"register_get.php"</span>&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;用户名：&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"text"</span> name=<span class="string">"username"</span>&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;密码：&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/font&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"password"</span> name=<span class="string">"password"</span> /&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;再次输入密码：&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/font&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"password"</span> name=<span class="string">"re_password"</span> /&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;性别：&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/font&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;男&lt;input type=<span class="string">"radio"</span> name=<span class="string">"sex"</span> value=<span class="string">"男"</span> /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;女&lt;input type=<span class="string">"radio"</span> name=<span class="string">"sex"</span> value=<span class="string">"女"</span> /&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;邮箱：&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/font&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"text"</span> name=<span class="string">"email"</span> /&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td colspan=<span class="string">"2"</span>&gt;其中加&lt;font color=<span class="string">"#FF0000"</span>&gt;*&lt;/font&gt;为必填&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">			&lt;tr&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"提交"</span> /&gt;&lt;/td&gt;</span><br><span class="line">				&lt;td&gt;&lt;input type=<span class="string">"reset"</span> name=<span class="string">"reset"</span> value=<span class="string">"重置"</span> /&gt;&lt;/td&gt;</span><br><span class="line">			&lt;/tr&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/table&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;/html&gt;</span><br><span class="line">```	</span><br><span class="line"> </span><br><span class="line"><span class="comment">### 上传注册信息  </span></span><br><span class="line">register_get.php:  </span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">	<span class="meta">&lt;?php</span></span><br><span class="line">	header(<span class="string">"content-Type: text/html; charset=utf-8"</span>);</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">	$username= trim($_POST[<span class="string">'username'</span>]);</span><br><span class="line">	$email = $_POST[<span class="string">'email'</span>];</span><br><span class="line">	$result = mysqli_query($conn,<span class="string">"SELECT * FROM userinfo</span></span><br><span class="line"><span class="string">	WHERE name='"</span>.$username.<span class="string">"'"</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($username)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('用户名不能为空!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (mysqli_num_rows($result)!=<span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('此用户名已注册!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (<span class="keyword">empty</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('密码不能为空!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span>($_POST[<span class="string">'password'</span>]!=$_POST[<span class="string">'re_password'</span>])&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('两次密码输入不一致!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (<span class="keyword">empty</span>($_POST[<span class="string">'sex'</span>])) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('性别不能为空!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (!preg_match(<span class="string">"/([\w\-]+\@[\w\-]+\.[\w\-]+)/"</span>,$email)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('非法邮件地址!');location.href='register.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123; </span><br><span class="line">	$sql = <span class="string">"INSERT INTO userinfo (name, password, sex, email)</span></span><br><span class="line"><span class="string">	VALUES ('$username','"</span>.$_POST[<span class="string">'password'</span>].<span class="string">"','"</span>.$_POST[<span class="string">'sex'</span>].<span class="string">"','$email');"</span>;</span><br><span class="line">	<span class="keyword">if</span> ($conn-&gt;multi_query($sql) === <span class="keyword">TRUE</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('注册成功!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Error: "</span> . $sql . <span class="string">"&lt;br&gt;"</span> . $conn-&gt;error;</span><br><span class="line">	&#125;</span><br><span class="line">	$conn-&gt;close();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h3><p>login.php:  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;登录&lt;/title&gt;</span><br><span class="line">&lt;p align=<span class="string">"center"</span>&gt;&lt;font size=<span class="string">"+3"</span> color=<span class="string">"#3300ff"</span>&gt;欢迎登录&lt;/font&gt;&lt;/p&gt;</span><br><span class="line">&lt;p align=<span class="string">"center"</span>&gt;&lt;a href=<span class="string">"index.php"</span>&gt;首页&lt;/a&gt;|&lt;a href=<span class="string">"register.php"</span>&gt;注册&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">&lt;table align=<span class="string">"center"</span>&gt;</span><br><span class="line">	&lt;form name=<span class="string">"login"</span> method=<span class="string">"post"</span> action=<span class="string">"login_get.php"</span>&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;td&gt;用户名：&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&lt;input type=<span class="string">"text"</span> name=<span class="string">"name"</span>&gt;&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;td&gt;密码：&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&lt;input type=<span class="string">"text"</span> name=<span class="string">"password"</span>&gt;&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;td&gt;&lt;input type=<span class="string">"submit"</span> name=<span class="string">"submit"</span> value=<span class="string">"确定"</span>&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;&lt;input type=<span class="string">"reset"</span> name=<span class="string">"reset"</span> value=<span class="string">"重置"</span>&gt;&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="上传登录信息"><a href="#上传登录信息" class="headerlink" title="上传登录信息"></a>上传登录信息</h3><p>login_get.php:  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">	<span class="meta">&lt;?php</span></span><br><span class="line">	header(<span class="string">"content-Type: text/html; charset=utf-8"</span>);</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">	$name= $_POST[<span class="string">'name'</span>];</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($name)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('用户名不能为空!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (<span class="keyword">empty</span>($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('密码不能为空!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123; </span><br><span class="line">	$result = mysqli_query($conn,<span class="string">"SELECT * FROM userinfo</span></span><br><span class="line"><span class="string">	WHERE name='"</span>.$name.<span class="string">"'"</span>);</span><br><span class="line">	<span class="keyword">if</span> (mysqli_num_rows($result)==<span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('账号不存在!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125; </span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span>($row = mysqli_fetch_array($result))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> ($row[<span class="string">'password'</span>]==$password) &#123;</span><br><span class="line">				session_start();</span><br><span class="line">				$_SESSION[<span class="string">"pass"</span>]=<span class="string">"ok"</span>;</span><br><span class="line">				$_SESSION[<span class="string">"name"</span>]=$_POST[<span class="string">'name'</span>];</span><br><span class="line">				<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('登录成功!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('密码不正确!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	$conn-&gt;close();</span><br><span class="line">	<span class="meta">?&gt;</span></span><br><span class="line">``` </span><br><span class="line">	</span><br><span class="line"><span class="comment">### 主页  </span></span><br><span class="line">index.php:  </span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">	&lt;html&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">	<span class="meta">&lt;?php</span> session_start(); </span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>($_SESSION[<span class="string">"pass"</span>]))&#123;  <span class="comment">//如果输入的的密码为空</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('请先登录!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>($_SESSION[<span class="string">"pass"</span>]==<span class="string">"ok"</span>) <span class="comment">//如果密码正确</span></span><br><span class="line">	&#123;</span><br><span class="line">		$name=$_SESSION[<span class="string">'name'</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br><span class="line">	&lt;title&gt;留言本&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">	&lt;table width=<span class="string">"678"</span> align=<span class="string">"center"</span>&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;&lt;h1&gt;留言本&lt;/h1&gt;&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;当前账号：<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $name; <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;&lt;a href=<span class="string">"session_destroy.php"</span>&gt;注销&lt;/a&gt;&lt;/td&gt;  </span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;/table&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line">	<span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">	$sql = <span class="string">"SELECT title, name, content FROM content"</span>;</span><br><span class="line">	$result = $conn-&gt;query($sql);</span><br><span class="line">	<span class="keyword">if</span> ($result-&gt;num_rows &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="comment">// 输出每行数据</span></span><br><span class="line">		<span class="keyword">while</span>($row = $result-&gt;fetch_assoc()) </span><br><span class="line">		&#123;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br><span class="line">		&lt;/p&gt;</span><br><span class="line">		&lt;table width=<span class="string">"678"</span> border=<span class="string">"1"</span> align=<span class="string">"center"</span> cellpadding=<span class="string">"5"</span> cellspacing=<span class="string">"1"</span> bgcolor=<span class="string">"#add3ef"</span>&gt;</span><br><span class="line">		&lt;tr bgcolor=<span class="string">"#eff3ff"</span>&gt;</span><br><span class="line">		&lt;td width=<span class="string">"178"</span>&gt;&lt;big&gt;标题:&lt;/big&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $row[<span class="string">"title"</span>] <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">		&lt;td width=<span class="string">"223"</span>&gt;&lt;big&gt;用户:&lt;/big&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $row[<span class="string">"name"</span>] <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">		&lt;/tr bgColor=<span class="string">"#ffffff"</span>&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">		&lt;td colspan=<span class="string">"4"</span>&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> wordwrap($row[<span class="string">"content"</span>],<span class="number">50</span>); <span class="meta">?&gt;</span>&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">		&lt;/table&gt;</span><br><span class="line">	<span class="meta">&lt;?php</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('没有数据!');&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	$conn-&gt;close();</span><br><span class="line">	<span class="meta">?&gt;</span></span><br><span class="line">	&lt;table align=<span class="string">"center"</span> width=<span class="string">"678"</span>&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;</span><br><span class="line">	&lt;form name=<span class="string">"form1"</span> method=<span class="string">"post"</span> action=<span class="string">"post.php"</span>&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line">	标题：</span><br><span class="line">	&lt;input name=<span class="string">"title"</span> type=<span class="string">"text"</span> id=<span class="string">"title"</span>&gt;</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line">	留言：</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line">	&lt;textarea name=<span class="string">"content"</span> id=<span class="string">"content"</span> cols=<span class="string">"45"</span> rows=<span class="string">"5"</span>&gt;&lt;/textarea&gt;</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line">	&lt;input type=<span class="string">"submit"</span> name=<span class="string">"button"</span> id=<span class="string">"button"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">	&lt;input type=<span class="string">"reset"</span> name=<span class="string">"button2"</span> id=<span class="string">"button2"</span> value=<span class="string">"重置"</span>&gt;</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;/table&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;/html&gt;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">### 上传留言信息  </span></span><br><span class="line">post.php:  </span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">	<span class="meta">&lt;?php</span></span><br><span class="line">	header(<span class="string">"content-Type: text/html; charset=utf-8"</span>);</span><br><span class="line">	session_start(); </span><br><span class="line">	<span class="keyword">if</span>($_SESSION[<span class="string">"pass"</span>]==<span class="string">"ok"</span>) <span class="comment">//如果密码正确</span></span><br><span class="line">	&#123;</span><br><span class="line">		$name=$_SESSION[<span class="string">'name'</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">include</span>(<span class="string">"config.php"</span>);</span><br><span class="line">	$title= $_POST[<span class="string">'title'</span>];</span><br><span class="line">	$patch = $_POST[<span class="string">'content'</span>];</span><br><span class="line">	$content = str_replace(<span class="string">"</span></span><br><span class="line"><span class="string">	"</span>,<span class="string">"&lt;br /&gt;"</span>,$patch);</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">empty</span>($title)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('标题不能为空!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (<span class="keyword">empty</span>($name)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('名字不能为空!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (<span class="keyword">empty</span>($content)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('内容不能为空!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123; </span><br><span class="line">	$sql = <span class="string">"INSERT INTO content (title, name, content)</span></span><br><span class="line"><span class="string">	VALUES ('$title','$name','$content');"</span>;</span><br><span class="line">	<span class="keyword">if</span> ($conn-&gt;multi_query($sql) === <span class="keyword">TRUE</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('提交成功!');location.href='index.php';&lt;/script&gt;"</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Error: "</span> . $sql . <span class="string">"&lt;br&gt;"</span> . $conn-&gt;error;</span><br><span class="line">	&#125;</span><br><span class="line">	$conn-&gt;close();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h3><p>session_destroy.php:  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"content-Type: text/html; charset=utf-8"</span>);</span><br><span class="line">session_start();</span><br><span class="line">session_destroy();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;script&gt;alert('已注销!');location.href='login.php';&lt;/script&gt;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="显示效果："><a href="#显示效果：" class="headerlink" title="显示效果："></a>显示效果：</h2><p><img src="http://7xok5a.com1.z0.glb.clouddn.com/001.JPG" alt="注册">  </p>
 <p><img src="http://7xok5a.com1.z0.glb.clouddn.com/002.JPG" alt="登录">  </p>
 <p><img src="http://7xok5a.com1.z0.glb.clouddn.com/003.JPG" alt="主页"></p>
@@ -637,7 +349,7 @@ echo &quot;&lt;script&gt;alert(&apos;已注销!&apos;);location.href=&apos;login
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Run Joe
+    		&copy; 2019 Run John
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -728,15 +440,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -752,11 +464,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,7 +480,59 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
             
             <div class="clearfix"></div>

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Run的博客">
 <meta property="og:description" content="常用MySQL语句。    多表查询：12345select  a.name as `a_name`,b.name as `b_brand`FROM  table_a AS aLEFT JOIN table_b AS b ON b.a_id=b.id 查每天单数与总额：123456789101112131415161718192021222324252627SELECT    DAY (FROM_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-11T12:59:28.801Z">
+<meta property="og:updated_time" content="2019-07-22T13:16:57.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用MySQL语句">
 <meta name="twitter:description" content="常用MySQL语句。    多表查询：12345select  a.name as `a_name`,b.name as `b_brand`FROM  table_a AS aLEFT JOIN table_b AS b ON b.a_id=b.id 查每天单数与总额：123456789101112131415161718192021222324252627SELECT    DAY (FROM_">
@@ -36,6 +36,16 @@
   
 
   
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?6fdd23415d0be9b0c990a710bf869475";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 
 </head>
 </html>
@@ -51,7 +61,7 @@
 			<img src="/assets/img/avatar.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Run Joe</a></h1>
+		  <h1 class="header-author"><a href="/">Run John</a></h1>
 		</hgroup>
 		
 
@@ -97,7 +107,7 @@
 				<img src="/assets/img/avatar.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Run Joe</h1>
+			  <h1 class="header-author js-header-author">Run John</h1>
 			</hgroup>
 			
 			
@@ -168,7 +178,8 @@
 <h2 id="向新数据表导入数据"><a href="#向新数据表导入数据" class="headerlink" title="向新数据表导入数据:"></a>向新数据表导入数据:</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span>(</span><br><span class="line"> 	uid,<span class="keyword">name</span>,<span class="string">`status`</span></span><br><span class="line"> )</span><br><span class="line"> <span class="keyword">select</span></span><br><span class="line">   uid,<span class="keyword">name</span>,<span class="string">`status`</span></span><br><span class="line"> <span class="keyword">from</span> old_user</span><br></pre></td></tr></table></figure>
 <h2 id="检查重复数据"><a href="#检查重复数据" class="headerlink" title="检查重复数据:"></a>检查重复数据:</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c1.name,c1.code,f1.phone,f1.member_name,f1.role_name</span><br><span class="line"><span class="keyword">FROM</span> children <span class="keyword">as</span> c1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> family <span class="keyword">as</span> f1 <span class="keyword">on</span> c1.<span class="string">`code`</span>=f1.children_code</span><br><span class="line"><span class="keyword">WHERE</span> <span class="number">1</span>&lt;(</span><br><span class="line">       <span class="keyword">SELECT</span> <span class="keyword">count</span>(*) </span><br><span class="line">        <span class="keyword">FROM</span> children <span class="keyword">as</span> c2  <span class="keyword">INNER</span> <span class="keyword">JOIN</span> family <span class="keyword">as</span> f2 <span class="keyword">on</span> f2.children_code=c2.code</span><br><span class="line">        <span class="keyword">WHERE</span> c2.<span class="string">`name`</span>=c1.<span class="string">`name`</span></span><br><span class="line">          <span class="keyword">AND</span> c2.<span class="string">`code`</span>&lt;&gt;c1.<span class="string">`code`</span>  </span><br><span class="line">          <span class="keyword">AND</span> f2.<span class="string">`phone`</span>=f1.<span class="string">`phone`</span></span><br><span class="line">   )</span><br></pre></td></tr></table></figure>
 <h2 id="横向统计"><a href="#横向统计" class="headerlink" title="横向统计:"></a>横向统计:</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">res.code <span class="keyword">as</span> code,</span><br><span class="line">res.<span class="string">`name`</span> <span class="keyword">as</span> <span class="keyword">name</span></span><br><span class="line"><span class="comment">-- 循环项目</span></span><br><span class="line"><span class="keyword">max</span>(</span><br><span class="line">    <span class="keyword">CASE</span> <span class="keyword">WHEN</span> resd.item_id=<span class="number">1</span> </span><br><span class="line">    <span class="keyword">THEN</span>  resd.score</span><br><span class="line">    <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">    ) <span class="keyword">as</span> score_1,</span><br><span class="line"><span class="keyword">max</span>(</span><br><span class="line">    <span class="keyword">CASE</span> <span class="keyword">WHEN</span> resd.item_id=<span class="number">1</span> </span><br><span class="line">    <span class="keyword">THEN</span>  resd.point</span><br><span class="line">    <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">    ) <span class="keyword">as</span> point_1</span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"><span class="keyword">result</span> <span class="keyword">as</span> res </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> result_detail <span class="keyword">as</span> resd <span class="keyword">on</span> resd.res_id=res.id <span class="keyword">AND</span> res.<span class="string">`status`</span>=<span class="number">1</span></span><br><span class="line"><span class="keyword">WHERE</span> res.<span class="string">`status`</span>=<span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> res.code</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> code <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="统计学生选课数与科目"><a href="#统计学生选课数与科目" class="headerlink" title="统计学生选课数与科目"></a>统计学生选课数与科目</h2> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.<span class="string">`name`</span> <span class="keyword">as</span> <span class="keyword">name</span>,</span><br><span class="line">    <span class="keyword">count</span>(r.<span class="string">`id`</span>) <span class="keyword">as</span> <span class="keyword">num</span>,</span><br><span class="line">    <span class="keyword">GROUP_CONCAT</span>(su.<span class="string">`name`</span> SEPARATOR <span class="string">","</span>) <span class="keyword">as</span> subject_name</span><br><span class="line"><span class="keyword">FROM</span> student <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> student_subject_relation <span class="keyword">as</span> r <span class="keyword">on</span> r.student_id=s.id</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="string">`subject`</span> <span class="keyword">as</span> su <span class="keyword">on</span> su.id=r.subject_id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> s.id</span><br></pre></td></tr></table></figure>
+<h2 id="thinkphp的Model数据库配置"><a href="#thinkphp的Model数据库配置" class="headerlink" title="thinkphp的Model数据库配置"></a>thinkphp的Model数据库配置</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> $connection = <span class="string">'mysql://username:password@host:port/db'</span>;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -326,7 +337,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Run Joe
+    		&copy; 2019 Run John
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -417,15 +428,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,11 +452,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">thinkphp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -453,7 +468,59 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
             
             <div class="clearfix"></div>
