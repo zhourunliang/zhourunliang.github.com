@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Run的博客">
 <meta property="og:description" content="Linuxpwd显示现在所处的目录12λ pwd/d/study/linux ls不带参数就显示当前目录下的所有文件程序可以加参数-l 显示详细信息-h 人性化显示文件尺寸-a 显示所有文件， 以 . 开头的文件是隐藏文件还可以带一个目录当参数，这样就会显示这个目录下面两个是等价的ls -l -hls -lh1234λ ls -l -htotal 4.0Kdrwxr-xr-x 1 pc 19712">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-22T13:16:57.651Z">
+<meta property="og:updated_time" content="2019-11-03T14:35:53.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="Linuxpwd显示现在所处的目录12λ pwd/d/study/linux ls不带参数就显示当前目录下的所有文件程序可以加参数-l 显示详细信息-h 人性化显示文件尺寸-a 显示所有文件， 以 . 开头的文件是隐藏文件还可以带一个目录当参数，这样就会显示这个目录下面两个是等价的ls -l -hls -lh1234λ ls -l -htotal 4.0Kdrwxr-xr-x 1 pc 19712">
@@ -167,9 +167,15 @@ var _hmt = _hmt || [];
 <h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>不带参数就显示当前目录下的所有文件<br>程序可以加参数<br>-l 显示详细信息<br>-h 人性化显示文件尺寸<br>-a 显示所有文件， 以 . 开头的文件是隐藏文件<br>还可以带一个目录当参数，这样就会显示这个目录<br>下面两个是等价的<br>ls -l -h<br>ls -lh<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">λ ls -l -h</span><br><span class="line">total 4.0K</span><br><span class="line">drwxr-xr-x 1 pc 197121    0 12月 28 15:19 <span class="built_in">test</span>/</span><br><span class="line">-rw-r--r-- 1 pc 197121 2.0K 12月 14 15:16 test.py</span><br></pre></td></tr></table></figure></p>
 <h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>cd Desktop<br>改变当前目录<br>. 代表当前目录<br>.. 代表上级目录<br>cd 不带参数就回到默认的家目录<br>每个用户都有一个家目录，默认在 /home/用户名<br>root 用户的家目录是 /root</p>
 <h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>复制出一个文件，用法如下<br>cp a.txt b.txt<br>复制 a.txt 并把新文件取名为 b.txt<br>复制目录要加上 -r 参数<br>cp -r a b</p>
+<ul>
+<li>复制文件夹：<br>  cp -ri app/code/HelloWorld/*  /home/web/HelloWorld/</li>
+</ul>
 <h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>创建一个目录<br>-p 可以一次性创建多层目录<br>mkdir -p a/b/c</p>
 <h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><p>只能用来删除一个空目录</p>
 <h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>这个命令直接删除东西，很危险，一般不要用<br>删除文件或者目录<br>-f 强制删除<br>-r 用来删除目录</p>
+<ul>
+<li>删除文件夹下文件：rm -rf generated/code/*</li>
+</ul>
 <h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>移动文件或者文件夹<br>也可以用来改名<br>mv a.txt b.txt<br>mv b.txt ../<br>mv b.txt ../c.txt<br>可以用 mv xx /tmp 的方式来将文件放入临时文件夹<br>（/tmp是操作系统提供的临时文件夹，重启会删除里面的所有文件）</p>
 <h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><p>显示文件内容</p>
 <h2 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h2><p>反过来显示文件内容</p>
@@ -238,6 +244,9 @@ var _hmt = _hmt || [];
 <p>三组 rwx 分表代表 所属用户|同组用户|其他用户<br>rwx 可以用数字表示为 421<br>于是乎<br>r– 就是 4<br>rw- 就是 6<br>rwx 就是 7<br>r-x 就是 5</p>
 <h2 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h2><p>改变文件的用户<br>chown abc c.c<br>chown abc:abc c.c</p>
 <h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>改变文件权限<br>chmod 666 root.c<br>chmod +x root.c<br>chmod -x tmp</p>
+<ul>
+<li>更改文件权限：chown -R 777 generated/*</li>
+</ul>
 <h2 id="信息查找"><a href="#信息查找" class="headerlink" title="信息查找"></a>信息查找</h2><h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><p>显示文件的类型（不是百分之百准确）</p>
 <h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p>显示操作系统的名字或者其他信息<br>uname -r<br>uname -a</p>
 <h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p>which pwd<br>显示 pwd 的具体路径</p>
@@ -246,6 +255,9 @@ var _hmt = _hmt || [];
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">~   家目录快捷方式</span><br><span class="line">&gt;   覆盖式重定向</span><br><span class="line">&gt;&gt;  追加重定向</span><br><span class="line">|   管道, 很麻烦 以后说</span><br><span class="line">``  获取命令执行的结果</span><br><span class="line">&amp;   后台执行</span><br><span class="line">    python3 server.py &amp;</span><br><span class="line">    可以用 <span class="built_in">fg</span> 命令把一个在后台的程序拉到前台来</span><br><span class="line">    可以用 Ctrl-z 来把一个前台的程序放到后台去挂起</span><br><span class="line">()  开新的子进程shell执行(不用掌握这一条, 因为几乎没人用)</span><br></pre></td></tr></table></figure>
 <h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>查看历史命令</p>
 <h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>查找<br>这两个一般配合使用<br>history | grep touch</p>
+<ul>
+<li>查找文件中的内容：<br>grep ‘HelloWorld’ config.php</li>
+</ul>
 <h2 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h2><p>查看进程, 一般用下面的用法<br>ps ax</p>
 <h2 id="ps-ax-grep-python"><a href="#ps-ax-grep-python" class="headerlink" title="ps ax | grep python"></a>ps ax | grep python</h2><p>查看带 python 字符串的进程</p>
 <h2 id="kill-和-killall-杀进程"><a href="#kill-和-killall-杀进程" class="headerlink" title="kill 和 killall 杀进程"></a>kill 和 killall 杀进程</h2><p>用 ps ax 找到进程id (pid)<br>kill [pid]<br>kill -9 [pid]<br>kill -15 [pid]<br>killall 是用进程名字来杀进程</p>
@@ -254,6 +266,7 @@ var _hmt = _hmt || [];
 <h2 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h2><p>重启</p>
 <h2 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h2><p>关机<br>可以用参数指定时间</p>
 <h2 id="halt"><a href="#halt" class="headerlink" title="halt"></a>halt</h2><p>关机</p>
+<h2 id="查ip"><a href="#查ip" class="headerlink" title="查ip"></a>查ip</h2><p>curl cip.cc</p>
 
       
 
@@ -507,15 +520,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,11 +540,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,15 +552,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,7 +560,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,11 +580,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +600,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+                <a href="javascript:void(0)" class="js-tag color2">TCP/IP</a>
               </li>
              
               <li class="article-tag-list-item">
